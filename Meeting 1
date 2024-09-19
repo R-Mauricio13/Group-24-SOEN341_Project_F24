@@ -7,4 +7,6 @@ Java
  
 
 --Tasks--
-
+●	Implement Student and Instructor login system (with roles).
+●	Functionality for instructors to create teams and assign students to specific groups. (For example, importing a course roaster from a CSV file)
+●	Ensure teams are visible to both students and instructors.
