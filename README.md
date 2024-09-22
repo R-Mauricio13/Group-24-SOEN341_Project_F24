@@ -1,6 +1,6 @@
 # Peer Assessment System
 
-This web application is designed to allow students to evaulate annonymously the contributions and performance of their teammates based four key dimensions:
+This web application is designed to allow students to evaulate anonymously the contributions and performance of their teammates based four key dimensions:
 
 - **Cooperation**
 - **Conceptual Contributions**
@@ -9,7 +9,10 @@ This web application is designed to allow students to evaulate annonymously the 
 
 This system allows students to improves themselves through their feedback.
 
+<h3>Primary users</h3>
 
+Students $\color{#45de6b}{\textbf{for the assessment of each individual member in their group with the above criteria}}$\
+Instructors $\color{#e6ae2e}{\textbf{for the creation of groups of students and read access to the detailed peer assessments from each group}}$
 
 ## Authors
 
