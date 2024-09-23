@@ -23,13 +23,4 @@ Instructors $\color{#e6ae2e}{\textbf{for the creation of groups of students and 
 - [@zjoway](https://github.com/zjoway)                       Victor Zhou (40264131)
 
   
-## Sprint 1
-- Implement Student and Instructor login system (with roles).
-- 	Functionality for instructors to create teams and assign students to specific groups. (For example, importing a course roaster from a CSV file)
-- 	Ensure teams are visible to both students and instructors
-
-
-![image](https://github.com/user-attachments/assets/309a677d-3044-4d52-8c1b-3fab86ee8b2d)
-
-![image](https://github.com/user-attachments/assets/f034e01a-64a8-4251-a014-e6a50e400afc)
 
