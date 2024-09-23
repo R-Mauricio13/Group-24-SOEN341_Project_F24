@@ -29,11 +29,12 @@ app.get("/api",(req,res)=>{
 
 //Loading the homepage upon startup
 app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname,'../client/home.html'))
+    res.sendFile(path.join(__dirname,'../client/Pages/home.html'))
 });
 
+
 //Establishing port connection
-const port= 8000;
+const port= 8080;
 app.listen(port,() =>
 {
     console.log(`Server port running on '${port}'`);
