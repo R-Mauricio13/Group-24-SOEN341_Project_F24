@@ -23,4 +23,29 @@ Instructors $\color{#e6ae2e}{\textbf{for the creation of groups of students and 
 - [@zjoway](https://github.com/zjoway)                       Victor Zhou (40264131)
 
   
+## Installation
+Ensure you have npm and NodeJS installed
+
+Install web app with npm
+
+```bash
+  cd client
+  npm install
+  cd ..
+  cd server
+  npm install
+```
+
+```bash
+  cd client
+  npm start
+```
+
+On a seperate terminal
+```bash
+  cd server
+  npm start
+```
+    
+    
 

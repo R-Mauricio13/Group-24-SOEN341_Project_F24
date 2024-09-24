@@ -15,7 +15,7 @@ function Login() {
   return (
     <>
       <div className="row justify-content-center">
-        <div className="col-md-4">
+        <div className="col-md-10">
           <div className="card p-3">
             <h2>Login </h2>
             <form onSubmit={submitForm}>
@@ -25,6 +25,8 @@ function Login() {
                   type="text"
                   name="usename"
                   placeholder="Enter username"
+                  required
+
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -33,6 +35,8 @@ function Login() {
                   type="password"
                   name="password"
                   placeholder="Enter pasword"
+                  required
+
                 />
               </Form.Group>
               <Button variant="primary" type="submit">
