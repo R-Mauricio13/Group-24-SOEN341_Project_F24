@@ -24,7 +24,7 @@ Instructors $\color{#e6ae2e}{\textbf{for the creation of groups of students and 
 
   
 ## Installation
-Ensure you have npm installed
+Ensure you have npm and NodeJS installed
 
 Install web app with npm
 
