@@ -1,19 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./Pages/home_page";
-import "bootstrap/dist/css/bootstrap.min.css"
-
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./Pages/home_page";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>}></Route>
-
+          <Route path="/" element={<HomePage />}></Route>
         </Routes>
-
       </BrowserRouter>
-
     </div>
   );
 }
