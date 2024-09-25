@@ -5,7 +5,9 @@
 }
 
 body {
+  display: grid;
   font-family: Arial, sans-serif;
+  grid-template-rows: auto 1fr auto;
 }
 
 .home {
@@ -24,11 +26,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-width: 0;
 }
+
 
 .logo {
   height: 50px; /* Adjust size as needed */
   margin: 0 10px;
+  border-width: 0;
+
 }
 
 h1 {
@@ -36,9 +42,11 @@ h1 {
 }
 
 .navigation {
+  background-color: white;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: -10px;
+
 }
 
 .nav-button {
@@ -59,15 +67,28 @@ h1 {
 
 .content {
   flex-grow: 1;
+  z-index: -1;
+  
   padding: 20px;
 }
 
 .building-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  
+  z-index: -1; /* Ensure the image is behind all other content */
+  overflow: hidden;
   opacity: 0.7;
 }
 
 p {
   font-size: 1.2em;
+}
+
+.forms {
+  position: relative;
+  top: -50px; /* Negative margin to move it up */
 }
