@@ -1,26 +1,19 @@
-import React from 'react'
+import React from 'react';
+import Header from '../Components/Header'
+import Navigation from '../Components/Navigation'
+import Footer from '../Components/Footer'
+import concordiaBuilding from '../Assets/concordia-building.png';
+import '../Styles/home-page.css';
 
-import CreateAccount from '../Components/CreateAccount';
-import Login from '../Components/Login';
-function HomePage() {
-    return (
-      <>
-        <div className="container">
-          <h1 className="text-center">Peer Assessment Site</h1>
-          
-          <div className="row justify-content-center">
-            {/* Login Form */}
-            <div className="col-md-5">
-              <Login />
-            </div>
-  
-            {/* Create Account Form */}
-            <div className="col-md-5">
-              <CreateAccount />
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
+const HomePage = () => (
+  <div className="home">
+    <Header />
+    <Navigation />
+    <main className="content">
+      <img src={concordiaBuilding} alt="Concordia Building" className="building-image" />
+    </main>
+    <Footer />
+  </div>
+);
+
 export default HomePage;
