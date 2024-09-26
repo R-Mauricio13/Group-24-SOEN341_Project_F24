@@ -24,7 +24,7 @@ const db=mysql.createConnection({
 
 //Testing if we can access the db
 app.get("/students",(req,res)=>{
-    const query =`SELECT * FROM ${students}`;
+    const query =`SELECT * FROM ${user_students}`;
     db.query(query,(err,data)=>{
         if(err)
         {
@@ -33,6 +33,38 @@ app.get("/students",(req,res)=>{
        return console.log(data);
     });
 
+})
+
+app.get("/login",(req, res)=>{
+    const students = process.env.STUDENTS;
+    const instructors = process.env.INSTRUCTORS;
+    let personnel = "";
+    console.log(req.query);
+
+    if (req.query.role==="student")
+    {
+        console.log("Student Login");
+        personnel = students;
+    }
+    else
+    {
+        console.log("Instructor Login");
+        personnel = instructors;
+    }
+
+    const query = `SELECT password FROM ${personnel} WHERE username = ?`;
+
+    db.query(query, [req.query.username], (err, data) => {
+        console.log(query);
+        if (err)
+        {
+            return res.json("No account found");
+        }
+        
+        console.log("Account found");
+        console.log(data[0].password);
+        res.send(data[0].password);
+    })
 })
 
 //Testing POST to submit data to SQL
@@ -52,7 +84,6 @@ app.post("/create",(req,res)=>{
     {
         person_type=process.env.STUDENTS
         console.log("this is a student")
-
     }
     else
     {
