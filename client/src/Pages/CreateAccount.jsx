@@ -21,7 +21,7 @@ function CreateAccount() {
   }
 
   const submitForm = async event => {
-    if(account.firstname)
+
 
     try{
       await axios.post("http://localhost:8080/create",account)
