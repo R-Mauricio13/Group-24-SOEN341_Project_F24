@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+
   const [user_info, setUser_info] = useState({
     username: "",
     password: "",
     role: "",
+    loggedin: false,
   });
 
-  const [login_error, setLogin_Error] = useState (null)
+  const [login_error, setLogin_Error] = useState(null)
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const handleChange=(event)=>{
-    setUser_info((prev)=>({...prev,[event.target.name]:event.target.value}))
+  const handleChange = (event) => {
+    setUser_info((prev) => ({ ...prev, [event.target.name]: event.target.value }))
+    setUser_info((prev) => ({ ...prev, loggedin: true }))
   };
 
-  
   const submitForm = async event => {
     event.preventDefault();
 
@@ -41,6 +43,9 @@ function Login() {
       setLogin_Error(<label style={{ color: 'red' }}>Incorrect Username or Password!</label>);
   };
 
+  useEffect(()=>{
+    localStorage.setItem("Logged in User",JSON.stringify(user_info))
+  })
   return (
     <>
       <div className="row justify-content-center">
@@ -78,7 +83,7 @@ function Login() {
                   <option value="instructor">Instructor</option>
                 </Form.Select>
               </Form.Group>
-              { login_error }
+              {login_error}
               <br />
               <Button variant="primary" type="submit">
                 Login

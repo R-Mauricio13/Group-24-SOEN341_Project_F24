@@ -65,36 +65,37 @@ app.post("/create",(req,res)=>{
         req.body.role,
         req.body.username,
         req.body.password,
-       
+      
     ];
     let person_type=""
     const person_name=values[0]
-
+    const person_username=values[3]
     if(req.body.role==="student")
     {
         person_type=process.env.STUDENTS
-        console.log(`attempting to add student: ${person_name}`)
+        console.log(`attempting to add student: ${person_name} with username :${person_username}`)
 
     }
     else
     {
         person_type=process.env.INSTRUCTORS
-        console.log(`attempting to add instructor: ${person_name}`)
+        console.log(`attempting to add instructor: ${person_name} with username :${person_username}`)
 
     } 
     
-    const query=`INSERT INTO ${person_type} (firstname,lastname,role,username,password) VALUES(?)`;
+    const query = `INSERT INTO students (firstname, lastname, role, username, password) VALUES (?,?,?,?,?)`;
+
 
 
     
-    db.query(query,[values],(err,data)=>{
-        if (err)
-        {
-            return res.json("Error account creation failed")
+    db.query(query, values, (err, data) => {
+        if (err) {
+            console.error("MySQL error: ", err);
+            return res.status(500).json("Error: Account creation failed");
         }
-        console.log("Account has been saved into database")
-        return res.json(data)
-    })
+        console.log("Data inserted successfully:", data);
+        return res.status(200).json(data);
+    });
 
 });
 

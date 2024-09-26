@@ -6,11 +6,12 @@ import Login from "./Pages/Login";
 import StudentView from "./Pages/Student_View";
 import ViewTeams from "./Pages/ViewTeams";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 // import Resources from './Resources';
 
 function App() {
  
-
+  
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
