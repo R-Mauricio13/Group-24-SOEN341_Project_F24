@@ -11,6 +11,8 @@ function Login() {
     role: "",
   });
 
+  const [login_error, setLogin_Error] = useState (null)
+
   const navigate=useNavigate();
 
   const handleChange=(event)=>{
@@ -28,8 +30,15 @@ function Login() {
         role: user_info.role,
       }
     });
-    navigate("/StudentPage");
-    //console.log(response.data);
+    //navigate("/StudentPage");
+    if (response.data) {
+      if (user_info.role === "student")
+        navigate("/Student_Login");
+      else if (user_info.role === "instructor")
+        navigate("/Instructor_Login");
+    }
+    else
+      setLogin_Error(<label style={{ color: 'red' }}>Incorrect Username or Password!</label>);
   };
 
   return (
@@ -69,7 +78,8 @@ function Login() {
                   <option value="instructor">Instructor</option>
                 </Form.Select>
               </Form.Group>
-              <br></br>
+              { login_error }
+              <br />
               <Button variant="primary" type="submit">
                 Login
               </Button>
