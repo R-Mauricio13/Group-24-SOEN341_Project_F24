@@ -24,12 +24,8 @@ const db=mysql.createConnection({
 
 //Testing if we can access the db
 app.get("/students",(req,res)=>{
-<<<<<<< HEAD
-    const query =`SELECT * FROM ${user_students}`;
-=======
     const students=process.env.STUDENTS
     const query =`SELECT * FROM ${students}`;
->>>>>>> 75425f42546cd0effd2af0f91f2a9eade70faf90
     db.query(query,(err,data)=>{
         if(err)
         {
@@ -89,12 +85,8 @@ app.post("/create",(req,res)=>{
     if(req.body.role==="student")
     {
         person_type=process.env.STUDENTS
-<<<<<<< HEAD
-        console.log("this is a student")
-=======
         console.log(`attempting to add student: ${person_name}`)
 
->>>>>>> 75425f42546cd0effd2af0f91f2a9eade70faf90
     }
     else
     {
