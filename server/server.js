@@ -40,31 +40,19 @@ app.get("/login",(req, res)=>{
     const students = process.env.STUDENTS;
     const instructors = process.env.INSTRUCTORS;
     let personnel = "";
-    console.log(req.query);
 
     if (req.query.role==="student")
-    {
-        console.log("Student Login");
         personnel = students;
-    }
     else
-    {
-        console.log("Instructor Login");
         personnel = instructors;
-    }
 
     const query = `SELECT password FROM ${personnel} WHERE username = ?`;
 
     db.query(query, [req.query.username], (err, data) => {
-        console.log(query);
         if (err)
-        {
-            return res.json("No account found");
-        }
-        
-        console.log("Account found");
-        console.log(data[0].password);
-        res.send(data[0].password);
+            return res.json(false);
+
+        res.send(data[0]?.password == req.query.password);
     })
 })
 
