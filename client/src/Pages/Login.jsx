@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const submitForm = (event) => {
+  const [user_info, setUser_info] = useState({
+    username: "",
+    password: "",
+    role: "",
+  });
+
+  const navigate=useNavigate();
+
+  const handleChange=(event)=>{
+    setUser_info((prev)=>({...prev,[event.target.name]:event.target.value}))
+  };
+
+  
+  const submitForm = async event => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const payload = Object.fromEntries(formData);
-
-    console.log(payload);
+    let response = await axios.get("http://localhost:8080/login", {
+      params: {
+        username: user_info.username,
+        password: user_info.password,
+        role: user_info.role,
+      }
+    });
+    navigate("/StudentPage");
+    //console.log(response.data);
   };
 
   return (
@@ -23,24 +43,35 @@ function Login() {
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
-                  name="usename"
+                  name="username"
                   placeholder="Enter username"
+                  onChange={handleChange}
                   required
-
                 />
               </Form.Group>
+
               <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
                   name="password"
                   placeholder="Enter pasword"
+                  onChange={handleChange}
                   required
-
                 />
               </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Select your role</Form.Label>
+                <Form.Select name="role" onChange={handleChange} required>
+                  <option></option>
+                  <option value="student">Student</option>
+                  <option value="instructor">Instructor</option>
+                </Form.Select>
+              </Form.Group>
+              <br></br>
               <Button variant="primary" type="submit">
-                Create Account
+                Login
               </Button>
             </form>
           </div>
