@@ -24,13 +24,18 @@ const db=mysql.createConnection({
 
 //Testing if we can access the db
 app.get("/students",(req,res)=>{
+<<<<<<< HEAD
     const query =`SELECT * FROM ${user_students}`;
+=======
+    const students=process.env.STUDENTS
+    const query =`SELECT * FROM ${students}`;
+>>>>>>> 75425f42546cd0effd2af0f91f2a9eade70faf90
     db.query(query,(err,data)=>{
         if(err)
         {
             return res.json("Error no data found");
         }
-       return console.log(data);
+       return res.status(200).json(data)
     });
 
 })
@@ -76,22 +81,31 @@ app.post("/create",(req,res)=>{
         req.body.role,
         req.body.username,
         req.body.password,
-        req.body.team_id
+       
     ];
     let person_type=""
+    const person_name=values[0]
 
     if(req.body.role==="student")
     {
         person_type=process.env.STUDENTS
+<<<<<<< HEAD
         console.log("this is a student")
+=======
+        console.log(`attempting to add student: ${person_name}`)
+
+>>>>>>> 75425f42546cd0effd2af0f91f2a9eade70faf90
     }
     else
     {
         person_type=process.env.INSTRUCTORS
-        console.log("this is an instructor")
-    } 
+        console.log(`attempting to add instructor: ${person_name}`)
 
-    const query=`INSERT INTO ${person_type} (firstname,lastname,role,username,password VALUES(?)`;
+    } 
+    
+    const query=`INSERT INTO ${person_type} (firstname,lastname,role,username,password) VALUES(?)`;
+
+
     
     db.query(query,[values],(err,data)=>{
         if (err)

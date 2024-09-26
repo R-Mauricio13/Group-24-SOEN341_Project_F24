@@ -1,21 +1,23 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/home_page";
-import StudentPage from "./Pages/student_page";
+import Introduction from "./Pages/Introduction";
+import Login from "./Pages/Login";
+import StudentView from "./Pages/Student_View";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import Resources from './Resources';
 
 function App() {
-  
+ 
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/Student_Page" element={<StudentPage />} />
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/introduction" element={<Introduction />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/Student_Login" element={<StudentView />} />
+      {/* <Route path="/resources" element={<Resources />} /> */}
+    </Routes>
   );
 }
 
