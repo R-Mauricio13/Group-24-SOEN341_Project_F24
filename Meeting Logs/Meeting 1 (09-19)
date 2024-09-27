@@ -11,12 +11,17 @@
 
 
 --Topics--
-1) Discussed the Tech Stack that we're going to be using to move forward on the project 
-2) Discussed each members capabilities to properly assign divide and assign tasks
-3) Setting up the repository of the project and project template on GitHub
+1)Team formation and role assignment
+2)Project overview and requirements analysis
+3)Setting up the GitHub repository and project management tools
+4)Creating the initial product backlog with user stories for Sprint 1
+5)Team Capacity Assessment:
+. Discuss each team member's skills, strengths, and experience
+. Assigning tasks based on individual capacities and strength
+. Determine availability and time commitments of each member
 
 --Tech Stack--
-● HTML/CSS/JS
+● HTML/CSS/JS, React 
 ● NodeJs - Backend
 ● MySQL - Database
 ● Java
