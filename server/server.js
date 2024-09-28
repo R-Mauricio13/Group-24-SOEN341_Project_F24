@@ -52,7 +52,7 @@ app.get("/login",(req, res)=>{
         if (err)
             return res.json(false);
 
-        res.send(data[0]?.password == req.query.password);
+        res.send(data[0]?.user_password == req.query.user_password);
     })
 })
 
@@ -60,17 +60,17 @@ app.get("/login",(req, res)=>{
 app.post("/create",(req,res)=>{
     
     const values=[
-        req.body.firstname,
-        req.body.lastname,
-        req.body.role,
+        req.body.first_name,
+        req.body.last_name,
+        req.body.user_role,
         req.body.username,
-        req.body.password,
+        req.body.user_password,
       
     ];
     let person_type=""
     const person_name=values[0]
     const person_username=values[3]
-    if(req.body.role==="student")
+    if(req.body.user_role==="student")
     {
         person_type=process.env.STUDENTS
         console.log(`attempting to add student: ${person_name} with username :${person_username}`)
@@ -83,9 +83,9 @@ app.post("/create",(req,res)=>{
 
     } 
     
-    const query = `INSERT INTO students (firstname, lastname, role, username, password) VALUES (?,?,?,?,?)`;
+    const query = `INSERT INTO ${person_type} (first_name, last_name, user_role, username, user_password) VALUES (?,?,?,?,?)`;
 
-
+    console.log("Executing query:", query, "with values:", values);
 
     
     db.query(query, values, (err, data) => {
