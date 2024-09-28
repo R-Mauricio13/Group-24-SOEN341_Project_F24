@@ -8,11 +8,11 @@ function CreateAccount() {
 
 
   const [account, setAccount] = useState({
-    firstname: "",
-    lastname: "",
-    role: "",
+    first_name: "",
+    last_name: "",
+    user_role: "",
     username: "",
-    password: "",
+    user_password: "",
   });
   
   const navigate=useNavigate();
@@ -58,7 +58,7 @@ function CreateAccount() {
                 <Form.Label class="CALabel">Password</Form.Label>
                 <Form.Control
                   type="password"
-                  name="password"
+                  name="user_password"
                   placeholder="Enter Password"
                   required
                   onChange={handleChange}
@@ -68,7 +68,7 @@ function CreateAccount() {
                 <Form.Label class="CALabel">First Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="firstname"
+                  name="first_name"
                   placeholder="Enter First Name"
                   required
 
@@ -79,7 +79,7 @@ function CreateAccount() {
                 <Form.Label class="CALabel">Last Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="lastname"
+                  name="last_name"
                   placeholder="Enter Last Name"
                   required
 
@@ -89,14 +89,14 @@ function CreateAccount() {
               <Form.Group>
                 <br />
                 <Form.Label class="CALabel">Select your role</Form.Label>
-                <Form.Select name="role" onChange={handleChange} required >
+                <Form.Select name="user_role" onChange={handleChange} required >
                   <option></option>
                   <option value="student">Student</option>
                   <option value="instructor">Instructor</option>
                 </Form.Select>
               </Form.Group>
               <br></br>
-              <button class="CAButton" variant="primary" type="submit">
+              <button class="CAButton" type="submit">
                 Create Account
               </button>
             </form>
