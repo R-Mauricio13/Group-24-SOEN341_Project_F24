@@ -1,0 +1,24 @@
+----------------------------------------------------------
+| September 26th, 2024 at PM 16:15PM- 17:55PM (Thursday) |
+----------------------------------------------------------
+
+--Members Present--
+● Richard Mauricio
+● Vladimir Todorov
+● Jimmy Ye
+● Nesrine Larbi
+● Teodore Oprea
+● Victor Zhou
+
+--Topics--
+1) Discussed Advancing the Create Team Function
+2) Discussed the UI design of Instructor View 
+3) Discussed the UI design of Student View
+4) Discussed Advancing Login Verification
+
+--Tasks--
+● Implementing Instructor View/ Student View       (Vladimir Todorov / Richard Mauricio)
+● Advancing/Finishing Account Creation Feature     (Vladimir Todorov)
+● Run web app and server commmunication            (Jimmy Ye)
+● Implement Tokens for Login Verification          (Jimmy Ye & Teodore Oprea)
+● Apply Css onto Pages                             (Richard Mauricio / Nesrine Larbi / Vladimir Todorov)
