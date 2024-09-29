@@ -1,5 +1,8 @@
 //Outputs a list of all students
 import { useEffect, useState } from "react";
+
+import '../Styles/ViewStudents.css'; // Import the CSS File
+
 function ViewStudents() {
   const [studentRecords, setRecord] = useState([]);
   const [order, setOrder] = useState("ASCENDING");
@@ -37,32 +40,32 @@ function ViewStudents() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="SVContainer">
       <h1>Student List</h1>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col" onClick={() => sorting("id")}>
+            <th scope="col" onClick={() => sorting("user_id")}>
               id#
             </th>
-            <th scope="col" onClick={() => sorting("firstname")}>
+            <th scope="col" onClick={() => sorting("first_name")}>
               First Name
             </th>
-            <th scope="col" onClick={() => sorting("lastname")}>
+            <th scope="col" onClick={() => sorting("last_name")}>
               Last Name
             </th>
-            <th scope="col" onClick={() => sorting("team_id")}>
+            <th scope="col" onClick={() => sorting("group_id")}>
               Team Assigned
             </th>
           </tr>
         </thead>
         <tbody>
           {studentRecords.map((student) => (
-            <tr key={student.id}>
-              <th scope="row">{student.id}</th>
-              <td>{student.firstname}</td>
-              <td>{student.lastname}</td>
-              <td>{student.team_id}</td>
+            <tr key={student.user_id}>
+              <th scope="row">{student.user_id}</th>
+              <td>{student.first_name}</td>
+              <td>{student.last_name}</td>
+              <td>{student.group_id}</td>
             </tr>
           ))}
         </tbody>

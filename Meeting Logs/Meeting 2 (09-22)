@@ -1,0 +1,26 @@
+--------------------------------------------------------
+| September 22th, 2024 at PM 20:45PM- 22:30PM (Sunday) |
+--------------------------------------------------------
+
+--Members Present--
+● Richard Mauricio
+● Vladimir Todorov
+● Jimmy Ye
+
+--Topics--
+1) Discussed GitHub Setup (Repository folders, Wiki, Project Tab)
+2) Thorougly communicated the Tech Stack to be used throughout the project
+3) Discussed individual tasks 
+
+--Tech Stack--
+● HTML/CSS/JS      (Same as initially planned)
+● NodeJs - Backend (Same as initially planned)
+● MySQL - Database (Same as initially planned)
+● React            (Updated)
+
+--Tasks--
+● Implement Homepage (Login and Create Account function)           (Richard Mauricio)
+● Setup and organize GitHub Project Repository,
+  Project Tab for issues, branches, and wiki                       (Richard Mauricio/ Vladimir Todorov/ Jimmy Ye)
+● Create the Database Tables on MySQL and queries                  (Vladimir Todorov)
+● Establish NodeJs                                                 (Richard Mauricio)

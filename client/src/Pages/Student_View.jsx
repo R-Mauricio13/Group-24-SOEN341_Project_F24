@@ -19,12 +19,14 @@ function StudentView() {
     <div>
       <Header />
       <Navigation />
-      <div>
-        <h1>Welcome {student_username}</h1>
+      <div style={{ position: 'relative' , height: '400px' }}>
+        <div>
+          <h1>Welcome {student_username}</h1>
 
-      </div>
-      <div>
-        <ViewStudents />
+        </div>
+        <div>
+          <ViewStudents />
+        </div>
       </div>
       <Footer />
     </div>

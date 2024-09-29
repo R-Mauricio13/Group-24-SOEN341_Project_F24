@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import '../Styles/CreateAccount.css'; 
 
 function CreateAccount() {
 
 
   const [account, setAccount] = useState({
-    firstname: "",
-    lastname: "",
-    role: "",
+    first_name: "",
+    last_name: "",
+    user_role: "",
     username: "",
-    password: "",
+    user_password: "",
   });
   
   const navigate=useNavigate();
@@ -42,10 +42,10 @@ function CreateAccount() {
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="card p-3">
-            <h2>Create Account</h2>
+            <h2 class="CAHighlight">Create Account</h2>
             <form onSubmit={submitForm}>
               <Form.Group className="mb-3">
-                <Form.Label>Username</Form.Label>
+                <Form.Label class="CALabel">Username</Form.Label>
                 <Form.Control
                   type="text"
                   name="username"
@@ -55,20 +55,20 @@ function CreateAccount() {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Password</Form.Label>
+                <Form.Label class="CALabel">Password</Form.Label>
                 <Form.Control
                   type="password"
-                  name="password"
-                  placeholder="Enter pasword"
+                  name="user_password"
+                  placeholder="Enter Password"
                   required
                   onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>First Name</Form.Label>
+                <Form.Label class="CALabel">First Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="firstname"
+                  name="first_name"
                   placeholder="Enter First Name"
                   required
 
@@ -76,10 +76,10 @@ function CreateAccount() {
                 ></Form.Control>
               </Form.Group>
               <Form.Group>
-                <Form.Label>Last Name</Form.Label>
+                <Form.Label class="CALabel">Last Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="lastname"
+                  name="last_name"
                   placeholder="Enter Last Name"
                   required
 
@@ -88,17 +88,17 @@ function CreateAccount() {
               </Form.Group>
               <Form.Group>
                 <br />
-                <Form.Label>Select your role</Form.Label>
-                <Form.Select name="role" onChange={handleChange} required >
+                <Form.Label class="CALabel">Select your role</Form.Label>
+                <Form.Select name="user_role" onChange={handleChange} required >
                   <option></option>
                   <option value="student">Student</option>
                   <option value="instructor">Instructor</option>
                 </Form.Select>
               </Form.Group>
               <br></br>
-              <Button variant="primary" type="submit">
+              <button class="CAButton" type="submit">
                 Create Account
-              </Button>
+              </button>
             </form>
           </div>
         </div>
