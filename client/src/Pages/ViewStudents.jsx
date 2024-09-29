@@ -57,15 +57,18 @@ function ViewStudents() {
             <th scope="col" onClick={() => sorting("group_id")}>
               Team Assigned
             </th>
+            <th scope="col"
+              Team Action >
+            </th>
           </tr>
         </thead>
         <tbody>
           {studentRecords.map((student) => (
-            <tr key={student.user_id}>
-              <th scope="row">{student.user_id}</th>
+            <tr key={student.id}>
+              <th scope="row">{student.id}</th>
               <td>{student.first_name}</td>
               <td>{student.last_name}</td>
-              <td>{student.group_id}</td>
+              <td>{student.team_name || "No Team Assigned"}</td>
             </tr>
           ))}
         </tbody>
