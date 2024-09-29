@@ -28,8 +28,8 @@ function Login() {
     let response = await axios.get("http://localhost:8080/login", {
       params: {
         username: user_info.username,
-        password: user_info.password,
-        role: user_info.role,
+        user_password: user_info.password,
+        user_role: user_info.role,
       }
     });
     //navigate("/StudentPage");

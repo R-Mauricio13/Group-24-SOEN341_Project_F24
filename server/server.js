@@ -41,12 +41,12 @@ app.get("/login",(req, res)=>{
     const instructors = process.env.INSTRUCTORS;
     let personnel = "";
 
-    if (req.query.role==="student")
+    if (req.query.user_role==="student")
         personnel = students;
     else
         personnel = instructors;
 
-    const query = `SELECT password FROM ${personnel} WHERE username = ?`;
+    const query = `SELECT user_password FROM ${personnel} WHERE username = ?`;
 
     db.query(query, [req.query.username], (err, data) => {
         if (err)
@@ -55,6 +55,16 @@ app.get("/login",(req, res)=>{
         res.send(data[0]?.user_password == req.query.user_password);
     })
 })
+
+app.get('/existingTeams', (req, res) => {
+    const query = 'SELECT team_name FROM student_groups'; // Adjust table name as needed
+    db.query(query, (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error fetching teams' });
+        }
+        return res.status(200).json(data); // Respond with existing team names
+    });
+});
 
 //Testing POST to submit data to SQL
 app.post("/create",(req,res)=>{
@@ -97,6 +107,42 @@ app.post("/create",(req,res)=>{
         return res.status(200).json(data);
     });
 
+});
+
+// POST to create a new team
+app.post("/createTeam", (req, res) => {
+    const { team_name, team_size } = req.body;
+
+    // Validate input values
+    if (!team_name || !team_size) {
+        return res.status(400).json("Both team name and size are required and cannot be null.");
+    }
+
+    // First, check if the team name already exists
+    const checkQuery = `SELECT * FROM student_groups WHERE team_name = ?`;
+    
+    db.query(checkQuery, [team_name], (err, data) => {
+        if (err) {
+            console.error("MySQL error: ", err);
+            return res.status(500).json("Error checking existing teams");
+        }
+
+        if (data.length > 0) {
+            // If a team with that name already exists, send an error response
+            return res.status(400).json("Team name already exists. Please choose a different name.");
+        } else {
+            // If the team name doesn't exist, proceed to insert
+            const insertQuery = `INSERT INTO student_groups (team_name, team_size) VALUES (?, ?)`;
+            db.query(insertQuery, [team_name, team_size], (err, data) => {
+                if (err) {
+                    console.error("MySQL error: ", err);
+                    return res.status(500).json("Error: Team creation failed");
+                }
+                console.log("Data inserted successfully:", data);
+                return res.status(201).json("Team created successfully!");
+            });
+        }
+    });
 });
 
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../Styles/TeamCreation.css'; // Import the CSS File
 
 const TeamCreation = () => {
@@ -8,12 +8,37 @@ const TeamCreation = () => {
 
     const [existingTeamNames, setExistingTeamNames] = useState('');
 
+    const createTeam = async (teamName, teamSize) => {
+        try {
+            const response = await fetch(
+                'http://localhost:8080/createTeam',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({team_name: teamName, team_size: teamSize})
+                }
+            );
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              const data = await response.json();
+              console.log(data);
+
+            } catch (error) {
+              console.error('Error:', error);
+            }
+        }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        
 
         if (existingTeamNames.includes(teamName)){
             setMessage('Team name already exists. Please choose a different name.');
         } else if (teamName && teamSize > 0) {
+            createTeam(teamName, teamSize);
             setExistingTeamNames([...existingTeamNames, teamName]);
             setMessage(`Team "${teamName}" with a maximum size of ${teamSize} member(s) has been created!`);
         } else {
