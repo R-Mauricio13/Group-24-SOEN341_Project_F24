@@ -83,7 +83,7 @@ app.post("/create",(req,res)=>{
 
     } 
     
-    const query = `INSERT INTO students (firstname, lastname, role, username, password) VALUES (?,?,?,?,?)`;
+    const query = `INSERT INTO ${person_type} (firstname, lastname, role, username, password) VALUES (?,?,?,?,?)`;
 
 
 
