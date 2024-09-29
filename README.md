@@ -79,6 +79,8 @@ Implement and demonstrate at least one feature related to "User Authentication &
 - [@VladimirTodorov21](https://github.com/VladimirTodorov21) Vladimir Todorov :(40203170)[Add your role:)]
 - [@YeJimmy](https://github.com/YeJimmy) Jimmy Ye (40244862):[Add your role:)]
 - [@zjoway](https://github.com/zjoway) Victor Zhou (40264131):[Add your role:)]
+-  [@KiwiMcQueen](https://github.com/KiwiMcQueen)  Teodor Oprea (40247239):[Add your role:)]
+
 
 ## Project Status
 
