@@ -75,11 +75,11 @@ Implement and demonstrate at least one feature related to "User Authentication &
 ## Team Members
 
 - [@R-Mauricio13](https://github.com/R-Mauricio13) Richard Mauricio (40224398): [Lead Full-Stack Developer] [Software Engineer]
-- [@Nesrine-larbi](https://github.com/Nesrine-larbi) Nesrine Larbi (40079009): [Add your role:)] [Software Engineer]
+- [@Nesrine-larbi](https://github.com/Nesrine-larbi) Nesrine Larbi(40079009): [Front-End, Graphic Design Developer] [Software Engineer]
 - [@VladimirTodorov21](https://github.com/VladimirTodorov21) Vladimir Todorov :(40203170)[Database Developer] [Software Engineer]
 - [@YeJimmy](https://github.com/YeJimmy) Jimmy Ye (40244862):[Full-Stack Developer] [Software Engineer]
-- [@zjoway](https://github.com/zjoway) Victor Zhou (40264131):[Add your role:)] 
--  [@1intuition](https://github.com/1Intuition)  Teodor Oprea (40247239):[Add your role:)] [Software Engineer]
+- [@zjoway](https://github.com/zjoway) Victor Zhou (40264131):[back-End Developer ] [Software Engineer]
+- [@1intuition](https://github.com/1Intuition)  Teodor Oprea (40247239):[back-End Developer] [Software Engineer]
 
 
 ## Project Status
