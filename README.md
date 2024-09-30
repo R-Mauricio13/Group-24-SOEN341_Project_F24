@@ -78,7 +78,7 @@ Implement and demonstrate at least one feature related to "User Authentication &
 - [@Nesrine-larbi](https://github.com/Nesrine-larbi) Nesrine Larbi(40079009): [Front-End, Graphic Design Developer] [Software Engineer]
 - [@VladimirTodorov21](https://github.com/VladimirTodorov21) Vladimir Todorov :(40203170)[Database Developer] [Software Engineer]
 - [@YeJimmy](https://github.com/YeJimmy) Jimmy Ye (40244862):[Full-Stack Developer] [Software Engineer]
-- [@zjoway](https://github.com/zjoway) Victor Zhou (40264131):[back-End Developer ] [Software Engineer]
+- [@zjoway](https://github.com/zjoway) Victor Zhou (40264131):[back-End Developer ] [Computer Engineer]
 - [@1intuition](https://github.com/1Intuition)  Teodor Oprea (40247239):[back-End Developer] [Software Engineer]
 
 
