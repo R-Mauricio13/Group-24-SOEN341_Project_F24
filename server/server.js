@@ -41,24 +41,29 @@ app.get("/login",(req, res)=>{
     const instructors = process.env.INSTRUCTORS;
     let personnel = "";
 
-    if (req.query.role==="student")
+    if (req.query.user_role==="student") {
         personnel = students;
-    else
+    } else if (req.query.user_role==="instructor") {
         personnel = instructors;
+    } else {
+        return res.status(400).json({ error: "Invalid user role" });
+    }
 
-    const query = `SELECT password FROM ${personnel} WHERE username = ?`;
+    const query = `SELECT * FROM ?? WHERE username = ? AND user_role = ? AND user_password = ?`;
 
-    db.query(query, [req.query.username], (err, data) => {
+    db.query(query, [personnel, req.query.username, req.query.user_role, req.query.user_password], (err, data) => {
         if (err)
             return res.json(false);
 
-        res.send(data[0]?.user_password == req.query.user_password);
+        res.send(data.length > 0);
+
+        // TODO: cookie auth here
     })
 })
 
 //Testing POST to submit data to SQL
 app.post("/create",(req,res)=>{
-    
+    console.log("Attempting to create account");
     const values=[
         req.body.first_name,
         req.body.last_name,
@@ -67,6 +72,7 @@ app.post("/create",(req,res)=>{
         req.body.user_password,
       
     ];
+    console.log(values);
     let person_type=""
     const person_name=values[0]
     const person_username=values[3]
