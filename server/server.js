@@ -20,7 +20,7 @@ const db = mysql.createConnection({
 
 
 
-//Test if we can access student_groups
+//Api call to GET teams with team_name & team_size
 app.get("/student_groups",(req,res)=>{
     const student_groups=process.env.TEAMS
     const query =`SELECT * FROM ${student_groups}`
@@ -70,6 +70,8 @@ app.get("/login", (req, res) => {
         // TODO: cookie auth here
     })
 })
+
+
 //Api call to post to SQL for team creation
 app.post("/Create_Team", (req, res) => {
     console.log("Attempting to create team")
