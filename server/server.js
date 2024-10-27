@@ -59,15 +59,44 @@ app.get("/login",(req, res)=>{
 })
 
 app.get('/existingTeams', (req, res) => {
-    const query = 'SELECT team_name FROM student_teams'; // Adjust table name as needed
-    db.query(query, (err, data) => {
+
+    const updateQuery = `
+    UPDATE student_teams
+    SET current_members = (
+        SELECT COUNT(*)
+        FROM student_team_members
+        WHERE student_team_members.team_name = student_teams.team_name
+    );`;
+
+    db.query(updateQuery, (err) => {
         if (err) {
-            return res.status(500).json({ message: 'Error fetching teams' });
+            console.error("Error updating team members count:", err);
+            return res.status(500).json({ message: 'Error updating team members count' });
         }
-        return res.status(200).json(data); // Respond with existing team names
+
+        // Fetch teams only after the update is successful
+        const selectQuery = 'SELECT team_name, team_size, current_members FROM student_teams';
+        
+        db.query(selectQuery, (err, data) => {
+            if (err) {
+                console.error("Error fetching teams:", err);
+                return res.status(500).json({ message: 'Error fetching teams' });
+            }
+            
+            return res.status(200).json(data); // Only one response
+        });
     });
 });
 
+// app.get('/existingTeams', (req, res) => {
+//     const query = 'SELECT team_name FROM student_teams'; // Adjust table name as needed
+//     db.query(query, (err, data) => {
+//         if (err) {
+//             return res.status(500).json({ message: 'Error fetching teams' });
+//         }
+//         return res.status(200).json(data); 
+//     });
+// }); 
 
 
 //Testing POST to submit data to SQL
@@ -149,7 +178,7 @@ app.post("/createTeam", (req, res) => {
     });
 });
 
-// POST to add member to a team
+// POST to add member to a team or to change a member's team
 app.post("/addMemberToTeam", (req, res) => {
     const { team_name,  username,} = req.body;
 
@@ -158,7 +187,7 @@ app.post("/addMemberToTeam", (req, res) => {
         return res.status(400).json("team_name and username are required.");
     }
 
-    // First, check if the team exists and retrieve its size
+    //check if the team exists and retrieve its size
     const checkTeamQuery = `SELECT team_size FROM student_teams WHERE team_name = ?`;
 
     db.query(checkTeamQuery, [team_name], (err, teamData) => {
@@ -179,32 +208,46 @@ app.post("/addMemberToTeam", (req, res) => {
             const currentMembers = countResult[0].memberCount;
 
             if (currentMembers >= maxTeamSize) {
-                // If the team is already full, return an error
-                return res.status(400).json("This team is full. Cannot add more members.");
+                // If the team is already full, return an message error
+                return res.status(400).json({message:"This team is full. Cannot add more members."});
             } else {
-                // If the team is not full, insert the new member into student_team_members
-                const insertMemberQuery = `INSERT INTO student_team_members (team_name, username) VALUES (?, ?)`;
-                
-                db.query(insertMemberQuery, [team_name, username], (err, insertResult) => {
-                    if (err) {
-                        if (err.code === 'ER_DUP_ENTRY') {
-                            return res.status(400).json("Error: Member name already exists.")
-                        }
-                        return res.status(500).json("Error adding member to the team.");
-                    }
+                // If the team is not full, check if the member already exists
+                const checkMemberQuery = `SELECT username FROM student_team_members WHERE username = ?`;
 
-                    // // Update the student's group_id in user_student table
-                    // const updateStudentGroupQuery = `UPDATE user_student SET group_id = ? WHERE username = ?`;
-                    
-                    // db.query(updateStudentGroupQuery, [team_name, username], (err, updateResult) => {
-                    //     if (err) {
-                    //         return res.status(500).json("Error updating student's team assignment.");
-                    //     }
+
+                db.query(checkMemberQuery, [username], (err, memberData) => {
+                    if (err) {
+                        return res.status(500).json("Error checking member's current team.");
+                    }
+            
+                    if (memberData.length > 0) {
+                        // Username already exists - update the team for this username
+                        const updateMemberTeamQuery = `UPDATE student_team_members SET team_name = ? WHERE username = ?`;
                         
-                    //     return res.status(200).json("Member added successfully and student team updated.");
-                    // });
-                    return res.status(200).json("Member added successfully and student team updated.");
-                });
+                        db.query(updateMemberTeamQuery, [team_name, username], (err, updateResult) => {
+                            if (err) {
+                                return res.status(500).json("Error updating member's team.");
+                            }
+                            
+                            return res.status(200).json("Student's team updated successfully.");
+                        });
+                    } else{ 
+                          //Insert if no team assigned
+                        const insertMemberQuery = `INSERT INTO student_team_members (team_name, username) VALUES (?, ?)`;
+                
+                        db.query(insertMemberQuery, [team_name, username], (err, insertResult) => {
+                            if (err) {
+                                if (err.code === 'ER_DUP_ENTRY') {
+                                    return res.status(400).json("Error: Member name already exists.")
+                                }
+                                return res.status(500).json("Error adding member to the team.");
+                            }
+        
+                            
+                            return res.status(200).json("Student added to the team successfully.");
+                        });}
+
+            });
             }
         });
     });

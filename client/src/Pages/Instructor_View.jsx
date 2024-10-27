@@ -13,10 +13,8 @@ function InstructorView() {
       return parsedItem ||"" //Returns the parsed item or null if nothing exists
   });
 
-
-  const instructor_username=user.username;
-
-
+  const instructor_username = user.username;
+  
   return (
     <div>
       <Header />
