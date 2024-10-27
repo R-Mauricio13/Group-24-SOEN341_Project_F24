@@ -1,0 +1,33 @@
+table {
+    border: 2px solid;
+    width: 70%;
+    margin: auto;
+}
+
+table th {
+    height: inherit;
+    width: inherit;
+}
+
+tr th {
+    border: 2px solid #000;
+    height: 1px;
+    text-align: center;
+    margin: auto;
+}
+
+th label { 
+    display: block;
+    align-content: center;
+    min-height: 100%; /* for the latest browsers which support min-height */
+    height: auto !important; /* for newer IE versions */
+    height: 100%; /* the only height-related attribute that IE6 does not ignore  */
+}
+
+.entities {
+    text-align: left;
+}
+
+textarea {
+    width: 90%;
+}

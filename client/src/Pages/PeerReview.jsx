@@ -2,6 +2,10 @@ import React, {  useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
+import Form from "react-bootstrap/Form";
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import '../Styles/PeerReview.css'; 
 
 function PeerReview() {
   const [user,setUser]=useState(()=>{
@@ -10,19 +14,131 @@ function PeerReview() {
       return parsedItem ||"" //Returns the parsed item or null if nothing exists
   });
 
-
   const student_username=user.username;
+  const navigate = useNavigate();
 
+  const [review, setReview] = useState({
+    cooperation: "",
+    coop_comment: "",
+    conceptual: "",
+    concept_comment: "",
+    practical: "",
+    practical_comment: "",
+    work_ethic: "",
+    we_comment: "",
+  });
+
+  //Handles reading the input field of the form
+  const handleChange=(event)=>{
+    setReview((prev)=>({...prev,[event.target.name]:event.target.value}))
+  }
+
+  const submitForm = async event => {
+    event.preventDefault();
+    navigate("/Peer_Review_Confirmation");
+  };
 
   return (
+    <>
     <div>
       <Header />
       <Navigation />
-      <h1>
-        Welcome to Peer Review
-      </h1>
+      <form onSubmit={submitForm}>
+        <Form.Group>
+            <table>
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                    </tr>
+                    <tr>
+                        <th className="entities">
+                            <h3>Cooperation</h3>
+                            <textarea 
+                                onChange={handleChange}
+                                placeholder="Cooperation Comments (Optional):"
+                                name="coop_comment"
+                                value={review.coop_comment}
+                                maxLength="255"
+                                rows="3"
+                            />
+                        </th>
+                        <th><label><input id="c1" type="radio" value="1" name="cooperation" onChange={handleChange} required/></label></th>
+                        <th><label><input type="radio" value="2" name="cooperation" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="3" name="cooperation" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="4" name="cooperation" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="5" name="cooperation" onChange={handleChange}/></label></th>
+                    </tr>
+                    <tr>
+                        <th className="entities">
+                            <h3>Conceptual Contribution</h3>
+                            <textarea 
+                                onChange={handleChange}
+                                placeholder="Conceptual Contribution Comments (Optional):"
+                                name="concept_comment"
+                                value={review.concept_comment}
+                                maxLength="255"
+                                rows="3"
+                            />
+                        </th>
+                        <th><label><input type="radio" value="1" name="conceptual" onChange={handleChange} required/></label></th>
+                        <th><label><input type="radio" value="2" name="conceptual" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="3" name="conceptual" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="4" name="conceptual" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="5" name="conceptual" onChange={handleChange}/></label></th>
+                    </tr>
+                    <tr>
+                        <th className="entities">
+                            <h3>Practical Contribution</h3>
+                            <textarea 
+                                onChange={handleChange}
+                                placeholder="Practical Contribution Comments (Optional):"
+                                name="pratical_comment"
+                                value={review.pratical_comment}
+                                maxLength="255"
+                                rows="3"
+                            />
+                        </th>
+                        <th><label><input type="radio" value="1" name="pratical" onChange={handleChange} required/></label></th>
+                        <th><label><input type="radio" value="2" name="pratical" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="3" name="pratical" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="4" name="pratical" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="5" name="pratical" onChange={handleChange}/></label></th>
+                    </tr>
+                    <tr>
+                        <th className="entities">
+                            <h3>Work Ethic</h3>
+                            <textarea 
+                                onChange={handleChange}
+                                placeholder="Work Ethic Comments (Optional):"
+                                name="we_comment"
+                                value={review.we_comment}
+                                maxLength="255"
+                                rows="3"
+                            />
+                        </th>
+                        <th><label><input type="radio" value="1" name="work_ethic" onChange={handleChange} required/></label></th>
+                        <th><label><input type="radio" value="2" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="3" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="4" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="5" name="work_ethic" onChange={handleChange}/></label></th>
+                    </tr>
+                </tbody>
+            </table>
+        </Form.Group>
+        <button className="CAButton" type="submit">
+            Submit Review
+        </button>
+      </form>
       <Footer />
     </div>
+    </>
   );
 }
 export default PeerReview;
