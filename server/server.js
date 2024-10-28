@@ -155,6 +155,37 @@ app.post("/create",(req,res)=>{
 });
 
 
+app.post("/submit_review",(req,res)=>{
+    console.log("Attempting to submit peer review.")
+    const values=[
+        parseInt( req.body.cooperation),
+        parseInt(req.body.conceptual),
+        parseInt(req.body.practical),
+        parseInt(req.body.work_ethic),
+        1, //<= fake student id 
+        // req.body.username, <== remove uncomment when you can add query the student id from the username of the student
+        req.body.coop_comment,
+        req.body.concept_comment,
+        req.body.practical_comment,
+        req.body.we_comment,
+
+    ]
+    console.log(values);
+    const peer_review=process.env.PEER_REVIEW;
+    
+    const query= `INSERT INTO ${peer_review} (Cooperation, Conceptional_Contribution, Practical_Contribution, Work_Ethic, user_id, coop_comment, cc_comment, we_comment, pc_comment) VALUES (?,?,?,?,?,?,?,?,?)`
+
+    db.query(query, values, (err, data) => {
+        if (err) {
+            console.error("MySQL error: ", err);
+            return res.status(500).json("Error: Peer review submission failed");
+        }
+        console.log("Data inserted successfully:", data);
+        return res.status(200).json(data);
+    });
+
+})
+
 //Establishing port connection
 const port= 8080;
 app.listen(port,() =>
