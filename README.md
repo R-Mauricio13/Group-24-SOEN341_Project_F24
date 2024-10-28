@@ -70,7 +70,19 @@ Develop a sprint plan, detailing user stories and task breakdowns using GitHub i
 Maintain logs of each team member's contributions, including time spent on activities.
 Record meeting minutes in files named appropriately for easy tracking.
 3. Initial Functionality:
-Implement and demonstrate at least one feature related to "User Authentication & Team Management.
+Implement and demonstrate at least one feature related to "User Authentication & Team Management".
+
+## Sprint 2 Focus
+
+1. Feature Implementation:
+  - Added a Peer Assessment Interface and Peer Reviewing Form
+  - Established the CI/CD Pipeline
+  - Implemented Acceptance Testing
+2. Documentation:
+  - Added Planning for Sprint 2 (Sprint 2 Burnout Sheet)
+  - Added new Meeting Logs for Sprint 2
+  - Added a new section called "IndividualLogs" for each shareholders contribution to the project
+
 
 ## Team Members
 
