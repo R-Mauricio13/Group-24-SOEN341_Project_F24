@@ -1,10 +1,6 @@
 /* TeamCreation.css */
 
 .TCContainer {
-    max-width: 400px;
-    position: absolute;
-    top:95px;
-    left: 40px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ddd;

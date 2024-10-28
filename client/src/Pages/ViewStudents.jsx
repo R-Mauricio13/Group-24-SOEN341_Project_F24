@@ -65,7 +65,7 @@ function ViewStudents() {
               <th scope="row">{student.user_id}</th>
               <td>{student.first_name}</td>
               <td>{student.last_name}</td>
-              <td>{student.group_id}</td>
+              <td>{student.group_id || 'N/A'}</td>
             </tr>
           ))}
         </tbody>

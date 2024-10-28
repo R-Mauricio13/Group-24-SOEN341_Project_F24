@@ -4,7 +4,10 @@ import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
 
 import ViewStudents from "./ViewStudents";
+import ViewTeams from "./ViewTeams";
 import CreateTeams from "./TeamCreation";
+
+import '../Styles/ToggleButton.css';
 
 function InstructorView() {
   const [user,setUser]=useState(()=>{
@@ -14,8 +17,9 @@ function InstructorView() {
   });
 
 
-  const instructor_username=user.username;
+  const instructor_username= user.username;
 
+  const [activeView, setActiveView] = useState("students");
 
   return (
     <div>
@@ -25,13 +29,17 @@ function InstructorView() {
         <div>
             <h1>Welcome {instructor_username}</h1>
         </div>
-        <div>
-            <ViewStudents />
+        <div class="ToggleNavigation">
+          <button class="ToggleView" onClick={() => setActiveView("students")}>View Students</button>
+          <button class="ToggleView" onClick={() => setActiveView("teams")}>View Teams</button>
+          <button class="ToggleView" onClick={() => setActiveView("createTeam")}>Create Team</button>
         </div>
 
         <div>
-            <CreateTeams />  
-        </div>  
+          {activeView === "students" && <ViewStudents />}
+          {activeView === "teams" && <ViewTeams />}
+          {activeView === "createTeam" && <CreateTeams />}
+        </div>
       </div>  
       <Footer />
     </div>

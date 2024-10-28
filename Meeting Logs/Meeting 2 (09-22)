@@ -6,11 +6,24 @@
 ● Richard Mauricio
 ● Vladimir Todorov
 ● Jimmy Ye
+<<<<<<< HEAD
+● Nesrine Larbi
+=======
+>>>>>>> fed280aa9b82563706f1d979c6748d50b52b9841
 
 --Topics--
 1) Discussed GitHub Setup (Repository folders, Wiki, Project Tab)
 2) Thorougly communicated the Tech Stack to be used throughout the project
 3) Discussed individual tasks 
+<<<<<<< HEAD
+4)Sprint 1 planning:
+  Selecting user stories for Sprint 1
+  Breaking down user stories into tasks
+  Estimating story points for tasks
+  
+5) Plan for any necessary adjustments to meet Sprint 1 goals
+=======
+>>>>>>> fed280aa9b82563706f1d979c6748d50b52b9841
 
 --Tech Stack--
 ● HTML/CSS/JS      (Same as initially planned)

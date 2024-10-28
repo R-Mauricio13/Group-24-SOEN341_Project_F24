@@ -8,8 +8,8 @@ function Login() {
 
   const [user_info, setUser_info] = useState({
     username: "",
-    password: "",
-    role: "",
+    user_password: "",
+    user_role: "",
     loggedin: false,
   });
 
@@ -28,15 +28,15 @@ function Login() {
     let response = await axios.get("http://localhost:8080/login", {
       params: {
         username: user_info.username,
-        password: user_info.password,
-        role: user_info.role,
+        user_password: user_info.user_password,
+        user_role: user_info.user_role,
       }
     });
     //navigate("/StudentPage");
     if (response.data) {
-      if (user_info.role === "student")
+      if (user_info.user_role === "student")
         navigate("/Student_Login");
-      else if (user_info.role === "instructor")
+      else if (user_info.user_role === "instructor")
         navigate("/Instructor_Login");
     }
     else
@@ -68,7 +68,7 @@ function Login() {
                 <Form.Label class="LLabel">Password</Form.Label>
                 <Form.Control
                   type="password"
-                  name="password"
+                  name="user_password"
                   placeholder="Enter Password"
                   onChange={handleChange}
                   required
@@ -77,7 +77,7 @@ function Login() {
 
               <Form.Group>
                 <Form.Label class="LLabel">Select your role</Form.Label>
-                <Form.Select name="role" onChange={handleChange} required>
+                <Form.Select name="user_role" onChange={handleChange} required>
                   <option></option>
                   <option value="student">Student</option>
                   <option value="instructor">Instructor</option>
