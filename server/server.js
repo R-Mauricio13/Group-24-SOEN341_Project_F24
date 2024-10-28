@@ -3,11 +3,34 @@ require('dotenv').config();
 const mysql=require('mysql2')
 const cors=require('cors');
 const path= require(`path`);
-const app=express();
-app.use(cors());
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+
+const app = express();
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
-
+const cookieJwtAuth = (req, res, next) => {
+    const token = req.cookies.token;
+    // console.log(token);
+    try {
+        console.log("Token data:", token);
+        const tokenData = jwt.verify(token, process.env.JWT_SECRET);
+        
+        req.user_id = tokenData.user_id;
+        // console.log("user_id:", req.user_id);
+        next();
+    } catch (e) {
+        res.clearCookie("token");
+        return res.status(401).send("Invalid token");
+    }
+};
 
 //In order to connect to your MySQL database, you have to put in your login info in the .env file
 const db=mysql.createConnection({
@@ -23,7 +46,7 @@ const db=mysql.createConnection({
 
 
 //Testing if we can access the db
-app.get("/students",(req,res)=>{
+app.get("/students", cookieJwtAuth, (req, res)=>{
     const students=process.env.STUDENTS
     // const students = 'user_student';
     const query =`SELECT ${students}.username, ${students}.id, ${students}.first_name, ${students}.last_name, ${students}.user_role, ${students}.user_password, student_team_members.team_name FROM ${students} LEFT JOIN student_team_members ON user_student.username = student_team_members.username`;
@@ -38,23 +61,54 @@ app.get("/students",(req,res)=>{
 
 })
 
-app.get("/login",(req, res)=>{
+app.get("/login", (req, res) => {
+    // const {email, password} = req.body;
+    // const user_id = await app.AccountDatabase.loginUser(email, password);
+    // if (user_id === false) {
+    //     return res.status(401).redirect("http://intbets.com/login.html?invalid-creds=true");
+    // };
+    // const jwtToken = jwt.sign({user_id: user_id}, process.env.JWT_SECRET, {expiresIn: "2m"});
+    // res.cookie("token", jwtToken, {
+    //     httpOnly: true,
+    //     // sameSite: 'None',  // need to set Secure too...
+    // });
+    // // res.status(200).send("Logged In!");
+    // return res.redirect("http://intbets.com/account.html");
+
     const students = process.env.STUDENTS;
     const instructors = process.env.INSTRUCTORS;
     let personnel = "";
 
-    if (req.query.user_role==="student")
+    if (req.query.user_role === "student") {
         personnel = students;
-    else
+    } else if (req.query.user_role === "instructor") {
         personnel = instructors;
+    } else {
+        return res.status(400).redirect("http://localhost:3000/?error-msg=Invalid user role");
+    }
 
-    const query = `SELECT user_password FROM ${personnel} WHERE username = ?`;
+    const query = `SELECT * FROM ?? WHERE username = ? AND user_role = ? AND user_password = ?`;
 
-    db.query(query, [req.query.username], (err, data) => {
+    db.query(query, [personnel, req.query.username, req.query.user_role, req.query.user_password], (err, data) => {
         if (err)
-            return res.json(false);
+            return res.status(400).redirect("http://localhost:3000/?error-msg=Unexpected server error");
 
-        res.send(data[0]?.user_password == req.query.user_password);
+        if (data.length > 0) {
+            const jwtToken = jwt.sign({user_id: data[0].id}, process.env.JWT_SECRET, {expiresIn: "2m"});
+            res.cookie("token", jwtToken, {
+                httpOnly: true,
+                // sameSite: 'None',  // need to set Secure too...
+            });
+            if (req.query.user_role === "student") {
+                return res.status(200).redirect("http://localhost:3000/Student_Login");
+            } else if (req.query.user_role === "instructor") {
+                return res.status(200).redirect("http://localhost:3000/Instructor_Login");
+            }
+            // return res.redirect("http://localhost:3000/introduction");
+        }
+
+        return res.status(401).redirect("http://localhost:3000/?error-msg=Invalid username or password");
+
     })
 })
 
@@ -101,7 +155,7 @@ app.get('/existingTeams', (req, res) => {
 
 //Testing POST to submit data to SQL
 app.post("/create",(req,res)=>{
-    
+    console.log("Attempting to create account");
     const values=[
         req.body.first_name,
         req.body.last_name,
@@ -110,6 +164,7 @@ app.post("/create",(req,res)=>{
         req.body.user_password,
       
     ];
+    console.log(values);
     let person_type=""
     const person_name=values[0]
     const person_username=values[3]
@@ -259,4 +314,3 @@ app.listen(port,() =>
 {
     console.log(`Server port running on '${port}'`);
 })
-            

@@ -1,0 +1,5 @@
+We had a meeting discussing our goals and tasks for sprint 2.
+We are quite behind due to most people being occupied studying for midterms.
+We decided to create a seperate table for the peer review submissions rather than adding new columns to the student table.
+We're still undecided on whether we want to add a component for selecting a team member for peer review or simply creating a link on teammate entries on the student view page to redirect to the peer review page.
+We outlined the tasks/issues for sprint 2 in github.

@@ -36,9 +36,22 @@ function ViewStudents() {
     }
   };
   useEffect(() => {
-    fetch("http://localhost:8080/students")
+    fetch("http://localhost:8080/students", {
+      method: "GET",
+      credentials: "include", // Include cookies
+    })
+      .then(response => {
+          if (response.status === 401) {
+              // alert('You are not logged in. Redirecting to login page...');
+              window.location.href = '/?error-msg=You are not logged in. Please log in.';
+          } else if (response.status !== 200) {
+              console.error('Error:', response);
+          }
+          return response;
+      })
+
       .then((response) => response.json())
-      .then((data) => setRecord(data))
+      .then((data) => setRecord(data))  // HERE YOU CAN DO STUFF...
       .catch((error) => console.log(error));
   }, []);
 

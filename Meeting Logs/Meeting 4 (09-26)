@@ -7,18 +7,23 @@
 ● Vladimir Todorov
 ● Jimmy Ye
 ● Nesrine Larbi
-● Teodore Oprea
+● Teodor Oprea
 ● Victor Zhou
 
 --Topics--
-1) Discussed Advancing the Create Team Function
-2) Discussed the UI design of Instructor View 
-3) Discussed the UI design of Student View
-4) Discussed Advancing Login Verification
+1)New Member Onboarding:
+   . Explain the project structure and development environment
+   . Review assigned roles and responsibilities within the team
+   . Provide access to necessary tools and repositories
+   . Brief recap of project goals and Sprint 1 objectives 
+2)Ensure all team members are on track with their assigned tasks
+3)Review and update the README file
+4)Ensure all team members are on track with their assigned tasks
+5)Final review of completed User Authentication & Team Management features
 
 --Tasks--
 ● Implementing Instructor View/ Student View       (Vladimir Todorov / Richard Mauricio)
 ● Advancing/Finishing Account Creation Feature     (Vladimir Todorov)
 ● Run web app and server commmunication            (Jimmy Ye)
-● Implement Tokens for Login Verification          (Jimmy Ye & Teodore Oprea)
+● Implement Tokens for Login Verification          (Jimmy Ye & Teodor Oprea)
 ● Apply Css onto Pages                             (Richard Mauricio / Nesrine Larbi / Vladimir Todorov)
