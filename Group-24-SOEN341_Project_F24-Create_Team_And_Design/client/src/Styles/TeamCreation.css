@@ -1,0 +1,56 @@
+/* TeamCreation.css */
+
+.TCContainer {
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+h2.highlight {
+    text-align: center;
+    color: #a71420;
+}
+
+label.TCLabel {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"].TCPrompt, 
+select.TCPrompt {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button.TCButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #912338;
+    color: white;
+    border: 1px solid #a71420;;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.6s ease, border 0.6s ease, color 0.2s ease;
+}
+
+button:hover {
+    background-color: #ffffff;
+    border: 1px solid #a71420;
+    color: #a71420;
+    font-weight:bold;
+}
+
+p.TCMessage {
+    text-align: center;
+    margin-top: 15px;
+    color: #a71420; /* Red for error messages */
+}
