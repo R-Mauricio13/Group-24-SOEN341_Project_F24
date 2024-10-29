@@ -70,11 +70,22 @@ Develop a sprint plan, detailing user stories and task breakdowns using GitHub i
 Maintain logs of each team member's contributions, including time spent on activities.
 Record meeting minutes in files named appropriately for easy tracking.
 3. Initial Functionality:
-Implement and demonstrate at least one feature related to "User Authentication & Team Management.
+Implement and demonstrate at least one feature related to "User Authentication & Team Management".
+
+## Sprint 2 Focus
+
+1. Feature Implementation:
+  - Added a Peer Assessment Interface and Peer Reviewing Form
+  - Established the CI/CD Pipeline
+  - Implemented Acceptance Testing
+2. Documentation:
+  - Added Planning for Sprint 2 (Sprint 2 Burnout Sheet)
+  - Added new Meeting Logs for Sprint 2
+  - Added a new section called "IndividualLogs" for each shareholders contribution to the project
+
 
 ## Team Members
 
-<<<<<<< HEAD
 - [@R-Mauricio13](https://github.com/R-Mauricio13) Richard Mauricio (40224398): [Lead Full-Stack Developer] [Software Engineer]
 - [@Nesrine-larbi](https://github.com/Nesrine-larbi) Nesrine Larbi(40079009): [Front-End, Graphic Design Developer] [Software Engineer]
 - [@VladimirTodorov21](https://github.com/VladimirTodorov21) Vladimir Todorov :(40203170)[Database Developer] [Software Engineer]
@@ -82,13 +93,6 @@ Implement and demonstrate at least one feature related to "User Authentication &
 - [@zjoway](https://github.com/zjoway) Victor Zhou (40264131):[back-End Developer ] [Computer Engineer]
 - [@1intuition](https://github.com/1Intuition)  Teodor Oprea (40247239):[back-End Developer] [Software Engineer]
 
-=======
-- [@R-Mauricio13](https://github.com/R-Mauricio13) Richard Mauricio (40224398): [Add your role:)]
-- [@Nesrine-larbi](https://github.com/Nesrine-larbi) Nesrine Larbi (40079009): [Add your role:)]
-- [@VladimirTodorov21](https://github.com/VladimirTodorov21) Vladimir Todorov :(40203170)[Database Developer]
-- [@YeJimmy](https://github.com/YeJimmy) Jimmy Ye (40244862):[Add your role:)]
-- [@zjoway](https://github.com/zjoway) Victor Zhou (40264131):[Add your role:)]
->>>>>>> fed280aa9b82563706f1d979c6748d50b52b9841
 
 ## Project Status
 

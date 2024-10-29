@@ -7,7 +7,6 @@
 ● Vladimir Todorov
 ● Jimmy Ye
 ● Nesrine Larbi
-<<<<<<< HEAD
 ● Teodor Oprea
 ● Victor Zhou
 
@@ -21,24 +20,10 @@
 3)Review and update the README file
 4)Ensure all team members are on track with their assigned tasks
 5)Final review of completed User Authentication & Team Management features
-=======
-● Teodore Oprea
-● Victor Zhou
-
---Topics--
-1) Discussed Advancing the Create Team Function
-2) Discussed the UI design of Instructor View 
-3) Discussed the UI design of Student View
-4) Discussed Advancing Login Verification
->>>>>>> fed280aa9b82563706f1d979c6748d50b52b9841
 
 --Tasks--
 ● Implementing Instructor View/ Student View       (Vladimir Todorov / Richard Mauricio)
 ● Advancing/Finishing Account Creation Feature     (Vladimir Todorov)
 ● Run web app and server commmunication            (Jimmy Ye)
-<<<<<<< HEAD
 ● Implement Tokens for Login Verification          (Jimmy Ye & Teodor Oprea)
-=======
-● Implement Tokens for Login Verification          (Jimmy Ye & Teodore Oprea)
->>>>>>> fed280aa9b82563706f1d979c6748d50b52b9841
 ● Apply Css onto Pages                             (Richard Mauricio / Nesrine Larbi / Vladimir Todorov)

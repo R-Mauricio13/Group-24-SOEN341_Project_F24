@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import axios from "axios"
+// import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import '../Styles/Login.css'; 
 
@@ -22,25 +22,40 @@ function Login() {
     setUser_info((prev) => ({ ...prev, loggedin: true }))
   };
 
+  // interpret get request for this page. if there is error-msg in the query, use the setLogin_Error function to display the error message
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const error_msg = url.searchParams.get("error-msg");
+    if (error_msg) {
+      setLogin_Error(<label style={{ color: 'red' }}>{error_msg}</label>);
+    }
+  }, []);
+
   const submitForm = async event => {
     event.preventDefault();
 
-    let response = await axios.get("http://localhost:8080/login", {
-      params: {
-        username: user_info.username,
-        user_password: user_info.user_password,
-        user_role: user_info.user_role,
-      }
-    });
+    // let response = await axios.get("http://localhost:8080/login", {
+    //   params: {
+    //     username: user_info.username,
+    //     user_password: user_info.user_password,
+    //     user_role: user_info.user_role,
+    //   }
+    // });
+
+    // TODO: Make this post request instead
+    window.location.replace("http://localhost:8080/login?username=" + user_info.username + "&user_password=" + user_info.user_password + "&user_role=" + user_info.user_role);
+
+
+
     //navigate("/StudentPage");
-    if (response.data) {
-      if (user_info.user_role === "student")
-        navigate("/Student_Login");
-      else if (user_info.user_role === "instructor")
-        navigate("/Instructor_Login");
-    }
-    else
-      setLogin_Error(<label style={{ color: 'red' }}>Incorrect Username or Password!</label>);
+    // if (response.data) {
+    //   if (user_info.user_role === "student")
+    //     navigate("/Student_Login");
+    //   else if (user_info.user_role === "instructor")
+    //     navigate("/Instructor_Login");
+    // }
+    // else
+    // setLogin_Error(<label style={{ color: 'red' }}>Incorrect Username or Password!</label>);
   };
 
   useEffect(()=>{
