@@ -23,25 +23,27 @@ function InstructorView() {
 
   return (
     <div>
-      <Header />
-      <Navigation />
-      <div style={{ position: 'relative' , height: '400px' }}>
-        <div>
-            <h1>Welcome {instructor_username}</h1>
-        </div>
-        <div class="ToggleNavigation">
-          <button class="ToggleView" onClick={() => setActiveView("students")}>View Students</button>
-          <button class="ToggleView" onClick={() => setActiveView("teams")}>View Teams</button>
-          <button class="ToggleView" onClick={() => setActiveView("createTeam")}>Create Team</button>
-        </div>
+      <div style={{flex: '1' , overflow: 'auto'}}>
+        <Header />
+        <Navigation />
+        <div style={{ position: 'relative' , height: '650px' }}>
+          <div>
+              <h1>Welcome {instructor_username}</h1>
+          </div>
+          <div class="ToggleNavigation">
+            <button class="ToggleView" onClick={() => setActiveView("students")}>View Students</button>
+            <button class="ToggleView" onClick={() => setActiveView("teams")}>View Teams</button>
+            <button class="ToggleView" onClick={() => setActiveView("createTeam")}>Create Team</button>
+          </div>
 
-        <div>
-          {activeView === "students" && <ViewStudents />}
-          {activeView === "teams" && <ViewTeams />}
-          {activeView === "createTeam" && <CreateTeams />}
-        </div>
-      </div>  
-      <Footer />
+          <div>
+            {activeView === "students" && <ViewStudents />}
+            {activeView === "teams" && <ViewTeams />}
+            {activeView === "createTeam" && <CreateTeams />}
+          </div>
+        </div>  
+        <Footer />
+      </div>
     </div>
   );
 }

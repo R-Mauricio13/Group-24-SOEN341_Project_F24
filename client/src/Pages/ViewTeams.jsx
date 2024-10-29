@@ -13,12 +13,13 @@ function ViewTeams() {
 
     // Grouping students by group_id and preparing team data
     const groupedRecords = studentRecords.reduce((acc, student) => {
-        const { group_id, team_name, team_size } = student;
+        const { group_id, team_name, team_size, current_members } = student;
 
         if (!acc[group_id]) {
             acc[group_id] = {
                 team_name: team_name, // Assuming team_name is part of the data
-                team_size: team_size
+                team_size: team_size,
+                current_members: current_members
             };
         }
         return acc;

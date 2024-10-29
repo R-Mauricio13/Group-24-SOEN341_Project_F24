@@ -17,18 +17,20 @@ function StudentView() {
 
   return (
     <div>
-      <Header />
-      <Navigation />
-      <div style={{ position: 'relative' , height: '400px' }}>
-        <div>
-          <h1>Welcome {student_username}</h1>
+      <div style={{flex: '1' , overflow: 'auto'}}>
+        <Header />
+        <Navigation />
+        <div style={{ position: 'relative' , height: '650px' }}>
+          <div>
+            <h1>Welcome {student_username}</h1>
 
+          </div>
+          <div>
+            <ViewStudents />
+          </div>
         </div>
-        <div>
-          <ViewStudents />
-        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
