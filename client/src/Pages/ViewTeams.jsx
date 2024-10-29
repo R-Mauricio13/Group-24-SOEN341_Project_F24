@@ -1,45 +1,66 @@
-//Outputs all teams taken from MySQL
 import { useEffect, useState } from "react";
+import '../Styles/ViewTeams.css';
 
-
-function ViewTeams(){
+function ViewTeams() {
     const [studentRecords, setRecord] = useState([]);
 
     useEffect(() => {
-      fetch("http://localhost:8080/students")
-        .then((response) => response.json())
-        .then((data) => setRecord(data))
-        .catch((error) => console.log(error));
+        fetch("http://localhost:8080/student_groups")
+            .then((response) => response.json())
+            .then((data) => setRecord(data))
+            .catch((error) => console.log(error));
     }, []);
 
-    //sorting by team id
-    const sortedRecords = studentRecords.sort((a, b) => a.team_id - b.team_id);
+    // Grouping students by group_id and preparing team data
+    const groupedRecords = studentRecords.reduce((acc, student) => {
+        const { group_id, team_name, team_size, current_members } = student;
 
-    
-    return ( <div className="container">
-        <h1>List of Teams</h1>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Team Assigned</th>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">id#</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedRecords.map((student) => (
-              <tr key={student.id}>
-                <th scope="row">{student.team_id}</th>
-                <td>{student.firstname}</td>
-                <td>{student.lastname}</td>
-                <td>{student.id}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>)
+        if (!acc[group_id]) {
+            acc[group_id] = {
+                team_name: team_name, // Assuming team_name is part of the data
+                team_size: team_size,
+                current_members: current_members
+            };
+        }
+        return acc;
+    }, {});
+
+    // Function to handle viewing the team
+    const handleViewTeam = (group_id) => {
+        console.log(`Viewing team: ${group_id}`);
+        // Implement the actual view logic, e.g., navigating to a new page or opening a modal
+    };
+
+    return (
+        <div className="VTContainer">
+            <h1>List of Teams</h1>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Group ID</th>
+                        <th scope="col">Team Name</th>
+                        <th scope="col">Team Size</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {Object.entries(groupedRecords).map(([group_id, teamData]) => (
+                        <tr key={group_id}>
+                            <td>{group_id}</td>
+                            <td>{teamData.team_name}</td>
+                            <td>{teamData.team_size}</td>
+                            <td>
+                                <button class="ViewButton" onClick={() => handleViewTeam(group_id)}>
+                                    View Team
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
-export default ViewTeams
+export default ViewTeams;
 
