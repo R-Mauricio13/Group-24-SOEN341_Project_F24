@@ -1,0 +1,20 @@
+Teodor Logs 40247239
+
+Sprint 1
+
+Task: Coded the backend to use the database for login and register purposes and linked in with the front end
+
+Sprint 2
+
+Wednesday 23rd Oct, 18:00-21:00
+Task: Implement backend for authentication (part1)
+
+Thursday 24th Oct, 18:00-20:00
+Task: Finish backend authentication (part2)
+
+Sunday 27th Oct, 20:00-23:00
+Task: Implement authentication in the frontend
+        - login page changed to redirect to backend in order to set the credentials cookie
+        - student view page changed to use the backend authentication using the credentials token
+        - created templated for authentication to be used in other pages
+Task: Commit and push the changes to the repository, including logs
