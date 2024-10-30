@@ -55,6 +55,27 @@ app.get("/student_groups",(req,res)=>{
     })
 })
 
+// API call to GET team details by group_id
+app.get("/student_groups/:group_id", (req, res) => {
+    const { group_id } = req.params;
+    const student_groups = process.env.TEAMS; // Assuming this is the table name for teams
+
+    const query = `SELECT * FROM ${student_groups} WHERE group_id = ?`;
+
+    db.query(query, [group_id], (err, data) => {
+        if (err) {
+            console.error("MySQL error: ", err);
+            return res.status(500).json("Error: Could not access team data");
+        }
+
+        if (data.length === 0) {
+            return res.status(404).json("No team found with this group_id");
+        }
+
+        return res.status(200).json(data);
+    });
+});
+
 
 //Testing if we can access the db
 app.get("/students", cookieJwtAuth, (req, res)=>{
@@ -98,6 +119,34 @@ app.get("/student-members", (req, res)=> {
     });
 
 })
+
+// API call to GET student members by group_id using a route parameter
+app.get("/student-members/:group_id", (req, res) => {
+    const { group_id } = req.params; // Extract group_id from route parameters
+    const students = process.env.STUDENTS; // Table for students
+    const members = process.env.MEMBERS; // Table for team members
+    const student_groups = process.env.TEAMS; // Table for teams
+
+    const query = `
+        SELECT us.username, us.first_name, us.last_name, sg.team_name
+        FROM ${students} us
+        LEFT JOIN ${members} sm ON us.username = sm.username
+        LEFT JOIN ${student_groups} sg ON sm.team_name = sg.team_name
+        WHERE sg.group_id = ?`;
+
+    db.query(query, [group_id], (err, data) => {
+        if (err) {
+            console.error("MySQL error: ", err);
+            return res.status(500).json("Error: Could not access student member data");
+        }
+
+        if (data.length === 0) {
+            return res.status(404).json("No members found for this group_id");
+        }
+
+        return res.status(200).json(data);
+    });
+});
 
 app.get("/login", (req, res) => {
     // const {email, password} = req.body;

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import '../Styles/ViewTeams.css';
 
 function ViewTeams() {
     const [studentRecords, setRecord] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:8080/student_groups")
@@ -13,22 +15,22 @@ function ViewTeams() {
 
     // Grouping students by group_id and preparing team data
     const groupedRecords = studentRecords.reduce((acc, student) => {
-        const { group_id, team_name, team_size, current_members } = student;
+        const { group_id, team_name, team_size } = student;
 
         if (!acc[group_id]) {
             acc[group_id] = {
                 team_name: team_name, // Assuming team_name is part of the data
-                team_size: team_size,
-                current_members: current_members
+                team_size: team_size
             };
         }
         return acc;
     }, {});
 
+    
     // Function to handle viewing the team
     const handleViewTeam = (group_id) => {
         console.log(`Viewing team: ${group_id}`);
-        // Implement the actual view logic, e.g., navigating to a new page or opening a modal
+        navigate(`/teams/${group_id}`);
     };
 
     return (
@@ -48,8 +50,8 @@ function ViewTeams() {
                         <tr key={group_id}>
                             <td>{group_id}</td>
                             <td>{teamData.team_name}</td>
-                            <td>{teamData.team_size}</td>
-                            <td>
+                            <td style={{ textAlign: 'center' }}>{teamData.team_size}</td>
+                            <td style={{ textAlign: 'center' }}>
                                 <button class="ViewButton" onClick={() => handleViewTeam(group_id)}>
                                     View Team
                                 </button>
