@@ -24,6 +24,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
+        cache-dependency-path: /home/runner/work/Group-24-SOEN341_Project_F24/server
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
