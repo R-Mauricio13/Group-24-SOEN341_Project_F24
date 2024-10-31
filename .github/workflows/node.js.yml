@@ -26,7 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: Group-24-SOEN341_Project_F24/server
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: cd server && npm ci
+    - run: cd server && npm run build --if-present
+    - run: cd server && npm test
