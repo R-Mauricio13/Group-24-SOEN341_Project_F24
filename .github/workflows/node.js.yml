@@ -28,5 +28,7 @@ jobs:
         cache: 'npm'
         cache-dependency-path: ${{github.workspace}}/server/package-lock.json
     - run: npm ci
+      working-directory: ${{github.workspace}}/server
     - run: npm run build --if-present
+      working-directory: ${{github.workspace}}/server
     #- run: npm test // unit tests have not been implemented into our package.json
