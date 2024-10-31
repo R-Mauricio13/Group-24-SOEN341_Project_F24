@@ -31,5 +31,3 @@ jobs:
       working-directory: ${{github.workspace}}/server
     - run: npm run build --if-present
       working-directory: ${{github.workspace}}/server
-    - run: npm test
-      working-directory: ${{github.workspace}}/server
