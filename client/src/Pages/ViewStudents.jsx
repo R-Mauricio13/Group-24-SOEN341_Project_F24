@@ -1,5 +1,6 @@
-//Outputs a list of all students
+// Outputs a list of all students
 import { useEffect, useState } from "react";
+import axios from 'axios';
 import TeamDropdown from '../Components/TeamDropdown';
 import '../Styles/ViewStudents.css'; // Import the CSS File
 
@@ -9,8 +10,6 @@ function ViewStudents() {
   const [order, setOrder] = useState("ASCENDING");
 
   const sorting = (col) => {
-    
-    console.log(order)
     if (order === "ASCENDING") {
       const sorted = [...studentRecords].sort((a, b) => {
         if (typeof a[col] === "string") {
@@ -21,8 +20,7 @@ function ViewStudents() {
       });
       setRecord(sorted);
       setOrder("DESCENDING");
-    }
-    else if (order === "DESCENDING") {
+    } else {
       const sorted = [...studentRecords].sort((a, b) => {
         if (typeof a[col] === "string") {
           return b[col].localeCompare(a[col]);
@@ -34,30 +32,61 @@ function ViewStudents() {
       setOrder("ASCENDING");
     }
   };
+
   useEffect(() => {
-    fetch("http://localhost:8080/student-members")
-      .then((response) => response.json())
-      .then((data) => setRecord(data))
-      .catch((error) => console.log(error));
+    const fetchStudents = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/student-members");
+        const data = await response.json();
+        setRecord(data);
+      } catch (error) {
+        console.error("Error fetching student members:", error);
+      }
+    };
+
+    fetchStudents();
   }, []);
 
-    // Fetch teams 
+  // Fetch teams 
   useEffect(() => {
-    fetch("http://localhost:8080/student_groups") 
-      .then((response) => response.json())
-      .then((data) => setTeams(data))
-      .catch((error) => console.log(error));
+    const fetchTeams = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/student_groups");
+        const data = await response.json();
+        setTeams(data);
+      } catch (error) {
+        console.error("Error fetching teams:", error);
+      }
+    };
+
+    fetchTeams();
   }, []);
 
   // Update the team name for the student
-  const handleTeamAssigned = (studentId, teamName) => {
+  const handleTeamAssigned = async (studentId, teamName) => {
+    // Find the corresponding team ID from the teams array
+    const selectedTeam = teams.find(team => team.team_name === teamName);
+    const groupId = selectedTeam ? selectedTeam.group_id : null;
+
+    // Update local state
     setRecord((prevRecords) => 
-        prevRecords.map((student) =>
-            student.username === studentId
-                ? { ...student, team_name: teamName } 
-                : student
-        )
+      prevRecords.map((student) =>
+        student.username === studentId
+          ? { ...student, team_name: teamName, group_id: groupId } 
+          : student
+      )
     );
+    
+    // Send a request to assign the team on the server
+    try {
+      const response = await axios.post(`http://localhost:8080/student/${studentId}/${groupId}/assign`, { group_id : groupId });
+      
+      if (!response.status === 200) {
+        throw new Error('Failed to assign team');
+      }
+    } catch (error) {
+      console.error("Error assigning team:", error);
+    }
   };
 
   const showDropdown = window.location.pathname === '/Instructor_Login';
@@ -80,7 +109,7 @@ function ViewStudents() {
             <th scope="col" onClick={() => sorting("group_id")}>
               Team Assigned
             </th>
-            <th scope="col" >
+            <th scope="col">
               Team Action
             </th>
           </tr>
@@ -93,8 +122,13 @@ function ViewStudents() {
               <td>{student.last_name}</td>
               <td>{student.team_name || 'No Team Assigned'}</td>
               <td style={{ textAlign: 'center' }}>
-              {showDropdown && ( 
-                  <TeamDropdown teams={teams} studentId={student.username} onTeamAssigned={handleTeamAssigned} setTeams={setTeams} />
+                {showDropdown && ( 
+                  <TeamDropdown 
+                    teams={teams} 
+                    studentId={student.username} 
+                    onTeamAssigned={handleTeamAssigned} 
+                    setTeams={setTeams} 
+                  />
                 )}
               </td>
             </tr>

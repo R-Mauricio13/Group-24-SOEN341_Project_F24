@@ -76,6 +76,31 @@ app.get("/student_groups/:group_id", (req, res) => {
     });
 });
 
+// API call to GET team details by username
+app.get("/student_groups/user/:username", (req, res) => {
+    const { username } = req.params;
+    const students = process.env.STUDENTS
+    const student_groups = process.env.TEAMS;
+    const members = process.env.MEMBERS;
+
+    const query = `
+        SELECT us.username, sg.team_name
+        FROM ${students} us
+        JOIN ${student_groups} sg ON us.group_id = sg.group_id
+        JOIN ${members} gm ON sg.team_name = gm.team_name
+        WHERE gm.username = ?;
+    `;
+
+    db.query(query, [username], (error, results) => {
+        if (error) {
+            console.error("Error fetching student groups:", error);
+            return res.status(500).send("Internal Server Error");
+        }
+
+        res.json(results); // Send the results back to the client
+    });
+});
+
 
 //Testing if we can access the db
 app.get("/students", cookieJwtAuth, (req, res)=>{
@@ -147,6 +172,52 @@ app.get("/student-members/:group_id", (req, res) => {
         return res.status(200).json(data);
     });
 });
+
+// API call to GET student members by username using a route parameter
+app.get("/student-members/user/:username", (req, res) => {
+    const username = req.params.username;
+
+    const query = `
+        SELECT us.first_name, us.last_name, us.username
+        FROM user_student us
+        JOIN student_groups sg ON us.group_id = sg.group_id
+        JOIN group_members gm ON sg.team_name = gm.team_name
+        WHERE gm.username = ?;
+    `;
+
+    db.query(query, [username], (error, results) => {
+        if (error) {
+            console.error("Error fetching student members:", error);
+            return res.status(500).send("Internal Server Error");
+        }
+
+        res.json(results); // Send the results back to the client
+    });
+});
+
+app.post("/student/:username/:group_id/assign", async (req, res) => {
+    const { group_id } = req.body; // Destructure group_id from request body
+    const { username } = req.params; // Get username from request parameters
+
+    const students = process.env.STUDENTS;
+    
+    const query = `
+        UPDATE ${students} 
+        SET group_id = ? 
+        WHERE username = ?`;
+
+    const values = [group_id, username];
+
+    db.query(query, values, (error, results) => {
+        if (error) {
+            console.error("Error updating student group:", error);
+            return res.status(500).send("Internal Server Error");
+        }
+
+        res.json(results); // Send the results back to the client
+    });
+});
+
 
 app.get("/login", (req, res) => {
     // const {email, password} = req.body;
