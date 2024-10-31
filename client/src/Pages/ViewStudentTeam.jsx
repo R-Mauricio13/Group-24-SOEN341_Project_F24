@@ -53,7 +53,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                 <div style={{flex: '1' , overflow: 'auto'}}>
                     <div style={{ position: 'relative' , height: '650px' }}>
                         <div className="VTContainer">
-                            <h1>{teamDetails[0].team_name}</h1>
+                            <h1> {teamDetails && teamDetails.length > 0 ? teamDetails[0].team_name : "None"}</h1>
                             <table className="table">
                                 <thead>
                                     <tr>
