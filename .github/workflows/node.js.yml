@@ -26,6 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci --prefix server
-    - run: npm run build --if-present --prefix server
+    - run: npm ci
+      working-directory: ${{github.workspace}}/server
+    - run: npm run build --if-present
+      working-directory: ${{github.workspace}}/server
     #- run: npm test // unit tests have not been implemented into our package.json
