@@ -35,8 +35,18 @@ function PeerReview() {
 
   const submitForm = async event => {
     event.preventDefault();
-    navigate("/Peer_Review_Confirmation");
-  };
+    try{
+        console.log(review)
+        await axios.post("http://localhost:8080/submit_review",review)
+        
+        navigate("/Peer_Review_Confirmation");
+      }
+      catch(err)
+      {
+        console.log(err)
+      }
+    }
+    
 
   return (
     <>
@@ -99,17 +109,17 @@ function PeerReview() {
                             <textarea 
                                 onChange={handleChange}
                                 placeholder="Practical Contribution Comments (Optional):"
-                                name="pratical_comment"
-                                value={review.pratical_comment}
+                                name="practical_comment"
+                                value={review.practical_comment}
                                 maxLength="255"
                                 rows="3"
                             />
                         </th>
-                        <th><label><input type="radio" value="1" name="pratical" onChange={handleChange} required/></label></th>
-                        <th><label><input type="radio" value="2" name="pratical" onChange={handleChange}/></label></th>
-                        <th><label><input type="radio" value="3" name="pratical" onChange={handleChange}/></label></th>
-                        <th><label><input type="radio" value="4" name="pratical" onChange={handleChange}/></label></th>
-                        <th><label><input type="radio" value="5" name="pratical" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="1" name="practical" onChange={handleChange} required/></label></th>
+                        <th><label><input type="radio" value="2" name="practical" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="3" name="practical" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="4" name="practical" onChange={handleChange}/></label></th>
+                        <th><label><input type="radio" value="5" name="practical" onChange={handleChange}/></label></th>
                     </tr>
                     <tr>
                         <th className="entities">
