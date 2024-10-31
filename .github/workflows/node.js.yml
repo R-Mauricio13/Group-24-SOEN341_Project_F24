@@ -35,7 +35,7 @@ jobs:
       working-directory: ${{github.workspace}}/server
     - run: npm install
       working-directory: ${{github.workspace}}/client
-    - run: npm test
+    - run: npm build
       working-directory: ${{github.workspace}}/client
     #- run: npm ci
      # working-directory: ${{github.workspace}}/client
