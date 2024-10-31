@@ -26,6 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: |
+          ${{github.workspace}}/server/package-lock.json
+          ${{github.workspace}}/client/package-lock.json
     - run: npm ci
       working-directory: ${{github.workspace}}/server
     - run: npm run build --if-present
