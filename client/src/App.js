@@ -5,6 +5,8 @@ import Introduction from "./Pages/Introduction";
 import Login from "./Pages/Login";
 import StudentView from "./Pages/Student_View";
 import ViewTeams from "./Pages/ViewTeams";
+import ViewStudentTeam from "./Pages/ViewStudentTeam";
+import TeamDetails from "./Pages/TeamDetails";
 import InstructorView from "./Pages/Instructor_View";
 import PeerReview from "./Pages/PeerReview";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,6 +23,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/Student_Login" element={<StudentView />} />
       <Route path="/Team_List" element={<ViewTeams />} />
+      <Route path="/teams/user/:username" element={<ViewStudentTeam />} />
+      <Route path="/teams/:group_id" element={<TeamDetails />} />
       <Route path="/Instructor_Login" element={<InstructorView />} />
       <Route path="/Peer_Review" element={<PeerReview />} />
       {/* <Route path="/resources" element={<Resources />} /> */}

@@ -1,10 +1,33 @@
-Vladimir's Logs
-  Sprint 2
-    Task 12 Assign Students
-    Spent 30 minutes dissecting and analyzing the requirements
-    Spent 1 hour 30 minutes writing back-end logic for display of View Students/View Teams/Create Team
-    Spent 1 hour on polishing the css visuals on the web page
+===================
+| Vladimir's Logs |
+===================
 
-    Task 34 Create the peer review page
-    Spent 30 minutes assessing the connections between the pre-existing database and the creation of the new table for peer review
-    Spent 1 hour creating the new database table with proper column connections between other tables
+------------
+| Sprint 2 |
+------------
+    --------------------------
+    |Task 12 Assign Students |
+    --------------------------
+      
+      30 minutes spent on dissecting and analyzing the requirements
+      2 hour 30 minutes spent on coding back-end logic for display of View Students, View Teams, and Create Team buttons
+      45 minutes spent on polishing the css visuals on the web page for Instructor_View
+
+    ---------------------------------------
+    | Task 34 Create the peer review page |
+    ---------------------------------------
+      30 minutes spent on assessing the connections between the pre-existing database and the creation of the new table for peer review
+      30 minutes spent on creating the new database table with proper column connections between other tables
+
+    ----------------------------------- 
+    | Task 36 Create a team interface |
+    -----------------------------------
+      2 hours 20 minutes spent on creating a react component visible to the student logged in for the team interface with all members belonging to that group
+      1 hour 30 minutes spent on establishing the API endpoints GET/POST from database query elements through server.js related to team interface
+      45 minutes spent on polishing the visual design of the team interface
+
+    ---------------------------------
+    | Task 39 Peer Review Selection |
+    ---------------------------------
+
+      40 minutes spent on ensuring button functionality with visual design of assessing each member and redirecting the user to the Peer Review Page

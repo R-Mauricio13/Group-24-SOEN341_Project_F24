@@ -55,6 +55,52 @@ app.get("/student_groups",(req,res)=>{
     })
 })
 
+// API call to GET team details by group_id
+app.get("/student_groups/:group_id", (req, res) => {
+    const { group_id } = req.params;
+    const student_groups = process.env.TEAMS; // Assuming this is the table name for teams
+
+    const query = `SELECT * FROM ${student_groups} WHERE group_id = ?`;
+
+    db.query(query, [group_id], (err, data) => {
+        if (err) {
+            console.error("MySQL error: ", err);
+            return res.status(500).json("Error: Could not access team data");
+        }
+
+        if (data.length === 0) {
+            return res.status(404).json("No team found with this group_id");
+        }
+
+        return res.status(200).json(data);
+    });
+});
+
+// API call to GET team details by username
+app.get("/student_groups/user/:username", (req, res) => {
+    const { username } = req.params;
+    const students = process.env.STUDENTS
+    const student_groups = process.env.TEAMS;
+    const members = process.env.MEMBERS;
+
+    const query = `
+        SELECT us.username, sg.team_name
+        FROM ${students} us
+        JOIN ${student_groups} sg ON us.group_id = sg.group_id
+        JOIN ${members} gm ON sg.team_name = gm.team_name
+        WHERE gm.username = ?;
+    `;
+
+    db.query(query, [username], (error, results) => {
+        if (error) {
+            console.error("Error fetching student groups:", error);
+            return res.status(500).send("Internal Server Error");
+        }
+
+        res.json(results); // Send the results back to the client
+    });
+});
+
 
 //Testing if we can access the db
 app.get("/students", cookieJwtAuth, (req, res)=>{
@@ -98,6 +144,80 @@ app.get("/student-members", (req, res)=> {
     });
 
 })
+
+// API call to GET student members by group_id using a route parameter
+app.get("/student-members/:group_id", (req, res) => {
+    const { group_id } = req.params; // Extract group_id from route parameters
+    const students = process.env.STUDENTS; // Table for students
+    const members = process.env.MEMBERS; // Table for team members
+    const student_groups = process.env.TEAMS; // Table for teams
+
+    const query = `
+        SELECT us.username, us.first_name, us.last_name, sg.team_name
+        FROM ${students} us
+        LEFT JOIN ${members} sm ON us.username = sm.username
+        LEFT JOIN ${student_groups} sg ON sm.team_name = sg.team_name
+        WHERE sg.group_id = ?`;
+
+    db.query(query, [group_id], (err, data) => {
+        if (err) {
+            console.error("MySQL error: ", err);
+            return res.status(500).json("Error: Could not access student member data");
+        }
+
+        if (data.length === 0) {
+            return res.status(404).json("No members found for this group_id");
+        }
+
+        return res.status(200).json(data);
+    });
+});
+
+// API call to GET student members by username using a route parameter
+app.get("/student-members/user/:username", (req, res) => {
+    const username = req.params.username;
+
+    const query = `
+        SELECT us.first_name, us.last_name, us.username
+        FROM user_student us
+        JOIN student_groups sg ON us.group_id = sg.group_id
+        JOIN group_members gm ON sg.team_name = gm.team_name
+        WHERE gm.username = ?;
+    `;
+
+    db.query(query, [username], (error, results) => {
+        if (error) {
+            console.error("Error fetching student members:", error);
+            return res.status(500).send("Internal Server Error");
+        }
+
+        res.json(results); // Send the results back to the client
+    });
+});
+
+app.post("/student/:username/:group_id/assign", async (req, res) => {
+    const { group_id } = req.body; // Destructure group_id from request body
+    const { username } = req.params; // Get username from request parameters
+
+    const students = process.env.STUDENTS;
+    
+    const query = `
+        UPDATE ${students} 
+        SET group_id = ? 
+        WHERE username = ?`;
+
+    const values = [group_id, username];
+
+    db.query(query, values, (error, results) => {
+        if (error) {
+            console.error("Error updating student group:", error);
+            return res.status(500).send("Internal Server Error");
+        }
+
+        res.json(results); // Send the results back to the client
+    });
+});
+
 
 app.get("/login", (req, res) => {
     // const {email, password} = req.body;
