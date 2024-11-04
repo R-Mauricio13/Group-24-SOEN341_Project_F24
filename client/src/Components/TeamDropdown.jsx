@@ -5,18 +5,18 @@ import axios from 'axios';
 
 
 
-const TeamDropdown = ({ teams = [], studentId, onTeamAssigned, setTeams }) => {
+const TeamDropdown = ({ teams = [], studentId, setTeams, setRecord }) => {
   
-  const handleAddMember = (teamName) => {
-    console.log(`Adding member ${studentId} to team ${teamName}`); 
+  const handleAddMember = (groupId) => {
+    console.log(`Adding member ${studentId} to team ${groupId}`); 
     axios.post("http://localhost:8080/addMemberToTeam", {
-      team_name: teamName,
-      username: studentId
+      group_id: groupId,
+      user_id: studentId
     })
     .then(response => {
       console.log('Response:', response.data); 
-      alert(response.data); 
-      onTeamAssigned(studentId, teamName);
+      alert(response.data.message); 
+      fetchUpdatedStudents();
       fetchUpdatedTeams();
     })
     .catch(error => {
@@ -34,6 +34,38 @@ const TeamDropdown = ({ teams = [], studentId, onTeamAssigned, setTeams }) => {
     });
   };
 
+  const handleRemoveMember = () => {
+    axios.post("http://localhost:8080/removeMemberfromTeam", {
+      user_id: studentId
+    })
+    .then(response => {
+      console.log('Response:', response.data);
+      alert(response.data);
+      fetchUpdatedStudents();
+      fetchUpdatedTeams();
+    })
+    .catch(error => {
+      console.error("Error response:", error.response?.data); 
+      if (error.response) {
+        alert("Error: " + error.response.data.message || error.response.statusText);
+      } else if (error.request) {
+        alert("Error: No response from server");
+      } else {
+        alert("Error: " + error.message);
+      }
+    });
+  };
+
+  const fetchUpdatedStudents = () => {
+    axios.get("http://localhost:8080/students", { withCredentials: true })
+      .then(response => {
+        setRecord(response.data); 
+      })
+      .catch(error => {
+        console.error("Error fetching updated teams:", error);
+      });
+  };
+
   const fetchUpdatedTeams = () => {
     axios.get("http://localhost:8080/existingTeams")
       .then(response => {
@@ -49,11 +81,22 @@ const TeamDropdown = ({ teams = [], studentId, onTeamAssigned, setTeams }) => {
         variant="danger"
         id={`dropdown-basic-${studentId}`}
         title="Assign Team"
-        onSelect={handleAddMember}
+        onSelect={(eventKey) => {
+          if (eventKey === "remove") {
+            handleRemoveMember();
+          } else {
+            handleAddMember(eventKey);
+          }
+        }}
       >
+         <Dropdown.Item 
+         eventKey="remove">Remove from Team
+         </Dropdown.Item>
+
+         <Dropdown.Divider />
         {teams.map((team) => (
-            <Dropdown.Item key={team.team_name} eventKey={team.team_name}>  
-            {team.team_name} ({team.current_members}/{team.team_size})
+            <Dropdown.Item key={team.group_id} eventKey={team.group_id}>  
+            {team.team_name} ({team.current_member}/{team.team_size})
           </Dropdown.Item>
         ))}
       </DropdownButton>

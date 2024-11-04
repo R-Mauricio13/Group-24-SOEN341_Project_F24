@@ -14,6 +14,10 @@ function ViewStudents() {
     console.log(order)
     if (order === "ASCENDING") {
       const sorted = [...studentRecords].sort((a, b) => {
+
+        if (a[col] === null) return 1;
+        if (b[col] === null) return -1;
+
         if (typeof a[col] === "string") {
           return a[col].localeCompare(b[col]);
         } else {
@@ -25,6 +29,10 @@ function ViewStudents() {
     }
     else if (order === "DESCENDING") {
       const sorted = [...studentRecords].sort((a, b) => {
+
+        if (a[col] === null) return 1;
+        if (b[col] === null) return -1;
+
         if (typeof a[col] === "string") {
           return b[col].localeCompare(a[col]);
         } else {
@@ -63,16 +71,7 @@ useEffect(() => {
     .catch((error) => console.log(error));
 }, []);
 
-// Update the team name for the student
-const handleTeamAssigned = (studentId, teamName) => {
-  setRecord((prevRecords) => 
-      prevRecords.map((student) =>
-          student.username === studentId
-              ? { ...student, team_name: teamName } 
-              : student
-      )
-  );
-};
+
 
 
   //features only shown on InstructorView
@@ -84,7 +83,7 @@ const handleTeamAssigned = (studentId, teamName) => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col" onClick={() => sorting("id")}>
+            <th scope="col" onClick={() => sorting("user_id")}>
               id#
             </th>
             <th scope="col" onClick={() => sorting("first_name")}>
@@ -96,21 +95,22 @@ const handleTeamAssigned = (studentId, teamName) => {
             <th scope="col" onClick={() => sorting("team_name")}>
               Team Assigned
             </th>
-            <th scope="col" >
-              Team Action
-            </th>
+            {showDropdown && (
+           <th scope="col">
+           Team Action
+          </th>)}
           </tr>
         </thead>
         <tbody>
           {studentRecords.map((student) => (
             <tr key={student.id}>
-              <th scope="row">{student.id}</th>
+              <th scope="row">{student.user_id}</th>
               <td>{student.first_name}</td>
               <td>{student.last_name}</td>
               <td>{student.team_name || "No Team Assigned"}</td>
               <td>
               {showDropdown && ( 
-                  <TeamDropdown teams={teams} studentId={student.username} onTeamAssigned={handleTeamAssigned} setTeams={setTeams} />
+                  <TeamDropdown teams={teams} studentId={student.user_id} setTeams={setTeams} setRecord={setRecord} /> //onTeamAssigned={handleTeamAssigned}
                 )}
               </td>
             </tr>
