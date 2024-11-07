@@ -17,6 +17,9 @@ function PeerReview() {
     
   const student_username=user.username;
   const navigate = useNavigate();
+   //Handles reading the input field of the form
+  const userID = searchParams.get("user_id")
+  const userAuthor = searchParams.get("user_author")
 
   const [review, setReview] = useState({
     cooperation: "",
@@ -31,10 +34,11 @@ function PeerReview() {
     user_author:"",
   });
 
-  //Handles reading the input field of the form
-  const userID = searchParams.get("user_id")
+
+  
   const handleChange=(event)=>{
-    setReview((prev)=>({...prev,[event.target.name]:event.target.value,user_id:userID}))
+    
+    setReview((prev)=>({...prev,[event.target.name]:event.target.value,user_id:userID,user_author:userAuthor}))
   }
 
   const submitForm = async event => {
@@ -42,7 +46,7 @@ function PeerReview() {
     try{
         console.log(review)
         
-        
+   
         console.log(`Attempting to submit review for user id= ${userID}`)
         await axios.post("http://localhost:8080/submit_review",review)
         

@@ -8,6 +8,15 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+
+
+    const [user, setUser] = useState(() => {
+        const savedItem = localStorage.getItem("Logged in User");
+        const parsedItem = JSON.parse(savedItem);
+        return parsedItem || ""; // Returns the parsed item or null if nothing exists
+    });
+
+    const student_username = user.username;
     useEffect(() => {
         const fetchTeamData = async () => {
             try {
@@ -42,7 +51,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
 
     function handleAssessButton(user_id) {
         console.log(`Viewing peer review`);
-        navigate(`/Peer_Review/user?user_id=${user_id}`);
+        navigate(`/Peer_Review/user?user_id=${user_id}&user_author=${student_username}`);
     };
 
     if (loading) return <div>Loading...</div>;

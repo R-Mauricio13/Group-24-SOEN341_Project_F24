@@ -405,17 +405,19 @@ app.post("/submit_review", (req, res) => {
     parseInt(req.body.conceptual),
     parseInt(req.body.practical),
     parseInt(req.body.work_ethic),
+    parseInt(req.body.user_id),
     req.body.coop_comment,
     req.body.concept_comment,
     req.body.practical_comment,
     req.body.we_comment,
+    req.body.user_author,
   ];
   console.log(values);
   const peer_review = process.env.PEER_REVIEW;
 
   const query = `
-    INSERT INTO ${peer_review} (Cooperation, Conceptional_Contribution, Practical_Contribution, Work_Ethic, user_id, coop_comment, cc_comment, we_comment, pc_comment) 
-    VALUES (?,?,?,?,?,?,?,?,?)
+    INSERT INTO ${peer_review} (Cooperation, Conceptional_Contribution, Practical_Contribution, Work_Ethic, user_id, coop_comment, cc_comment, we_comment, pc_comment,user_author) 
+    VALUES (?,?,?,?,?,?,?,?,?,?)
     ON DUPLICATE KEY UPDATE 
     Cooperation = VALUES(Cooperation),
     Conceptional_Contribution = VALUES(Conceptional_Contribution),
