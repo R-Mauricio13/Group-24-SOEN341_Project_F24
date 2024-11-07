@@ -5,7 +5,7 @@ import axios from "axios";
 function Peers_Summary() {
   const [peer_review, setPeerReview] = useState([]);
 
-  const [student_average_score,setAverage]= useState([]);
+  const [student_review_count,setCount]= useState([]);
 
 
   //Fetching the peer_reviews and storing the information into peer_review array
@@ -31,7 +31,7 @@ function Peers_Summary() {
       try {
         const response = await fetch("http://localhost:8080/peer_reviews/review-counts");
         const data = await response.json();
-        setAverage(data);
+        setCount(data);
       } catch (error) {
         console.error("Error fetching student members:", error);
       }
@@ -39,14 +39,25 @@ function Peers_Summary() {
 
     fetchReviewCount();
   }, []);
+
+  //Function to find the student with matching user_id to return the amount of people who review said student
+   function getReviewScore(student){
+    const matchedStudent= student_review_count.find((user)=>student.user_id=== user.user_id);
+    
+    return matchedStudent?matchedStudent.review_count:0;
+   }
   return (
-    <div>
-      <table>
+    <div className="SVContainer">
+        <h1>Summary of Student Reviews</h1>
+      <table className="table">
+      
+        <thead>
+
         <tr>
           <th scope="col">Student ID</th>
           <th scope="col">Last Name</th>
           <th scope="col">First Name</th>
-          <th scope="col">Team</th>
+          <th scope="col" >Team</th>
           <th scope="col">Cooperation</th>
           <th scope="col">Conceptual</th>
           <th scope="col">Practical</th>
@@ -54,6 +65,9 @@ function Peers_Summary() {
           <th scope="col">Average</th>
           <th scope="col">Peers who responded</th>
         </tr>
+        </thead>
+        <tbody>
+
         {peer_review.map((student) => (
           <tr key={student.user_id}>
             <th scope="row">{student.user_id}</th>
@@ -65,11 +79,12 @@ function Peers_Summary() {
             <td>{student.Practical_Contribution}</td>
             <td>{student.Work_Ethic}</td>
             <td>Add in average</td>
-           {student_average_score.map((score)=>(
-            <td>{score.review_count}</td>
-           ))}
+            <td >{getReviewScore(student)}
+            </td>
+          
           </tr>
         ))}
+        </tbody>
       </table>
     </div>
   );

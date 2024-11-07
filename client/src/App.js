@@ -21,7 +21,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/introduction" element={<Introduction />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/Student_Login" element={<StudentView />} />
+      <Route path="/Student_Login/" element={<StudentView />} />
       <Route path="/Team_List" element={<ViewTeams />} />
       <Route path="/teams/user/:username" element={<ViewStudentTeam />} />
       <Route path="/teams/:group_id" element={<TeamDetails />} />

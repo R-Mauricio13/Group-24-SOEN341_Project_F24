@@ -337,6 +337,26 @@ app.post("/Create_Team", (req, res) => {
     return res.status(200).json(data);
   });
 });
+//Api call to post to SQL for team creation
+app.post("/Create_Team", (req, res) => {
+  console.log("Attempting to create team");
+  const values = [req.body.team_name, req.body.team_size];
+
+  console.log(values);
+  let sql_team_table = process.env.TEAMS;
+
+  const query = `INSERT INTO ${sql_team_table} (team_name, team_size) Values(?,?)`;
+  console.log(`Query: ${query}`);
+
+  db.query(query, values, (err, data) => {
+    if (err) {
+      console.error("MySQL error: ", err);
+      return res.status(500).json("Error: Team creation failed");
+    }
+    console.log("Data inserted successfully:", data);
+    return res.status(200).json(data);
+  });
+});
 
 //Testing POST to submit data to SQL
 app.post("/create", (req, res) => {
@@ -385,7 +405,6 @@ app.post("/submit_review", (req, res) => {
     parseInt(req.body.conceptual),
     parseInt(req.body.practical),
     parseInt(req.body.work_ethic),
-    parseInt(req.body.user_id), 
     req.body.coop_comment,
     req.body.concept_comment,
     req.body.practical_comment,

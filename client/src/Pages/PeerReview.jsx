@@ -28,6 +28,7 @@ function PeerReview() {
     work_ethic: "",
     we_comment: "",
     user_id:"",
+    user_author:"",
   });
 
   //Handles reading the input field of the form
