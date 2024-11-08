@@ -8,6 +8,15 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+
+
+    const [user, setUser] = useState(() => {
+        const savedItem = localStorage.getItem("Logged in User");
+        const parsedItem = JSON.parse(savedItem);
+        return parsedItem || ""; // Returns the parsed item or null if nothing exists
+    });
+
+    const student_username = user.username;
     useEffect(() => {
         const fetchTeamData = async () => {
             try {
@@ -40,9 +49,9 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
         fetchTeamData();
     }, [username]);
 
-    function handleAssessButton() {
+    function handleAssessButton(user_id) {
         console.log(`Viewing peer review`);
-        navigate(`/Peer_Review`);
+        navigate(`/Peer_Review/user?user_id=${user_id}&user_author=${student_username}`);
     };
 
     if (loading) return <div>Loading...</div>;
@@ -70,7 +79,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                                                 <td style={{ textAlign: 'center' }}>{member.last_name}</td>
                                                 <td style={{ textAlign: 'center' }}>
                                                     {member.username != username && (
-                                                      <button className="ViewButton" style={{width: '140px'}} onClick={() => handleAssessButton()}>Assess Member</button>
+                                                      <button className="ViewButton" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Assess Member</button>
                                                     )}
                                                 </td>
                                             </tr>

@@ -4,7 +4,7 @@ import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
 import Form from "react-bootstrap/Form";
 import axios from "axios"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import '../Styles/PeerReview.css'; 
 
 function PeerReview() {
@@ -12,10 +12,14 @@ function PeerReview() {
       const savedItem= localStorage.getItem("Logged in User")
       const parsedItem= JSON.parse(savedItem)
       return parsedItem ||"" //Returns the parsed item or null if nothing exists
-  });
-
+    });
+ const [searchParams]= useSearchParams();
+    
   const student_username=user.username;
   const navigate = useNavigate();
+   //Handles reading the input field of the form
+  const userID = searchParams.get("user_id")
+  const userAuthor = searchParams.get("user_author")
 
   const [review, setReview] = useState({
     cooperation: "",
@@ -26,17 +30,24 @@ function PeerReview() {
     practical_comment: "",
     work_ethic: "",
     we_comment: "",
+    user_id:"",
+    user_author:"",
   });
 
-  //Handles reading the input field of the form
+
+  
   const handleChange=(event)=>{
-    setReview((prev)=>({...prev,[event.target.name]:event.target.value}))
+    
+    setReview((prev)=>({...prev,[event.target.name]:event.target.value,user_id:userID,user_author:userAuthor}))
   }
 
   const submitForm = async event => {
     event.preventDefault();
     try{
         console.log(review)
+        
+   
+        console.log(`Attempting to submit review for user id= ${userID}`)
         await axios.post("http://localhost:8080/submit_review",review)
         
         navigate("/Peer_Review_Confirmation");
