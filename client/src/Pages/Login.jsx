@@ -66,10 +66,10 @@ function Login() {
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="card p-3">
-            <h2 class="LHighlight">Login </h2>
+            <h2 className="LHighlight">Login </h2>
             <form onSubmit={submitForm}>
               <Form.Group className="mb-3">
-                <Form.Label class="LLabel">Username</Form.Label>
+                <Form.Label className="LLabel">Username</Form.Label>
                 <Form.Control
                   type="text"
                   name="username"
@@ -80,7 +80,7 @@ function Login() {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label class="LLabel">Password</Form.Label>
+                <Form.Label className="LLabel">Password</Form.Label>
                 <Form.Control
                   type="password"
                   name="user_password"
@@ -91,7 +91,7 @@ function Login() {
               </Form.Group>
 
               <Form.Group>
-                <Form.Label class="LLabel">Select your role</Form.Label>
+                <Form.Label className="LLabel">Select your role</Form.Label>
                 <Form.Select name="user_role" onChange={handleChange} required>
                   <option></option>
                   <option value="student">Student</option>
@@ -100,7 +100,7 @@ function Login() {
               </Form.Group>
               {login_error}
               <br />
-              <button class="LButton" type="submit">
+              <button className="LButton" type="submit">
                 Login
               </button>
             </form>
