@@ -9,6 +9,7 @@ import CreateTeams from "./TeamCreation";
 
 import '../Styles/ToggleButton.css';
 import Peers_Summary from "./Peers_Summary";
+import Peers_Detailed from "./Peers_Detailed";
 
 function InstructorView() {
   const [user,setUser]=useState(()=>{
@@ -36,6 +37,7 @@ function InstructorView() {
             <button class="ToggleView" onClick={() => setActiveView("teams")}>View Teams</button>
             <button class="ToggleView" onClick={() => setActiveView("createTeam")}>Create Team</button>
             <button class="ToggleView" onClick={() => setActiveView("peer_review_summary")}>Summary of Reviews</button>
+            <button class="ToggleView" onClick={() => setActiveView("peer_review_detailed")}>Details of Reviews</button>
           </div>
 
           <div>
@@ -43,6 +45,7 @@ function InstructorView() {
             {activeView === "teams" && <ViewTeams />}
             {activeView === "createTeam" && <CreateTeams />}
             {activeView === "peer_review_summary" && <Peers_Summary/>}
+            {activeView === "peer_review_detailed" && <Peers_Detailed/>}
           </div>
         </div>  
         <Footer />

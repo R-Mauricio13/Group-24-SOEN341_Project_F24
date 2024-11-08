@@ -6,6 +6,19 @@ function Peers_Summary() {
   const [peer_review, setPeerReview] = useState([]);
 
   const [student_review_count,setCount]= useState([]);
+  const [student_Average_Score,setAverage]= useState([]);
+
+  function getStudentAverageScore(student)
+  {
+    //get all information tied to same user_id and calculate the average and store into student_Average_score
+  }
+
+
+
+
+
+
+
 
 
   //Fetching the peer_reviews and storing the information into peer_review array
@@ -46,6 +59,12 @@ function Peers_Summary() {
     
     return matchedStudent?matchedStudent.review_count:0;
    }
+   //Function to calculate the total criteria average as totalAverage
+   function getTotalAverageScore(student)
+   {
+      const totalAverage=(student.Cooperation+student.Conceptional_Contribution+student.Practical_Contribution+student.Work_Ethic)/4;
+      return totalAverage;
+   }
   return (
     <div className="SVContainer">
         <h1>Summary of Student Reviews</h1>
@@ -57,7 +76,7 @@ function Peers_Summary() {
           <th scope="col">Student ID</th>
           <th scope="col">Last Name</th>
           <th scope="col">First Name</th>
-          <th scope="col" >Team</th>
+          <th scope="col">Team</th>
           <th scope="col">Cooperation</th>
           <th scope="col">Conceptual</th>
           <th scope="col">Practical</th>
@@ -78,7 +97,7 @@ function Peers_Summary() {
             <td>{student.Conceptional_Contribution}</td>
             <td>{student.Practical_Contribution}</td>
             <td>{student.Work_Ethic}</td>
-            <td>Add in average</td>
+            <td> {getTotalAverageScore(student)}</td>
             <td >{getReviewScore(student)}
             </td>
           
