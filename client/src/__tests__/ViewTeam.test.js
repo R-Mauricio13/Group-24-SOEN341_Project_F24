@@ -61,5 +61,23 @@ describe('ViewTeams Component', () => {
         expect(screen.getByText('Team Size')).toBeInTheDocument();
     });
 
-   
+    test('displays team data correctly', async () => {
+        render(
+            <MemoryRouter>
+                <ViewTeams />
+            </MemoryRouter>
+        );
+    
+        await waitFor(() => {
+            expect(screen.getByText('Team Alpha')).toBeInTheDocument();
+        });
+    
+        await waitFor(() => {
+            expect(screen.getByText('Team Beta')).toBeInTheDocument();
+        });
+    
+        expect(screen.getByText('4')).toBeInTheDocument();
+        expect(screen.getByText('3')).toBeInTheDocument();
+    });
+        
 });
