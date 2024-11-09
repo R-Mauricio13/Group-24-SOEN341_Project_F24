@@ -86,4 +86,22 @@ describe('TeamCreation Component', () => {
             expect(mockNavigate).toHaveBeenCalledWith('/Instructor_Login');
         });
     });
+    test('handles API error during team creation', async () => {
+        const consoleLogSpy = jest.spyOn(console, 'log');
+        axios.post.mockRejectedValueOnce(new Error('API Error'));
+
+        render(<MemoryRouter><TeamCreation /></MemoryRouter>);
+
+        const teamNameInput = screen.getByLabelText(/Team Name/i);
+        const submitButton = screen.getByRole('button', { name: /create team/i });
+
+        await userEvent.type(teamNameInput, 'New Team');
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(consoleLogSpy).toHaveBeenCalledWith(expect.any(Error));
+        });
+
+        consoleLogSpy.mockRestore();
+    });
 });
