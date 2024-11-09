@@ -100,4 +100,27 @@ describe('CreateAccount Component', () => {
     
         consoleLogSpy.mockRestore();
     });
+
+    test('validates required fields', async () => {
+        render(<MemoryRouter><CreateAccount /></MemoryRouter>);
+    
+        const submitButton = screen.getByRole('button', { name: /create account/i });
+        fireEvent.click(submitButton);
+    
+        // Check if HTML5 validation is working for required fields
+        const usernameInput = screen.getByLabelText(/Username/i);
+        expect(usernameInput).toBeRequired();
+        
+        const passwordInput = screen.getByLabelText(/Password/i);
+        expect(passwordInput).toBeRequired();
+        
+        const firstNameInput = screen.getByLabelText(/First Name/i);
+        expect(firstNameInput).toBeRequired();
+        
+        const lastNameInput = screen.getByLabelText(/Last Name/i);
+        expect(lastNameInput).toBeRequired();
+        
+        const roleSelect = screen.getByLabelText(/Select your role/i);
+        expect(roleSelect).toBeRequired();
+    });
 });
