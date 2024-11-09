@@ -39,5 +39,12 @@ describe('TeamCreation Component', () => {
         jest.resetAllMocks();
     });
 
-   
+    test('renders team creation form correctly', () => {
+        render(<MemoryRouter><TeamCreation /></MemoryRouter>);
+
+        expect(screen.getByText('Create a Team')).toBeInTheDocument();
+        expect(screen.getByLabelText(/Team Name/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/Team Size/i)).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /create team/i })).toBeInTheDocument();
+    });
 });
