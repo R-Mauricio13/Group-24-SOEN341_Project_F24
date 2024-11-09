@@ -79,5 +79,22 @@ describe('ViewTeams Component', () => {
         expect(screen.getByText('4')).toBeInTheDocument();
         expect(screen.getByText('3')).toBeInTheDocument();
     });
-        
+    
+
+    test('handles view team button click', async () => {
+        render(
+            <MemoryRouter>
+                <ViewTeams />
+            </MemoryRouter>
+        );
+
+        await waitFor(() => {
+            expect(screen.getAllByText('View Team')).toHaveLength(2);
+        });
+
+        const viewButtons = screen.getAllByText('View Team');
+        fireEvent.click(viewButtons[0]);
+
+        expect(mockNavigate).toHaveBeenCalledWith('/teams/1');
+    });
 });
