@@ -47,4 +47,35 @@ describe('CreateAccount Component', () => {
         expect(lastNameInput.value).toBe('Doe');
         expect(roleSelect.value).toBe('student');
     });
+
+    test('successfully creates new account', async () => {
+        axios.post.mockResolvedValueOnce({ data: 'success' });
+        
+        render(<MemoryRouter><CreateAccount /></MemoryRouter>);
+    
+        await userEvent.type(screen.getByLabelText(/Username/i), 'testuser');
+        await userEvent.type(screen.getByLabelText(/Password/i), 'password123');
+        await userEvent.type(screen.getByLabelText(/First Name/i), 'John');
+        await userEvent.type(screen.getByLabelText(/Last Name/i), 'Doe');
+        await userEvent.selectOptions(screen.getByLabelText(/Select your role/i), 'student');
+    
+        const submitButton = screen.getByRole('button', { name: /create account/i });
+        fireEvent.click(submitButton);
+    
+        await waitFor(() => {
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:8080/create',
+                {
+                    username: 'testuser',
+                    user_password: 'password123',
+                    first_name: 'John',
+                    last_name: 'Doe',
+                    user_role: 'student'
+                }
+            );
+        });
+        await waitFor(() => {
+            expect(mockNavigate).toHaveBeenCalledWith('/');
+        });
+    });
 });
