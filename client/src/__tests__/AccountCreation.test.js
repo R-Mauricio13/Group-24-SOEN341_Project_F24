@@ -78,4 +78,26 @@ describe('CreateAccount Component', () => {
             expect(mockNavigate).toHaveBeenCalledWith('/');
         });
     });
+
+    test('handles API error during account creation', async () => {
+        const consoleLogSpy = jest.spyOn(console, 'log');
+        axios.post.mockRejectedValueOnce(new Error('API Error'));
+    
+        render(<MemoryRouter><CreateAccount /></MemoryRouter>);
+    
+        await userEvent.type(screen.getByLabelText(/Username/i), 'testuser');
+        await userEvent.type(screen.getByLabelText(/Password/i), 'password123');
+        await userEvent.type(screen.getByLabelText(/First Name/i), 'John');
+        await userEvent.type(screen.getByLabelText(/Last Name/i), 'Doe');
+        await userEvent.selectOptions(screen.getByLabelText(/Select your role/i), 'student');
+    
+        const submitButton = screen.getByRole('button', { name: /create account/i });
+        fireEvent.click(submitButton);
+    
+        await waitFor(() => {
+            expect(consoleLogSpy).toHaveBeenCalledWith(expect.any(Error));
+        });
+    
+        consoleLogSpy.mockRestore();
+    });
 });
