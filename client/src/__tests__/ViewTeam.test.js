@@ -97,4 +97,45 @@ describe('ViewTeams Component', () => {
 
         expect(mockNavigate).toHaveBeenCalledWith('/teams/1');
     });
+
+    test('handles fetch error gracefully', async () => {
+        const consoleLogSpy = jest.spyOn(console, 'log');
+        global.fetch.mockRejectedValueOnce(new Error('Failed to fetch'));
+    
+        render(
+            <MemoryRouter>
+                <ViewTeams />
+            </MemoryRouter>
+        );
+    
+        await waitFor(() => {
+            expect(consoleLogSpy).toHaveBeenCalledWith(expect.any(Error));
+        });
+    
+        consoleLogSpy.mockRestore();
+    });
+
+    test('renders empty table when no teams exist', async () => {
+        global.fetch.mockImplementationOnce(() =>
+            Promise.resolve({
+                json: () => Promise.resolve([])
+            })
+        );
+    
+        render(
+            <MemoryRouter>
+                <ViewTeams />
+            </MemoryRouter>
+        );
+    
+        await waitFor(() => {
+            const table = screen.getByRole('table');
+            expect(table).toBeInTheDocument();
+        });
+    
+        await waitFor(() => {
+            const rows = screen.getAllByRole('row');
+            expect(rows.length).toBe(1);
+        });
+    });
 });
