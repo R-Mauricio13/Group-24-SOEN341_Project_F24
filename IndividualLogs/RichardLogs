@@ -15,3 +15,14 @@ Spent 1 hour on task #35 submitting peer rewview data into MySQL with Jimmy
 Wednesday(10-30)
 Spent 30mins on writing Acceptance Tests for AT 1.0 & 1.1
 Spent 1 hour reviewing/merging project into main 
+
+Sprint 3:
+Task 62: 
+ - 1 hour setting up the table and formatting
+
+Task 64:
+ - 4 hours backtracking to fix missing components that connect users when choosing who to assess and submitting the assessment. Now we know who the review is for and from who
+
+- 3 hours adding logic to tables such as figuring out who the author of the review is and calculating review count and averages
+
+- 2 hours summing all the entries for one student and calculating their average by the number of review counts. Then outputting it onto the table

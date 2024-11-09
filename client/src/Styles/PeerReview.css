@@ -7,18 +7,25 @@ table {
 table th {
     height: inherit;
     width: inherit;
+    white-space: nowrap;
 }
-
+td {
+    text-align: center;
+   
+}
 tr th {
     border: 2px solid #000;
     height: 1px;
     text-align: center;
     margin: auto;
+
 }
 
 th label { 
     display: block;
     align-content: center;
+    text-align: center;
+    width: auto;
     min-height: 100%; /* for the latest browsers which support min-height */
     height: auto !important; /* for newer IE versions */
     height: 100%; /* the only height-related attribute that IE6 does not ignore  */
