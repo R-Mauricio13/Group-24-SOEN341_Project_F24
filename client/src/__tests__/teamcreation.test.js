@@ -60,6 +60,7 @@ describe('TeamCreation Component', () => {
         expect(teamNameInput.value).toBe('New Team');
         expect(teamSizeSelect.value).toBe('4');
     });
+    
     test('successfully creates new team', async () => {
         axios.post.mockResolvedValueOnce({ data: 'success' });
         
@@ -86,6 +87,7 @@ describe('TeamCreation Component', () => {
             expect(mockNavigate).toHaveBeenCalledWith('/Instructor_Login');
         });
     });
+
     test('handles API error during team creation', async () => {
         const consoleLogSpy = jest.spyOn(console, 'log');
         axios.post.mockRejectedValueOnce(new Error('API Error'));
@@ -103,5 +105,13 @@ describe('TeamCreation Component', () => {
         });
 
         consoleLogSpy.mockRestore();
+    });
+
+    test('fetches existing teams on component mount', async () => {
+        render(<MemoryRouter><TeamCreation /></MemoryRouter>);
+
+        await waitFor(() => {
+            expect(global.fetch).toHaveBeenCalledWith('http://localhost:8080/student_groups');
+        });
     });
 });
