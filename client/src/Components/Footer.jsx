@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <p>&copy; 2024 Concordia University. All rights reserved.</p>
+        <p style={{fontSize:'14px'}}>&copy; 2024 Concordia University. All rights reserved.</p>
       </div>
     </footer>
   );

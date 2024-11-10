@@ -31,3 +31,21 @@
     ---------------------------------
 
       40 minutes spent on ensuring button functionality with visual design of assessing each member and redirecting the user to the Peer Review Page
+
+------------
+| Sprint 3 |
+------------
+
+    -----------------------------------
+    | Task 64 Design Detailed View UI |
+    -----------------------------------
+
+      1 hour 30 minutes spent on polishing the visuals on the web front-end for user readability and clean looks for the detailed summary of individual members' peer reviews within a specific team
+
+    ------------------------------------------
+    | Task 65 Retrieve Detailed Results Data |
+    ------------------------------------------
+
+      2 hours spent on understanding the requirements and writing the queries for the data retrieval of individual students within a group with each having a different number of peer responses
+      3 hours 30 minutes spent on coding the back-end logic for the 2 newly created react components Peers_Detailed.jsx and TeamReviews.jsx and using map and filter methods in Arrays to obtain the end result on the web page
+      30 minutes spent on slightly refactoring/altering external files needed to incorporate the new files

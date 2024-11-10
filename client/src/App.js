@@ -9,6 +9,7 @@ import ViewStudentTeam from "./Pages/ViewStudentTeam";
 import TeamDetails from "./Pages/TeamDetails";
 import InstructorView from "./Pages/Instructor_View";
 import PeerReview from "./Pages/PeerReview";
+import TeamReviews from "./Pages/TeamReviews";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // import Resources from './Resources';
@@ -27,6 +28,7 @@ function App() {
       <Route path="/teams/:group_id" element={<TeamDetails />} />
       <Route path="/Instructor_Login" element={<InstructorView />} />
       <Route path="/Peer_Review/:user_id" element={<PeerReview />} />
+      <Route path="/team-reviews/:group_id" element={<TeamReviews />} />
       
       {/* <Route path="/resources" element={<Resources />} /> */}
     </Routes>
