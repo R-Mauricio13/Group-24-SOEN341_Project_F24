@@ -168,23 +168,27 @@ const sorting = (col) => {
         </tr>
         </thead>
         <tbody>
-       
-        {student_Average_Score.map((student) => (
-          <tr key={student.user_id}>
-            <th scope="row">{student.user_id}</th>
-            <td>{student.last_name}</td>
-            <td>{student.first_name}</td>
-            <td>{student.team_name}</td>
-            <td>{(student.Cooperation).toFixed(2)}</td>
-            <td>{(student.Conceptional_Contribution).toFixed(2)}</td>
-            <td>{(student.Practical_Contribution).toFixed(2)}</td>
-            <td>{(student.Work_Ethic).toFixed(2)}</td>
-            <td> {getTotalAverageScore(student)}</td>
-            <td >{student.review_count}
-            </td>
-          
-          </tr>
-        ))}
+        {Array.isArray(student_Average_Score) && student_Average_Score.length > 0 ? (
+            student_Average_Score.map((student) => (
+              <tr key={student.user_id}>
+                <th scope="row">{student.user_id}</th>
+                <td>{student.last_name}</td>
+                <td>{student.first_name}</td>
+                <td>{student.team_name}</td>
+                <td>{(student.Cooperation).toFixed(2)}</td>
+                <td>{(student.Conceptional_Contribution).toFixed(2)}</td>
+                <td>{(student.Practical_Contribution).toFixed(2)}</td>
+                <td>{(student.Work_Ethic).toFixed(2)}</td>
+                <td> {getTotalAverageScore(student)}</td>
+                <td style={{textAlign: 'center'}}>{student.review_count}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+                <td colSpan="10" style={{ textAlign: 'center', padding:'50px' }}>No reviews submitted by students.</td>
+            </tr>
+        )}
         </tbody>
       </table>
     </div>

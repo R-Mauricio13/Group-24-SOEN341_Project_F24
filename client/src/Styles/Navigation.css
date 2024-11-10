@@ -1,12 +1,16 @@
 .navigation {
-    margin-top: 20px;
-  }
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Centers the navigation items horizontally */
+  align-items: center; /* Centers them vertically */
+  gap: 5px; /* Adds space between items */
+}
   
   .nav-button {
     display: inline-block;
     background-color: #e0e0e0;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 20px;
     margin: 5px;
     cursor: pointer;
     font-size: 1em;
@@ -15,5 +19,6 @@
   }
   
   .nav-button:hover {
-    background-color: #d4d4d4;
+    background-color: #f9f9f9;
+    color: #a71420;
   }

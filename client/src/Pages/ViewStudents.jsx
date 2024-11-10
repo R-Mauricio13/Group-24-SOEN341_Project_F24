@@ -121,7 +121,7 @@ function ViewStudents() {
               <td>{student.first_name}</td>
               <td>{student.last_name}</td>
               <td>{student.team_name || 'No Team Assigned'}</td>
-              <td style={{ textAlign: 'center' }}>
+              <td style={{ textAlign: 'left' }}>
                 {showDropdown && ( 
                   <TeamDropdown 
                     teams={teams} 
