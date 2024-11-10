@@ -105,6 +105,32 @@ app.get("/peer_reviews/review-counts", (req, res) => {
   });
 });
 
+//Api to GET the list of individual team reviews
+app.get("/team_reviews/:group_id", (req, res) => {
+  const { group_id } = req.params;
+  const students = process.env.STUDENTS;
+  const student_groups = process.env.TEAMS;
+  const members = process.env.MEMBERS;
+  const peer_reviews = process.env.PEER_REVIEW;
+
+  const query = `
+    SELECT us.first_name AS reviewed_first_name, us.last_name AS reviewed_last_name, author.first_name AS author_first_name, author.last_name AS author_last_name, pr.*, ROUND((pr.Cooperation + pr.Conceptional_Contribution + pr.Practical_Contribution + pr.Work_Ethic) / 4.0, 2) AS average_score
+    FROM ${students} us
+    LEFT JOIN ${members} gm ON us.username = gm.username
+    LEFT JOIN ${student_groups} sg ON gm.team_name = sg.team_name
+    LEFT JOIN ${peer_reviews} pr ON us.user_id = pr.user_id
+    LEFT JOIN ${students} author ON pr.user_author = author.username
+    WHERE sg.group_id = ? AND pr.Cooperation != 0;
+  `;
+
+  db.query(query, [group_id],(err, data) => {
+    if (err) {
+      return res.status(500).send("Internal Server Error");
+    }
+    return res.status(200).json(data);
+  });
+});
+
 // API call to GET team details by username
 app.get("/student_groups/user/:username", (req, res) => {
   const { username } = req.params;

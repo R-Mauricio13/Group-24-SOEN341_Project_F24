@@ -66,9 +66,9 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Peer Review</th>
+                                        <th style={{textAlign: 'center'}} scope="col">First Name</th>
+                                        <th style={{textAlign: 'center'}} scope="col">Last Name</th>
+                                        <th style={{textAlign: 'center'}} scope="col">Peer Review</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,7 +87,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
 
                                 ) : (
                                     <tr>
-                                        <td colSpan="3" style={{ textAlign: 'center' }}>No members found for this team.</td>
+                                        <td colSpan="3" style={{ textAlign: 'center', padding:'50px' }}>No members found for this team.</td>
                                     </tr>
                                 )}
                                 </tbody>

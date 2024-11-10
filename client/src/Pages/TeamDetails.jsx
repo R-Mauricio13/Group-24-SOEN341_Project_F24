@@ -63,9 +63,9 @@ function TeamDetails() {
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Username</th>
+                                        <th style={{textAlign: 'center'}} scope="col">First Name</th>
+                                        <th style={{textAlign: 'center'}} scope="col">Last Name</th>
+                                        <th style={{textAlign: 'center'}} scope="col">Username</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,17 +80,20 @@ function TeamDetails() {
 
                                 ) : (
                                     <tr>
-                                        <td colSpan="3" style={{ textAlign: 'center' }}>No members found for this team.</td>
+                                        <td colSpan="3" style={{ textAlign: 'center', padding:'50px' }}>No members found for this team.</td>
                                     </tr>
                                 )}
                                 </tbody>
                             </table>
-
+                            
+                            {/*}     
                             {Array.isArray(members) && members.length > 0 && (
                                 <div style={{ textAlign: 'center'}}>
                                     <button className="ViewButton" style={{width: '200px'}}>Peer Review Details</button>
                                 </div>
                             )}
+                            */}
+
                             <div style={{ textAlign: 'center', marginTop: '20px' }}>
                                 <button className="ViewButton" onClick={() => navigate(-1)}>Back</button>
                             </div>
