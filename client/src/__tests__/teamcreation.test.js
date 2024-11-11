@@ -3,13 +3,14 @@
  */
 
 import React from 'react';
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
 import TeamCreation from '../Pages/TeamCreation';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 
+/* eslint-disable testing-library/no-unnecessary-act */
 // Mock react-router-dom
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -39,9 +40,11 @@ describe('TeamCreation Component', () => {
         jest.resetAllMocks();
     });
 
-    test('renders team creation form correctly', () => {
-        render(<MemoryRouter><TeamCreation /></MemoryRouter>);
-
+    test('renders team creation form correctly', async () => {
+        await act(async () => {
+            render(<MemoryRouter><TeamCreation /></MemoryRouter>);
+        });
+    
         expect(screen.getByText('Create a Team')).toBeInTheDocument();
         expect(screen.getByLabelText(/Team Name/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Team Size/i)).toBeInTheDocument();
@@ -49,13 +52,15 @@ describe('TeamCreation Component', () => {
     });
 
     test('handles team name input and size selection', async () => {
-        render(<MemoryRouter><TeamCreation /></MemoryRouter>);
+        await act(async () => {
+            render(<MemoryRouter><TeamCreation /></MemoryRouter>);
+        });
 
         const teamNameInput = screen.getByLabelText(/Team Name/i);
         const teamSizeSelect = screen.getByLabelText(/Team Size/i);
 
-        await userEvent.type(teamNameInput, 'New Team');
-        await userEvent.selectOptions(teamSizeSelect, '4');
+        userEvent.type(teamNameInput, 'New Team');
+        userEvent.selectOptions(teamSizeSelect, '4');
 
         expect(teamNameInput.value).toBe('New Team');
         expect(teamSizeSelect.value).toBe('4');
