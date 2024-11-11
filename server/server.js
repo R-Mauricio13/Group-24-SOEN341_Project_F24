@@ -565,3 +565,5 @@ const port = 8080;
 app.listen(port, () => {
   console.log(`Server port running on '${port}'`);
 });
+
+module.exports = app;
