@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import ViewTeams from '../Pages/ViewTeams';
 import '@testing-library/jest-dom/extend-expect';
@@ -47,11 +47,13 @@ describe('ViewTeams Component', () => {
     });
 
     test('renders teams table with headers', async () => {
-        render(
-            <MemoryRouter>
-                <ViewTeams />
-            </MemoryRouter>
-        );
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <ViewTeams />
+                </MemoryRouter>
+            );
+        });
 
         expect(screen.getByText('List of Teams')).toBeInTheDocument();
         
