@@ -52,7 +52,7 @@ function ViewTeams() {
                             <td>{teamData.team_name}</td>
                             <td style={{ textAlign: 'center' }}>{teamData.team_size}</td>
                             <td style={{ textAlign: 'center' }}>
-                                <button class="ViewButton" onClick={() => handleViewTeam(group_id)}>
+                                <button className="ViewButton" onClick={() => handleViewTeam(group_id)}>
                                     View Team
                                 </button>
                             </td>
