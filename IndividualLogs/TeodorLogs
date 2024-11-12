@@ -14,7 +14,35 @@ Task: Finish backend authentication (part2)
 
 Sunday 27th Oct, 20:00-23:00
 Task: Implement authentication in the frontend
-        - login page changed to redirect to backend in order to set the credentials cookie
-        - student view page changed to use the backend authentication using the credentials token
-        - created templated for authentication to be used in other pages
+    Login page changed to redirect to backend in order to set the credentials cookie
+    Student view page changed to use the backend authentication using the credentials token
+    Created templated for authentication to be used in other pages
+
 Task: Commit and push the changes to the repository, including logs
+
+Sprint 3
+
+Friday 8th Nov, 16:00-19:00
+Task: Set up password reset functionality
+    Created backend API endpoints for password reset requests.
+    Implemented email service to send reset links.
+    Added validation for password reset tokens to enhance security.
+
+Friday 8th Nov, 19:30-21:30
+Task: Update frontend for password reset
+    Designed password reset request and reset forms in the frontend.
+    Integrated forms with backend reset API.
+    Tested complete password reset flow for UX and functionality.
+
+Saturday 9th Nov, 14:00-17:00
+Task: Implement user role-based access control
+    Added role-based access control to the backend (e.g., admin, student).
+    Modified user database schema to store user roles.
+    Implemented logic to restrict specific pages based on user roles.
+
+Saturday 9th Nov, 17:30-20:00
+Task: Testing and debugging for Sprint 3 features
+    Conducted tests for new features (password reset, role-based access).
+    Debugged issues found during testing (e.g., token expiration handling, restricted access errors).
+    Updated documentation for Sprint 3 tasks.
+    
