@@ -13,8 +13,8 @@ import '@testing-library/jest-dom';
 let mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
-  afterEach(() => {mockAxios.reset();});
   beforeEach(() => {
+    mockAxios.reset();
     // Mock the URL search parameters for all tests
     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
@@ -71,12 +71,6 @@ describe('PeerReview Component', () => {
   
 
   it('should submit the form when all required radio buttons are selected', async () => {
-
-    mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
-      console.log("Request made with data:", config.data);  // Log the request data
-      return [200, { success: true }];
-    });
-
     render(
       <Router>
         <PeerReview />
@@ -97,6 +91,11 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('conceptual 3')).toBeChecked();
     expect(screen.getByLabelText('practical 3')).toBeChecked();
     expect(screen.getByLabelText('work ethic 3')).toBeChecked();
+
+    mockAxios.onPost('http://localhost:8080/submit_review', {params: {}}).reply((config) => {
+      console.log("Request made with data:", config.data);  // Log the request data
+      return [200, { success: true }];
+    });
 
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
