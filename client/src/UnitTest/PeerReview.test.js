@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import PeerReview from '../Pages/PeerReview';
 import axios from 'axios';
