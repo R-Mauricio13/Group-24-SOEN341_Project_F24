@@ -81,8 +81,10 @@ describe('PeerReview Component', () => {
     fireEvent.click(screen.getByLabelText("practical 3"));
     fireEvent.click(screen.getByLabelText("work ethic 3"));
 
-    mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
-
+    mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
+      console.log("Request made with data:", config.data);  // Log the request data
+      return [200, { success: true }];
+  });
     fireEvent.click(screen.getByText('Submit Review'));
 
     await waitFor(() => expect(mockAxios.history.post).toHaveLength(1));
