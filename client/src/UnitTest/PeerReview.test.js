@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import PeerReview from '../Pages/PeerReview';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -9,10 +9,11 @@ import '@testing-library/jest-dom';
 const mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
-  afterEach(() => {mockAxios.reset();});
+  afterEach(cleanup);
   beforeEach(() => {
-     // Mock the URL search parameters for all tests
-     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
+    // Mock the URL search parameters for all tests
+    mockAxios.reset();
+    window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
   });
@@ -91,7 +92,7 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor(() => {
+    await waitFor( async () => {
       // Log the length of the mockAxios POST requests
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post).toHaveLength(1);
