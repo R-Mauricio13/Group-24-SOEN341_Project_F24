@@ -39,34 +39,34 @@ describe('PeerReview Component', () => {
    
   });
 
-  // it('should not allow form submission if any required radio button is not selected', async () => {
-  //   render(
-  //     <Router>
-  //       <PeerReview />
-  //     </Router>
-  //   );
+  it('should not allow form submission if any required radio button is not selected', async () => {
+    render(
+      <Router>
+        <PeerReview />
+      </Router>
+    );
   
-  //   // Fill in optional comments
-  //   fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
+    // Fill in optional comments
+    fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
   
-  //   // Try to submit without selecting the required radio button
-  //   // fireEvent.click(screen.getByText('Submit Review'));
-  //   const form = screen.getByTestId('peer-review-form');
-  //   fireEvent.submit(form); // Trigger the form submission
+    // Try to submit without selecting the required radio button
+    // fireEvent.click(screen.getByText('Submit Review'));
+    const form = screen.getByTestId('peer-review-form');
+    fireEvent.submit(form); // Trigger the form submission
     
   
-  //   // Assert that the required radio buttons are invalid (not selected)
-  //   expect(screen.getByLabelText('cooperation 3')).toBeInvalid();
-  //   expect(screen.getByLabelText('conceptual 3')).toBeInvalid();
-  //   expect(screen.getByLabelText('practical 3')).toBeInvalid();
-  //   expect(screen.getByLabelText('work ethic 3')).toBeInvalid();
+    // Assert that the required radio buttons are invalid (not selected)
+    expect(screen.getByLabelText('cooperation 3')).toBeInvalid();
+    expect(screen.getByLabelText('conceptual 3')).toBeInvalid();
+    expect(screen.getByLabelText('practical 3')).toBeInvalid();
+    expect(screen.getByLabelText('work ethic 3')).toBeInvalid();
 
-  //   // Wait for any potential requests and assert that no request was made (i.e., form should not be submitted)
-  //   await waitFor(() => {
-  //     expect(mockAxios.history.post).toHaveLength(0); // The post request should not be sent
-  //   });
+    // Wait for any potential requests and assert that no request was made (i.e., form should not be submitted)
+    await waitFor(() => {
+      expect(mockAxios.history.post).toHaveLength(0); // The post request should not be sent
+    });
     
-  // });
+  });
 
   
 
@@ -104,7 +104,7 @@ describe('PeerReview Component', () => {
       // Log the length of the mockAxios POST requests
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post).toHaveLength(1);
-    });
+    }, {timeout: 5000 });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
