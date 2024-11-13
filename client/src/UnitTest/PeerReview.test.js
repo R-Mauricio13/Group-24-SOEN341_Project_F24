@@ -92,7 +92,7 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('practical 3')).toBeChecked();
     expect(screen.getByLabelText('work ethic 3')).toBeChecked();
 
-    mockAxios.onPost('http://localhost:8080/submit_review', {params: {}}).reply((config) => {
+    mockAxios.onPost('http://localhost:8080/submit_review', {params: {"cooperation":"3","coop_comment":"Some comments","conceptual":"3","concept_comment":"Some conceptual comments","practical":"3","practical_comment":"Some practical comments","work_ethic":"3","we_comment":"Some work ethic comments","user_id":"123","user_author":"JohnDoe"}}).reply((config) => {
       console.log("Request made with data:", config.data);  // Log the request data
       return [200, { success: true }];
     });
