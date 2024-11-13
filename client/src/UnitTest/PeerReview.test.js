@@ -92,9 +92,7 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('practical 3')).toBeChecked();
     expect(screen.getByLabelText('work ethic 3')).toBeChecked();
 
-    mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
-      console.log("Request made with data:", config.data);  // Log the request data
-      return [200, { success: true }];
+    mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
     });
 
     const form = screen.getByTestId('peer-review-form');
