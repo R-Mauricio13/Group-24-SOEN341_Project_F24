@@ -10,7 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom';
 
-let mockAxios = new MockAdapter(axios);
+const mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
   beforeEach(() => {
@@ -97,11 +97,11 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor(() => {
+    waitFor(() => {
       // Log the length of the mockAxios POST requests
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post).toHaveLength(1);
-    }, {timeout: 5000 });
+    });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
