@@ -72,8 +72,6 @@ describe('PeerReview Component', () => {
   
 
   it('should submit the form when all required radio buttons are selected', async () => {
-    mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
-
     render(
     <Router>
       <PeerReview />
@@ -90,9 +88,26 @@ describe('PeerReview Component', () => {
     fireEvent.click(screen.getByLabelText("practical 3"));
     fireEvent.click(screen.getByLabelText("work ethic 3"));
 
+    let review = {
+      cooperation:"3",
+      coop_comment:"Some comments",
+      conceptual:"3",
+      concept_comment:"Some conceptual comments",
+      practical:"3",
+      practical_comment:"Some practical comments",
+      work_ethic:"3",
+      we_comment:"Some work ethic comments",
+      user_id:"123",
+      user_author:"JohnDoe"
+    }
+
+    mockAxios.onPost('http://localhost:8080/submit_review', review).reply((config) => {
+      console.log("Request made with data:", config.data);  // Log the request data
+      return [200, { success: true }];
+    });
+
     const form = screen.getByTestId('peer-review-form');
-    fireEvent.click(screen.getByRole("button", { name: /Submit Review/i }));
-    //fireEvent.submit(form); // Trigger the form submission
+    fireEvent.submit(form); // Trigger the form submission
 
     await waitFor(() => {
       // Log the length of the mockAxios POST requests
