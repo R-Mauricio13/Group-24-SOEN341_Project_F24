@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import PeerReview from '../Pages/PeerReview';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -73,11 +73,13 @@ describe('PeerReview Component', () => {
   it('should submit the form when all required radio buttons are selected', async () => {
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
 
-    render(
+    act(() => {
+      render(
       <Router>
         <PeerReview />
       </Router>
-    );
+      );
+    });
 
     fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
     fireEvent.change(screen.getByPlaceholderText('Conceptual Contribution Comments (Optional):'), { target: { value: 'Some conceptual comments' } });
@@ -91,21 +93,22 @@ describe('PeerReview Component', () => {
 
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
-    expect(mockAxios.history.post).toHaveLength(1);
-    console.log(mockAxios.history.post.length);
-    // waitFor(() => {
-    //   // Log the length of the mockAxios POST requests
-    //   console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
-    //   expect(mockAxios.history.post).toHaveLength(1);
-    // });
+    console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
+
+    await waitFor(() => {
+      // Log the length of the mockAxios POST requests
+      expect(mockAxios.history.post).toHaveLength(1);
+    });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
-    render(
+    act(() => {
+      render(
       <Router>
         <PeerReview />
       </Router>
-    );
+      );
+    });
 
     fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
     fireEvent.change(screen.getByPlaceholderText('Conceptual Contribution Comments (Optional):'), { target: { value: 'Some conceptual comments' } });
