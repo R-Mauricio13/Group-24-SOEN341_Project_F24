@@ -3,7 +3,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
 import Form from "react-bootstrap/Form";
-import axios from "axios"
+import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import '../Styles/PeerReview.css'; 
 

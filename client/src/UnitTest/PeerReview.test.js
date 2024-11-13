@@ -103,7 +103,7 @@ describe('PeerReview Component', () => {
 
     mockAxios.onPost('http://localhost:8080/submit_review', review).reply((config) => {
       console.log("Request made with data:", config.data);  // Log the request data
-      return [200, { success: true }];
+      return [200, review];
     });
 
     const form = screen.getByTestId('peer-review-form');
@@ -111,7 +111,7 @@ describe('PeerReview Component', () => {
 
     await waitFor(() => {
       // Log the length of the mockAxios POST requests
-      console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
+      //console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post).toHaveLength(1);
     });
   });
