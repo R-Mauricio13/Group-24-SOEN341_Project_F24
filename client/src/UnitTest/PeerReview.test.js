@@ -91,12 +91,13 @@ describe('PeerReview Component', () => {
 
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
-
-    waitFor(() => {
-      // Log the length of the mockAxios POST requests
-      console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
-      expect(mockAxios.history.post).toHaveLength(1);
-    });
+    expect(mockAxios.history.post).toHaveLength(1);
+    console.log(mockAxios.history.post.length);
+    // waitFor(() => {
+    //   // Log the length of the mockAxios POST requests
+    //   console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
+    //   expect(mockAxios.history.post).toHaveLength(1);
+    // });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
