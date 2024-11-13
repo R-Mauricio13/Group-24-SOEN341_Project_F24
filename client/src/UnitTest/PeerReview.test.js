@@ -9,12 +9,12 @@ import '@testing-library/jest-dom/extend-expect';
 const mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
+  afterEach(() => {mockAxios.reset();});
   beforeEach(() => {
      // Mock the URL search parameters for all tests
      window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
-    mockAxios.reset();
   });
 
   it('should render the form with radio buttons and textarea fields', () => {
@@ -58,9 +58,10 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('work ethic 3')).toBeInvalid();
 
     // Wait for any potential requests and assert that no request was made (i.e., form should not be submitted)
-    await waitFor( async () => {
+    await waitFor(() => {
       expect(mockAxios.history.post).toHaveLength(0); // The post request should not be sent
     });
+    
   });
 
   
@@ -85,15 +86,14 @@ describe('PeerReview Component', () => {
     mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
       console.log("Request made with data:", config.data);  // Log the request data
       return [200, { success: true }];
-    });
-    
+  });
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor( async () => {
+    await waitFor(() => {
       // Log the length of the mockAxios POST requests
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
-      expect(mockAxios.history.length).toBe(1);
+      expect(mockAxios.history.post).toHaveLength(1);
     });
   });
 
@@ -124,6 +124,6 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor( async () => expect(window.location.pathname).toBe('/Peer_Review_Confirmation'));
+    await waitFor(() => expect(window.location.pathname).toBe('/Peer_Review_Confirmation'));
   });
 });
