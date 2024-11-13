@@ -10,7 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom';
 
-const mockAxios = new MockAdapter(axios);
+let mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
   afterEach(() => {mockAxios.reset();});
@@ -100,7 +100,7 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor( async () => {
+    await waitFor(() => {
       // Log the length of the mockAxios POST requests
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post).toHaveLength(1);
