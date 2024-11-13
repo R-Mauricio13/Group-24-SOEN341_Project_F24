@@ -4,7 +4,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -86,7 +86,8 @@ describe('PeerReview Component', () => {
     mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
       console.log("Request made with data:", config.data);  // Log the request data
       return [200, { success: true }];
-  });
+    });
+
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
