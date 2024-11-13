@@ -10,6 +10,8 @@ const mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
   beforeEach(() => {
+     // Mock the URL search parameters for all tests
+     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
     mockAxios.reset();
@@ -114,7 +116,8 @@ describe('PeerReview Component', () => {
 
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
 
-    fireEvent.click(screen.getByText('Submit Review'));
+    const form = screen.getByTestId('peer-review-form');
+    fireEvent.submit(form); // Trigger the form submission
 
     await waitFor(() => expect(window.location.pathname).toBe('/Peer_Review_Confirmation'));
   });
