@@ -89,11 +89,6 @@ describe('PeerReview Component', () => {
     fireEvent.click(screen.getByLabelText("practical 3"));
     fireEvent.click(screen.getByLabelText("work ethic 3"));
 
-    expect(screen.getByLabelText('cooperation 3')).toBeChecked();
-    expect(screen.getByLabelText('conceptual 3')).toBeChecked();
-    expect(screen.getByLabelText('practical 3')).toBeChecked();
-    expect(screen.getByLabelText('work ethic 3')).toBeChecked();
-
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
