@@ -9,10 +9,9 @@ import '@testing-library/jest-dom';
 const mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
-  afterEach(cleanup);
+  afterEach(() => {mockAxios.reset();});
   beforeEach(() => {
     // Mock the URL search parameters for all tests
-    mockAxios.reset();
     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
@@ -83,6 +82,11 @@ describe('PeerReview Component', () => {
     fireEvent.click(screen.getByLabelText("conceptual 3"));
     fireEvent.click(screen.getByLabelText("practical 3"));
     fireEvent.click(screen.getByLabelText("work ethic 3"));
+
+    expect(screen.getByLabelText('cooperation 3')).toBeChecked();
+    expect(screen.getByLabelText('conceptual 3')).toBeChecked();
+    expect(screen.getByLabelText('practical 3')).toBeChecked();
+    expect(screen.getByLabelText('work ethic 3')).toBeChecked();
 
     mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
       console.log("Request made with data:", config.data);  // Log the request data
