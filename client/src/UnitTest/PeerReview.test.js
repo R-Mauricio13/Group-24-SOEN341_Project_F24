@@ -77,9 +77,9 @@ describe('PeerReview Component', () => {
     fireEvent.change(screen.getByPlaceholderText('Work Ethic Comments (Optional):'), { target: { value: 'Some work ethic comments' } });
 
     fireEvent.click(screen.getByLabelText("cooperation 3"));
-  fireEvent.click(screen.getByLabelText("conceptual 3"));
-  fireEvent.click(screen.getByLabelText("practical 3"));
-  fireEvent.click(screen.getByLabelText("work ethic 3"));
+    fireEvent.click(screen.getByLabelText("conceptual 3"));
+    fireEvent.click(screen.getByLabelText("practical 3"));
+    fireEvent.click(screen.getByLabelText("work ethic 3"));
 
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
 
@@ -101,9 +101,14 @@ describe('PeerReview Component', () => {
     fireEvent.change(screen.getByPlaceholderText('Work Ethic Comments (Optional):'), { target: { value: 'Some work ethic comments' } });
 
     fireEvent.click(screen.getByLabelText("cooperation 3"));
-  fireEvent.click(screen.getByLabelText("conceptual 3"));
-  fireEvent.click(screen.getByLabelText("practical 3"));
-  fireEvent.click(screen.getByLabelText("work ethic 3"));
+    fireEvent.click(screen.getByLabelText("conceptual 3"));
+    fireEvent.click(screen.getByLabelText("practical 3"));
+    fireEvent.click(screen.getByLabelText("work ethic 3"));
+
+    expect(screen.getByLabelText('cooperation 3')).toBeChecked();
+    expect(screen.getByLabelText('conceptual 3')).toBeChecked();
+    expect(screen.getByLabelText('practical 3')).toBeChecked();
+    expect(screen.getByLabelText('work ethic 3')).toBeChecked();
 
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
 

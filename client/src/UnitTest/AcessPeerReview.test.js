@@ -20,6 +20,17 @@ describe('ViewStudentTeam Page', () => {
 
     const mockNavigate = jest.fn();
 
+    beforeAll(() => {
+        // Mock console.error to prevent error logs in tests
+        jest.spyOn(console, 'error').mockImplementation(() => {});
+    });
+    
+    afterAll(() => {
+        // Restore original console.error after all tests are done
+        console.error.mockRestore();
+    });
+    
+
     beforeEach(() => {
         // Mock fetch to return team and member data
         global.fetch = jest.fn((url) => {
