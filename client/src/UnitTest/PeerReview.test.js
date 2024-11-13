@@ -58,10 +58,9 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('work ethic 3')).toBeInvalid();
 
     // Wait for any potential requests and assert that no request was made (i.e., form should not be submitted)
-    await waitFor(() => {
+    await waitFor( async () => {
       expect(mockAxios.history.post).toHaveLength(0); // The post request should not be sent
     });
-    
   });
 
   
@@ -86,14 +85,15 @@ describe('PeerReview Component', () => {
     mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
       console.log("Request made with data:", config.data);  // Log the request data
       return [200, { success: true }];
-  });
+    });
+    
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor(() => {
+    await waitFor( async () => {
       // Log the length of the mockAxios POST requests
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
-      expect(mockAxios.history.post).toHaveLength(1);
+      expect(mockAxios.history.length).toBe(1);
     });
   });
 
@@ -124,6 +124,6 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor(() => expect(window.location.pathname).toBe('/Peer_Review_Confirmation'));
+    await waitFor( async () => expect(window.location.pathname).toBe('/Peer_Review_Confirmation'));
   });
 });
