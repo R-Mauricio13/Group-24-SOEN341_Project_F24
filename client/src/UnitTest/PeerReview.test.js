@@ -93,7 +93,6 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('work ethic 3')).toBeChecked();
 
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
-    });
 
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
