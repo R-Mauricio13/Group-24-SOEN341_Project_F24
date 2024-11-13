@@ -87,9 +87,14 @@ describe('PeerReview Component', () => {
       console.log("Request made with data:", config.data);  // Log the request data
       return [200, { success: true }];
   });
-    fireEvent.click(screen.getByText('Submit Review'));
+    const form = screen.getByTestId('peer-review-form');
+    fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor(() => expect(mockAxios.history.post).toHaveLength(1));
+    await waitFor(() => {
+      // Log the length of the mockAxios POST requests
+      console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
+      expect(mockAxios.history.post).toHaveLength(1);
+    });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
