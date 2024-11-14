@@ -2,28 +2,23 @@
  * @jest-environment jsdom
  */
 
-import { render, screen, fireEvent, waitFor, cleanup, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import PeerReview from '../Pages/PeerReview';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+
+const mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
-  let mockAxios = new MockAdapter(axios);
-
   beforeEach(() => {
-    // Mock the URL search parameters for all tests
-    window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
+     // Mock the URL search parameters for all tests
+     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
-
-    // mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
-    //   console.log("Request made with data:", config.data);  // Log the request data
-    //   return [200, review];
-    // });
-    mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
+    mockAxios.reset();
   });
 
   it('should render the form with radio buttons and textarea fields', () => {
@@ -77,9 +72,9 @@ describe('PeerReview Component', () => {
 
   it('should submit the form when all required radio buttons are selected', async () => {
     render(
-    <Router>
-      <PeerReview />
-    </Router>
+      <Router>
+        <PeerReview />
+      </Router>
     );
 
     fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
@@ -92,26 +87,27 @@ describe('PeerReview Component', () => {
     fireEvent.click(screen.getByLabelText("practical 3"));
     fireEvent.click(screen.getByLabelText("work ethic 3"));
 
+    mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
+      console.log("Request made with data:", config.data);  // Log the request data
+      return [200, { success: true }];
+    });
+
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor( async () => {
+    await waitFor(() => {
       // Log the length of the mockAxios POST requests
-      await new Promise(resolve => setTimeout(resolve, 50));
-      console.log(mockAxios.history.post);
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
-      expect(mockAxios.history.post.length).toBe(1);
+      expect(mockAxios.history.post).toHaveLength(1);
     });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
-    act(() => {
-      render(
+    render(
       <Router>
         <PeerReview />
       </Router>
-      );
-    });
+    );
 
     fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
     fireEvent.change(screen.getByPlaceholderText('Conceptual Contribution Comments (Optional):'), { target: { value: 'Some conceptual comments' } });
