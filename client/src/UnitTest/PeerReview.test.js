@@ -11,11 +11,9 @@ import React from 'react';
 import '@testing-library/jest-dom';
 
 describe('PeerReview Component', () => {
-  let mockAxios;
+  let mockAxios = new MockAdapter(axios);
 
   beforeEach(() => {
-    mockAxios = new MockAdapter(axios);
-    console.log("Mock setup complete");
     // Mock the URL search parameters for all tests
     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
@@ -26,6 +24,11 @@ describe('PeerReview Component', () => {
     //   return [200, review];
     // });
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
+  });
+
+  afterEach(() => {
+    mockAxios.reset();
+    console.log("Mock reset");
   });
 
   it('should render the form with radio buttons and textarea fields', () => {
