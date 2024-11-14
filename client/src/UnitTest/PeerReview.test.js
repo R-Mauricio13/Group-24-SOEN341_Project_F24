@@ -9,8 +9,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 
-const mockAxios = new MockAdapter(axios);
-
 describe('PeerReview Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
