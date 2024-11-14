@@ -1,0 +1,13 @@
+Sprint 2
+featuer addmembertoteam
+-made the dropdownmenu layout
+
+Sprint 3
+feautre/unit_test/Victor
+
+-made unit test for page to acess peer review; (valide navigation and display)
+-made unit test for peer review page to validate rendering of values in page, submission functionailty
+
+research jest 2h
+first unit test 2h
+second unit test 3h30

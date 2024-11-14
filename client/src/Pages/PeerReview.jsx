@@ -3,7 +3,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
 import Form from "react-bootstrap/Form";
-import axios from "axios"
+import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import '../Styles/PeerReview.css'; 
 
@@ -43,20 +43,26 @@ function PeerReview() {
 
   const submitForm = async event => {
     event.preventDefault();
-    try{
-        console.log(review)
-        
-   
-        console.log(`Attempting to submit review for user id= ${userID}`)
-        await axios.post("http://localhost:8080/submit_review",review)
-        
-        navigate("/Peer_Review_Confirmation");
-      }
-      catch(err)
-      {
-        console.log(err)
-      }
+    const form = event.target;
+
+  // Check if the form is valid (ensures that required fields are filled out)
+  if (form.checkValidity()) {
+    try {
+      console.log(review);
+      console.log(`Attempting to submit review for user id= ${userID}`);
+      
+      // Proceed with form submission if valid
+      await axios.post("http://localhost:8080/submit_review", review);
+      console.log("post complete");
+      // Navigate to the confirmation page after successful submission
+      navigate("/Peer_Review_Confirmation");
+    } catch (err) {
+      console.log("Form submission error:", err);
     }
+  } else {
+    console.log("Form is invalid. Please fill in all required fields.");
+  }
+};
     
 
   return (
@@ -64,17 +70,17 @@ function PeerReview() {
     <div>
       <Header />
       <Navigation />
-      <form onSubmit={submitForm}>
+      <form data-testid="peer-review-form" onSubmit={submitForm}>
         <Form.Group>
-            <table class="PRtable">
+            <table className="PRtable">
                 <tbody>
                     <tr>
-                        <th class="PRth"></th>
-                        <th class="PRth">1</th>
-                        <th class="PRth">2</th>
-                        <th class="PRth">3</th>
-                        <th class="PRth">4</th>
-                        <th class="PRth">5</th>
+                        <th className="PRth"></th>
+                        <th className="PRth">1</th>
+                        <th className="PRth">2</th>
+                        <th className="PRth">3</th>
+                        <th className="PRth">4</th>
+                        <th className="PRth">5</th>
                     </tr>
                     <tr>
                         <th className="PRth entities">
@@ -88,11 +94,11 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th class="PRth"><label class="PRlabel"><input id="c1" type="radio" value="1" name="cooperation" onChange={handleChange} required/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="2" name="cooperation" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="3" name="cooperation" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="4" name="cooperation" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="5" name="cooperation" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input id="c1" type="radio" value="1" name="cooperation" aria-label="cooperation 1" onChange={handleChange} required/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="cooperation" aria-label="cooperation 2" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="cooperation" aria-label="cooperation 3" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="cooperation" aria-label="cooperation 4" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="cooperation" aria-label="cooperation 5" onChange={handleChange}/></label></th>
                     </tr>
                     <tr>
                         <th className="Prth entities">
@@ -106,11 +112,11 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="1" name="conceptual" onChange={handleChange} required/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="2" name="conceptual" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="3" name="conceptual" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="4" name="conceptual" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="5" name="conceptual" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="1" name="conceptual" onChange={handleChange} required/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="conceptual" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="conceptual"  aria-label="conceptual 3" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="conceptual" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="conceptual" onChange={handleChange}/></label></th>
                     </tr>
                     <tr>
                         <th className="PRth entities">
@@ -124,11 +130,11 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="1" name="practical" onChange={handleChange} required/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="2" name="practical" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="3" name="practical" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="4" name="practical" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="5" name="practical" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="1" name="practical" onChange={handleChange} required/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="practical" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="practical"  aria-label="practical 3" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="practical" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="practical" onChange={handleChange}/></label></th>
                     </tr>
                     <tr>
                         <th className="PRth entities">
@@ -142,11 +148,11 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="1" name="work_ethic" onChange={handleChange} required/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="2" name="work_ethic" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="3" name="work_ethic" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="4" name="work_ethic" onChange={handleChange}/></label></th>
-                        <th class="PRth"><label class="PRlabel"><input type="radio" value="5" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="1" name="work_ethic" onChange={handleChange} required/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="work_ethic" aria-label="work ethic 3" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="work_ethic" onChange={handleChange}/></label></th>
                     </tr>
                 </tbody>
             </table>
