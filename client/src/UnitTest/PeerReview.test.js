@@ -15,15 +15,17 @@ describe('PeerReview Component', () => {
 
   beforeEach(() => {
     mockAxios = new MockAdapter(axios);
+    console.log("Mock setup complete");
     // Mock the URL search parameters for all tests
     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
 
-    mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
-      console.log("Request made with data:", config.data);  // Log the request data
-      return [200, review];
-    });
+    // mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
+    //   console.log("Request made with data:", config.data);  // Log the request data
+    //   return [200, review];
+    // });
+    mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
   });
 
   afterEach(() => {
@@ -71,9 +73,9 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('work ethic 3')).toBeInvalid();
 
     // Wait for any potential requests and assert that no request was made (i.e., form should not be submitted)
-    // await waitFor(() => {
-    //   expect(mockAxios.history.post).toHaveLength(0); // The post request should not be sent
-    // });
+    await waitFor(() => {
+      expect(mockAxios.history.post).toHaveLength(0); // The post request should not be sent
+    });
     
   });
 
@@ -99,11 +101,13 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
+    console.log(mockAxios.history.post);
+
     await waitFor(() => {
       // Log the length of the mockAxios POST requests
-      //console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
+      console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post.length).toBe(1);
-    });
+    }, {timeout: 10000 });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
