@@ -2,12 +2,14 @@
  * @jest-environment jsdom
  */
 
-import { render, screen, fireEvent, waitFor, cleanup, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import PeerReview from '../Pages/PeerReview';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+
+const mockAxios = new MockAdapter(axios);
 
 describe('PeerReview Component', () => {
   beforeEach(() => {
@@ -72,9 +74,9 @@ describe('PeerReview Component', () => {
 
   it('should submit the form when all required radio buttons are selected', async () => {
     render(
-    <Router>
-      <PeerReview />
-    </Router>
+      <Router>
+        <PeerReview />
+      </Router>
     );
 
     fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
@@ -111,13 +113,11 @@ describe('PeerReview Component', () => {
   });
 
   it('should show the confirmation page after successful form submission', async () => {
-    act(() => {
-      render(
+    render(
       <Router>
         <PeerReview />
       </Router>
-      );
-    });
+    );
 
     fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
     fireEvent.change(screen.getByPlaceholderText('Conceptual Contribution Comments (Optional):'), { target: { value: 'Some conceptual comments' } });
