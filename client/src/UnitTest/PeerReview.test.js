@@ -26,11 +26,6 @@ describe('PeerReview Component', () => {
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
   });
 
-  afterEach(() => {
-    mockAxios.reset();
-    console.log("Mock reset");
-  });
-
   it('should render the form with radio buttons and textarea fields', () => {
     render(
       <Router>
@@ -100,10 +95,10 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    console.log(mockAxios.history.post);
-
-    await waitFor(() => {
+    await waitFor( async () => {
       // Log the length of the mockAxios POST requests
+      await new Promise(resolve => setTimeout(resolve, 50));
+      console.log(mockAxios.history.post);
       console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post.length).toBe(1);
     });
