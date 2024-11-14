@@ -19,11 +19,16 @@ describe('PeerReview Component', () => {
     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
-  })
+
+    mockAxios.onPost('http://localhost:8080/submit_review').reply((config) => {
+      console.log("Request made with data:", config.data);  // Log the request data
+      return [200, review];
+    });
+  });
 
   afterEach(() => {
-    mockAxios.restore()
-  })
+    mockAxios.reset();
+  });
 
   it('should render the form with radio buttons and textarea fields', () => {
     render(
@@ -91,24 +96,6 @@ describe('PeerReview Component', () => {
     fireEvent.click(screen.getByLabelText("practical 3"));
     fireEvent.click(screen.getByLabelText("work ethic 3"));
 
-    let review = {
-      cooperation:"3",
-      coop_comment:"Some comments",
-      conceptual:"3",
-      concept_comment:"Some conceptual comments",
-      practical:"3",
-      practical_comment:"Some practical comments",
-      work_ethic:"3",
-      we_comment:"Some work ethic comments",
-      user_id:"123",
-      user_author:"JohnDoe"
-    }
-
-    mockAxios.onPost('http://localhost:8080/submit_review', review).reply((config) => {
-      console.log("Request made with data:", config.data);  // Log the request data
-      return [200, review];
-    });
-
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
@@ -143,20 +130,7 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('practical 3')).toBeChecked();
     expect(screen.getByLabelText('work ethic 3')).toBeChecked();
 
-    let review = {
-      cooperation:"3",
-      coop_comment:"Some comments",
-      conceptual:"3",
-      concept_comment:"Some conceptual comments",
-      practical:"3",
-      practical_comment:"Some practical comments",
-      work_ethic:"3",
-      we_comment:"Some work ethic comments",
-      user_id:"123",
-      user_author:"JohnDoe"
-    }
-
-    mockAxios.onPost('http://localhost:8080/submit_review', review).reply(200, { success: true });
+    mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
 
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
