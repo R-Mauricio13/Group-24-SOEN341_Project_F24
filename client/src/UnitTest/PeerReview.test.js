@@ -28,10 +28,6 @@ describe('PeerReview Component', () => {
     mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
   });
 
-  afterEach(() => {
-    mockAxios.reset();
-  });
-
   it('should render the form with radio buttons and textarea fields', () => {
     render(
       <Router>
@@ -105,9 +101,9 @@ describe('PeerReview Component', () => {
 
     await waitFor(() => {
       // Log the length of the mockAxios POST requests
-      console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
+      //console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
       expect(mockAxios.history.post.length).toBe(1);
-    }, {timeout: 10000 });
+    });
   });
 
   it('should show the confirmation page after successful form submission', async () => {
