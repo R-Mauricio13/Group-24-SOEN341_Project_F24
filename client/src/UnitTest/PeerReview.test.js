@@ -112,7 +112,7 @@ describe('PeerReview Component', () => {
     await waitFor(() => {
       // Log the length of the mockAxios POST requests
       //console.log("Length of mockAxios.history.post:", mockAxios.history.post.length);
-      expect(mockAxios.history.post.length).toHaveLength(1);
+      expect(mockAxios.history.post.length).toBe(1);
     });
   });
 
