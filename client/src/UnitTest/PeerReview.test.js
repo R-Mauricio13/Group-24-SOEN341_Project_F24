@@ -10,16 +10,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom';
 
-const mockAxios = new MockAdapter(axios);
-
 describe('PeerReview Component', () => {
-  afterEach(cleanup);
+  let mockAxios;
+
   beforeEach(() => {
+    mockAxios = new MockAdapter(axios);
     // Mock the URL search parameters for all tests
     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser));
-  });
+  })
+
+  afterEach(() => {
+    mockAxios.restore()
+  })
 
   it('should render the form with radio buttons and textarea fields', () => {
     render(
@@ -139,7 +143,20 @@ describe('PeerReview Component', () => {
     expect(screen.getByLabelText('practical 3')).toBeChecked();
     expect(screen.getByLabelText('work ethic 3')).toBeChecked();
 
-    mockAxios.onPost('http://localhost:8080/submit_review').reply(200, { success: true });
+    let review = {
+      cooperation:"3",
+      coop_comment:"Some comments",
+      conceptual:"3",
+      concept_comment:"Some conceptual comments",
+      practical:"3",
+      practical_comment:"Some practical comments",
+      work_ethic:"3",
+      we_comment:"Some work ethic comments",
+      user_id:"123",
+      user_author:"JohnDoe"
+    }
+
+    mockAxios.onPost('http://localhost:8080/submit_review', review).reply(200, { success: true });
 
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
