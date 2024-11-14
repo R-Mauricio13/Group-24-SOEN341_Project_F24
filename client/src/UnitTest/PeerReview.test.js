@@ -15,7 +15,6 @@ const mockAxios = new MockAdapter(axios);
 describe('PeerReview Component', () => {
   afterEach(cleanup);
   beforeEach(() => {
-    mockAxios.reset();
     // Mock the URL search parameters for all tests
     window.history.pushState({}, '', '/peer-review?user_id=123&user_author=JohnDoe');
     const mockUser = { username: 'testUser' };
