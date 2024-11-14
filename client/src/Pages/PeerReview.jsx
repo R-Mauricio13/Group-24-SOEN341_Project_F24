@@ -53,7 +53,7 @@ function PeerReview() {
       
       // Proceed with form submission if valid
       await axios.post("http://localhost:8080/submit_review", review);
-
+      console.log("post complete");
       // Navigate to the confirmation page after successful submission
       navigate("/Peer_Review_Confirmation");
     } catch (err) {
