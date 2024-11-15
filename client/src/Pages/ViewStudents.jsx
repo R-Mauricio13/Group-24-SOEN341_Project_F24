@@ -36,7 +36,7 @@ function ViewStudents() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch("http://localhost:8080/student-members");
+        const response = await fetch("http://localhost:8080/student-members", {credentials: 'include'});
         const data = await response.json();
         setRecord(data);
       } catch (error) {
@@ -51,7 +51,7 @@ function ViewStudents() {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await fetch("http://localhost:8080/student_groups");
+        const response = await fetch("http://localhost:8080/student_groups", {credentials: 'include'});
         const data = await response.json();
         setTeams(data);
       } catch (error) {
@@ -79,7 +79,10 @@ function ViewStudents() {
     
     // Send a request to assign the team on the server
     try {
-      const response = await axios.post(`http://localhost:8080/student/${studentId}/${groupId}/assign`, { group_id : groupId });
+      const response = await fetch(`http://localhost:8080/student/${studentId}/${groupId}/assign`, {
+        credentials: 'include',
+      });
+      console.log(response);
       
       if (!response.status === 200) {
         throw new Error('Failed to assign team');

@@ -43,7 +43,7 @@ describe('ViewStudentTeam Page', () => {
                     ok: true,
                     json: () => Promise.resolve(teamDetails),
                 });
-            } else if (url.includes('/student-members/user/')) {
+            } else if (url.includes('/student-members/user/', {credentials: 'include'})) {
                 return Promise.resolve({
                     ok: true,
                     json: () => Promise.resolve(members),

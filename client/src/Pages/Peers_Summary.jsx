@@ -103,7 +103,7 @@ const sorting = (col) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("http://localhost:8080/peer_reviews");
+        const response = await fetch("http://localhost:8080/peer_reviews", {credentials: 'include'});
         const data = await response.json();
         const sortedReviews=data.sort((a,b)=>parseInt(a.user_id)-parseInt(b.user_id))
         setPeerReview( sortedReviews) //sort by user_id increasing
@@ -123,7 +123,7 @@ const sorting = (col) => {
   useEffect(() => {
     const fetchReviewCount = async () => {
       try {
-        const response = await fetch("http://localhost:8080/peer_reviews/review-counts");
+        const response = await fetch("http://localhost:8080/peer_reviews/review-counts", {credentials: 'include'});
         const data = await response.json();
         setCount(data);
       } catch (error) {

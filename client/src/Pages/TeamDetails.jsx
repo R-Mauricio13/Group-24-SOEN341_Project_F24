@@ -16,7 +16,7 @@ function TeamDetails() {
         const fetchTeamData = async () => {
             try {
                 // Fetch team details
-                const teamResponse = await fetch(`http://localhost:8080/student_groups/${group_id}`);
+                const teamResponse = await fetch(`http://localhost:8080/student_groups/${group_id}`, {credentials: 'include',});
                 
                 if (!teamResponse.ok) {
                     throw new Error("Team not found");
@@ -27,7 +27,7 @@ function TeamDetails() {
                 setLoading(false);
                 
                 // Fetch members of the team
-                const membersResponse = await fetch(`http://localhost:8080/student-members/${group_id}`);
+                const membersResponse = await fetch(`http://localhost:8080/student-members/${group_id}`, {credentials: 'include'});
                 const membersData = await membersResponse.json();
                 setMembers(membersData);
             } catch (error) {

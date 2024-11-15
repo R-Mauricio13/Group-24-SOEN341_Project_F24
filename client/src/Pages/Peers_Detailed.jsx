@@ -8,7 +8,7 @@ function Peers_Detailed(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:8080/student_groups")
+        fetch("http://localhost:8080/student_groups", {credentials: 'include'})
             .then((response) => response.json())
             .then((data) => setRecord(data))
             .catch((error) => console.log(error));

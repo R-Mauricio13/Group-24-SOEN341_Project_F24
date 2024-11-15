@@ -35,13 +35,13 @@ const TeamDropdown = ({ teams = [], studentId, onTeamAssigned, setTeams }) => {
   };
 
   const fetchUpdatedTeams = () => {
-    axios.get("http://localhost:8080/student_groups")
-      .then(response => {
-        setTeams(response.data); 
+      fetch("http://localhost:8080/student_groups", {
+        credentials: 'include',
       })
-      .catch(error => {
-        console.error("Error fetching updated teams:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => setTeams(data))
+        .catch((error) => console.log(error));
+
   };
   
     return (

@@ -17,7 +17,7 @@ function TeamReviews() {
         const fetchTeamData = async () => {
             try {
                 // Fetch team details
-                const teamResponse = await fetch(`http://localhost:8080/student_groups/${group_id}`);
+                const teamResponse = await fetch(`http://localhost:8080/student_groups/${group_id}`, {credentials: 'include',});
                 
                 if (!teamResponse.ok) {
                     throw new Error("Team not found");
@@ -27,12 +27,12 @@ function TeamReviews() {
                 setTeamDetails(teamData[0]); // Assuming the response is an array
                 setLoading(false);
 
-                const teamMembersResponse = await fetch(`http://localhost:8080/student-members/${group_id}`);
+                const teamMembersResponse = await fetch(`http://localhost:8080/student-members/${group_id}`, {credentials: 'include'});
                 const teamMembersData = await teamMembersResponse.json();
                 setTeamMembers(teamMembersData);
                 
                 // Fetch reviews of the team
-                const membersResponse = await fetch(`http://localhost:8080/team_reviews/${group_id}`);
+                const membersResponse = await fetch(`http://localhost:8080/team_reviews/${group_id}`, {credentials: 'include'});
                 const membersData = await membersResponse.json();
                 setMembers(membersData);
             } catch (error) {

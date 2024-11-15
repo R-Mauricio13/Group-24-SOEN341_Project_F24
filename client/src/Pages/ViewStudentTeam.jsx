@@ -21,7 +21,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
         const fetchTeamData = async () => {
             try {
                 // Fetch team details based on username
-                const teamResponse = await fetch(`http://localhost:8080/student_groups/user/${username}`);
+                const teamResponse = await fetch(`http://localhost:8080/student_groups/user/${username}`, {credentials: 'include'});
 
                 if (!teamResponse.ok) {
                     throw new Error("Team not found");
@@ -32,7 +32,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                 setLoading(false);
 
                 // Fetch members of the team
-                const membersResponse = await fetch(`http://localhost:8080/student-members/user/${username}`);
+                const membersResponse = await fetch(`http://localhost:8080/student-members/user/${username}`, {credentials: 'include'});
                 if (!membersResponse.ok) {
                     throw new Error("Failed to fetch members");
                 }

@@ -18,10 +18,32 @@ function InstructorView() {
       return parsedItem ||"" //Returns the parsed item or null if nothing exists
   });
 
-
   const instructor_username= user.username;
 
   const [activeView, setActiveView] = useState("students");
+
+  // get credential cookie and check if valid, and redirect to appropriate page
+  fetch('http://localhost:8080/check_login', {
+    method: 'GET',
+    credentials: 'include'  // Include cookies
+    })
+    .then(response => {
+        if (response.status === 200) {
+          // If the user is already logged in, redirect to the appropriate page
+          response.json().then(data => {
+            if (data.user_role === "student") {
+              window.location.href = 'Student_Login';  // already on the student page
+            } else if (data.user_role === "instructor") {
+              // window.location.href = 'Instructor_Login';
+            }
+          });
+        } else {
+            window.location.href = '/?error-msg=You are not logged in';
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 
   return (
     <div>

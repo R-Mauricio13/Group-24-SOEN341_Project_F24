@@ -6,6 +6,9 @@ import '../Styles/Login.css';
 
 function Login() {
 
+
+  
+
   const [user_info, setUser_info] = useState({
     username: "",
     user_password: "",
@@ -14,6 +17,7 @@ function Login() {
   });
 
   const [login_error, setLogin_Error] = useState(null)
+  const [login_success, setLogin_Success] = useState(null)
 
   const navigate = useNavigate();
 
@@ -24,10 +28,36 @@ function Login() {
 
   // interpret get request for this page. if there is error-msg in the query, use the setLogin_Error function to display the error message
   useEffect(() => {
+
+    // get credential cookie and check if valid, and redirect to appropriate page
+    fetch('http://localhost:8080/check_login', {
+      method: 'GET',
+      credentials: 'include'  // Include cookies
+      })
+      .then(response => {
+          if (response.status === 200) {
+            // If the user is already logged in, redirect to the appropriate page
+            response.json().then(data => {
+              if (data.user_role === "student") {
+                window.location.href = 'Student_Login';
+              } else if (data.user_role === "instructor") {
+                window.location.href = 'Instructor_Login';
+              }
+            });
+          }
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+
     const url = new URL(window.location.href);
     const error_msg = url.searchParams.get("error-msg");
+    const success_msg = url.searchParams.get("success-msg");
     if (error_msg) {
       setLogin_Error(<label style={{ color: 'red' }}>{error_msg}</label>);
+    }
+    if (success_msg) {
+      setLogin_Success(<label style={{ color: 'green' }}>{success_msg}</label>);
     }
   }, []);
 
@@ -48,17 +78,6 @@ function Login() {
     // TODO: Make this post request instead
     window.location.replace("http://localhost:8080/login?username=" + user_info.username + "&user_password=" + user_info.user_password + "&user_role=" + user_info.user_role);
 
-
-
-    //navigate("/StudentPage");
-    // if (response.data) {
-    //   if (user_info.user_role === "student")
-    //     navigate("/Student_Login");
-    //   else if (user_info.user_role === "instructor")
-    //     navigate("/Instructor_Login");
-    // }
-    // else
-    // setLogin_Error(<label style={{ color: 'red' }}>Incorrect Username or Password!</label>);
   };
 
   useEffect(()=>{
@@ -104,6 +123,7 @@ function Login() {
                 </Form.Select>
               </Form.Group>
               {login_error}
+              {login_success}
               <br />
               <button className="LButton" type="submit" name="login" disabled={!user_info.username || !user_info.user_password || !user_info.user_role}>
                 Login

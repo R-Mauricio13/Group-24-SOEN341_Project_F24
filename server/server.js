@@ -24,6 +24,7 @@ const cookieJwtAuth = (req, res, next) => {
     const tokenData = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user_id = tokenData.user_id;
+    req.user_role = tokenData.user_role;
     // console.log("user_id:", req.user_id);
     next();
   } catch (e) {
@@ -41,7 +42,7 @@ const db = mysql.createConnection({
 });
 
 //Api call to GET teams with team_name & team_size
-app.get("/student_groups", (req, res) => {
+app.get("/student_groups", cookieJwtAuth, (req, res) => {
   const student_groups = process.env.TEAMS;
   const query = `SELECT * FROM ${student_groups}`;
   db.query(query, (err, data) => {
@@ -53,7 +54,7 @@ app.get("/student_groups", (req, res) => {
 });
 
 // API call to GET team details by group_id
-app.get("/student_groups/:group_id", (req, res) => {
+app.get("/student_groups/:group_id", cookieJwtAuth, (req, res) => {
   const { group_id } = req.params;
   const student_groups = process.env.TEAMS; // Assuming this is the table name for teams
 
@@ -132,7 +133,7 @@ app.get("/team_reviews/:group_id", (req, res) => {
 });
 
 // API call to GET team details by username
-app.get("/student_groups/user/:username", (req, res) => {
+app.get("/student_groups/user/:username", cookieJwtAuth, (req, res) => {
   const { username } = req.params;
   const students = process.env.STUDENTS;
   const student_groups = process.env.TEAMS;
@@ -179,7 +180,7 @@ app.get("/members", (req, res) => {
   });
 });
 
-app.get("/student-members", (req, res) => {
+app.get("/student-members", cookieJwtAuth, (req, res) => {
   const students = process.env.STUDENTS;
   const student_group_members = process.env.MEMBERS;
   // const students = 'user_student';
@@ -194,7 +195,7 @@ app.get("/student-members", (req, res) => {
 });
 
 // API call to GET student members by group_id using a route parameter
-app.get("/student-members/:group_id", (req, res) => {
+app.get("/student-members/:group_id", cookieJwtAuth, (req, res) => {
   const { group_id } = req.params; // Extract group_id from route parameters
   const students = process.env.STUDENTS; // Table for students
   const members = process.env.MEMBERS; // Table for team members
@@ -224,7 +225,7 @@ app.get("/student-members/:group_id", (req, res) => {
 });
 
 // API call to GET student members by username using a route parameter
-app.get("/student-members/user/:username", (req, res) => {
+app.get("/student-members/user/:username", cookieJwtAuth, (req, res) => {
   const username = req.params.username;
 
   const query = `
@@ -245,8 +246,8 @@ app.get("/student-members/user/:username", (req, res) => {
   });
 });
 
-app.post("/student/:username/:group_id/assign", async (req, res) => {
-  const { group_id } = req.body; // Destructure group_id from request body
+app.get("/student/:username/:group_id/assign", cookieJwtAuth, async (req, res) => {
+  const { group_id } = req.params; // Destructure group_id from parameters body
   const { username } = req.params; // Get username from request parameters
 
   const students = process.env.STUDENTS;
@@ -268,19 +269,23 @@ app.post("/student/:username/:group_id/assign", async (req, res) => {
   });
 });
 
+app.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  return res.redirect("http://localhost:3000/?success-msg=Successfully logged out");
+});
+
+app.get("/check_login", cookieJwtAuth, (req, res) => {
+  // sent the user object back to the client
+  return res.send({
+    user_id: req.user_id,
+    user_role: req.user_role,
+  });
+
+  // return res.send(true);
+});
+
+
 app.get("/login", (req, res) => {
-  // const {email, password} = req.body;
-  // const user_id = await app.AccountDatabase.loginUser(email, password);
-  // if (user_id === false) {
-  //     return res.status(401).redirect("http://intbets.com/login.html?invalid-creds=true");
-  // };
-  // const jwtToken = jwt.sign({user_id: user_id}, process.env.JWT_SECRET, {expiresIn: "2m"});
-  // res.cookie("token", jwtToken, {
-  //     httpOnly: true,
-  //     // sameSite: 'None',  // need to set Secure too...
-  // });
-  // // res.status(200).send("Logged In!");
-  // return res.redirect("http://intbets.com/account.html");
 
   const students = process.env.STUDENTS;
   const instructors = process.env.INSTRUCTORS;
@@ -313,8 +318,12 @@ app.get("/login", (req, res) => {
           .redirect("http://localhost:3000/?error-msg=Unexpected server error");
 
       if (data.length > 0) {
+        console.log("User found:", data[0]);
         const jwtToken = jwt.sign(
-          { user_id: data[0].id },
+          {
+            user_id: data[0].id,
+            user_role: data[0].user_role,
+          },
           process.env.JWT_SECRET,
           { expiresIn: "2m" }
         );

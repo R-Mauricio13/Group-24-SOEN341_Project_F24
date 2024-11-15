@@ -9,7 +9,7 @@ const Navigation = () => (
     <Link to="/introduction" className="nav-button">Introduction</Link>
     {/* <Link to="/login" className="nav-button">Login</Link> */}
     <Link to="/resources" className="nav-button">Resources</Link>
-    <Link className="nav-button">Logout</Link>
+    <Link to="http://localhost:8080/logout" className="nav-button">Logout</Link>
   </div>
 );
 
