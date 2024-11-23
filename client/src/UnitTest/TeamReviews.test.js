@@ -39,21 +39,22 @@ describe('TeamReviews Component', () => {
   });
 
   it('should display "No reviews found for this team" when there are no team members', async () => {
+    // Mock the axios response to simulate no team members
     mockAxios.get.mockResolvedValueOnce({
       data: {
         teamDetails: { team_name: 'Group 2' },
         teamMembers: [], // No team members
       },
     });
-
+  
     const mockUser1 = {
       username: 'testUser1',
-      group_id: group_id1,
+      group_id: '2',
     };
-
+  
     global.localStorage.setItem('Logged in User', JSON.stringify(mockUser1));
-    window.history.pushState({}, '', `/team_reviews/${group_id1}`);
-
+    window.history.pushState({}, '', `/team_reviews/2`);
+  
     render(
       <Router>
         <Routes>
@@ -61,7 +62,13 @@ describe('TeamReviews Component', () => {
         </Routes>
       </Router>
     );
+  
+    // Wait for the "Loading..." text to disappear (if present)
+    await waitFor(() => {
+      expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument();
+    });
 
+    // Now check for the "No reviews found for this team" message
     await waitFor(() => {
       expect(screen.getByText(/No reviews found for this team/i)).toBeInTheDocument();
     });
