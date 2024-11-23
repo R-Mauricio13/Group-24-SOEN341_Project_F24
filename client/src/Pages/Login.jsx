@@ -6,9 +6,6 @@ import '../Styles/Login.css';
 
 function Login() {
 
-
-  
-
   const [user_info, setUser_info] = useState({
     username: "",
     user_password: "",
@@ -74,6 +71,13 @@ function Login() {
     if (!user_info.username || !user_info.user_password || !user_info.user_role) {
       throw new Error("Login parameters missings!");
     }
+
+    const updatedUser = {
+      ...user_info,
+      loggedin: true,  // Mark the user as logged in
+    };
+
+    setUser_info(updatedUser);
 
     // TODO: Make this post request instead
     window.location.replace("http://localhost:8080/login?username=" + user_info.username + "&user_password=" + user_info.user_password + "&user_role=" + user_info.user_role);

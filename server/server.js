@@ -107,7 +107,7 @@ app.get("/peer_reviews/review-counts", (req, res) => {
 });
 
 //Api to GET the list of individual team reviews
-app.get("/team_reviews/:group_id", (req, res) => {
+app.get("/team_reviews/:group_id", cookieJwtAuth, (req, res) => {
   const { group_id } = req.params;
   const students = process.env.STUDENTS;
   const student_groups = process.env.TEAMS;

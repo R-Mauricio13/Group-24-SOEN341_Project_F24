@@ -49,7 +49,7 @@ const TeamCreation = () => {
     }
 
     return (
-        <div className="TCContainer" style={{ maxWidth: '300px', margin: 'auto' }}>
+        <div className="TCContainer" style={{ maxWidth: '300px', marginTop: '40px' }}>
             <h2 className="highlight">Create a Team</h2>
             <form onSubmit={handleSubmit}>
                 <div>
