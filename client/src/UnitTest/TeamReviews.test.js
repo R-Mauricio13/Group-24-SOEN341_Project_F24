@@ -8,6 +8,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom';
 import axios from 'axios';  // Import axios to mock it
+import fetch from 'node-fetch';
+
+global.fetch = fetch;
 
 // Mock axios globally at the top of the test file
 jest.mock('axios'); // This tells Jest to mock axios
