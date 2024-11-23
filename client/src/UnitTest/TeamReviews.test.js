@@ -9,14 +9,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 
-// Mock axios for the fetch requests
-jest.mock('axios');
-
-// Mock components
-jest.mock('../Components/Header', () => () => <div>Header</div>);
-jest.mock('../Components/Footer', () => () => <div>Footer</div>);
-jest.mock('../Components/Navigation', () => () => <div>Navigation</div>);
-
 // Polyfill global fetch (needed for axios calls)
 if (typeof fetch === 'undefined') {
   global.fetch = require('node-fetch');
