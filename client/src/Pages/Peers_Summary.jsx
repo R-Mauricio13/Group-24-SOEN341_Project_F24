@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 //Will display the summaries of the peer reviews from all students
 function Peers_Summary() {

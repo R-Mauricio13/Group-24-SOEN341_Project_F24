@@ -1,6 +1,5 @@
 // Outputs a list of all students
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import TeamDropdown from '../Components/TeamDropdown';
 import '../Styles/ViewStudents.css'; // Import the CSS File
 

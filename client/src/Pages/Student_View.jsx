@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import Navigation from "../Components/Navigation";
+//import Navigation from "../Components/Navigation";
 import ViewStudents from "./ViewStudents";
 import ViewStudentTeam from "./ViewStudentTeam";
 import '../Styles/ToggleButton.css';
@@ -44,7 +44,7 @@ function StudentView() {
         <div>
             <div style={{ flex: '1', overflow: 'auto' }}>
                 <Header />
-                <Navigation />
+                {/*<Navigation />*/}
                 <div style={{ position: 'relative', height: '650px' }}>
                     <div>
                         <h1>Welcome {student_username}</h1>

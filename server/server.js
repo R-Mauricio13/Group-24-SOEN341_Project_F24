@@ -54,7 +54,7 @@ app.get("/student_groups", cookieJwtAuth, (req, res) => {
 });
 
 // API call to GET team details by group_id
-app.get("/student_groups/:group_id", cookieJwtAuth, (req, res) => {
+app.get("/student_groups/:group_id", (req, res) => {
   const { group_id } = req.params;
   const student_groups = process.env.TEAMS; // Assuming this is the table name for teams
 
@@ -195,7 +195,7 @@ app.get("/student-members", cookieJwtAuth, (req, res) => {
 });
 
 // API call to GET student members by group_id using a route parameter
-app.get("/student-members/:group_id", cookieJwtAuth, (req, res) => {
+app.get("/student-members/:group_id", (req, res) => {
   const { group_id } = req.params; // Extract group_id from route parameters
   const students = process.env.STUDENTS; // Table for students
   const members = process.env.MEMBERS; // Table for team members

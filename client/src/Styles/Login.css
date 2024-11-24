@@ -6,7 +6,7 @@
 
 .LHighlight {
     text-align: center;
-    color: #a71420;
+    color: #666;
 }
 
 button.LButton {
@@ -21,13 +21,14 @@ button.LButton {
     transition: background-color 0.6s ease, border 0.6s ease, color 0.2s ease;
 }
 
-button:enabled:hover {
+button.LButton:disabled:hover {
     background-color: #ffffff;
-    border: 1px solid #a71420;
-    color: #a71420;
+    border: 1px solid #666;
+    color: #666;
     font-weight:bold;
 }
 
-button:disabled {
+button.LButton:disabled {
     background-color: #666;
+    border: 1px solid white;
 }

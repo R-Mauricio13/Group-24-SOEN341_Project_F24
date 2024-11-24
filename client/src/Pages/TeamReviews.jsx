@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import Navigation from "../Components/Navigation";
+//import Navigation from "../Components/Navigation";
 import { useParams, useNavigate } from "react-router-dom";
 
 function TeamReviews() {
@@ -20,7 +20,7 @@ function TeamReviews() {
                 const teamResponse = await fetch(`http://localhost:8080/student_groups/${group_id}`, {credentials: 'include',});
                 
                 if (!teamResponse.ok) {
-                    throw new Error("Team not found");
+                    throw new Error("Error: Team not found");
                 }
                 
                 const teamData = await teamResponse.json();
@@ -36,8 +36,8 @@ function TeamReviews() {
                 const membersData = await membersResponse.json();
                 setMembers(membersData);
             } catch (error) {
-                console.error("Error fetching team data:", error);
                 setError(error.message);
+                console.log(error.message);
                 setLoading(false);
             }
         };
@@ -58,32 +58,33 @@ function TeamReviews() {
     }
 
     return (
-            <div>
-                <div style={{flex: '1' , overflow: 'auto'}}>
-                    <Header />
-                    <Navigation />
-                    <div style={{ position: 'relative' , height: '650px' }}>
-                        <div className="VTContainer">
-                            <h1>{teamDetails.team_name} : Detailed Peer Review</h1>
-
-                            {Array.isArray(teamMembers) && teamMembers.length > 0 ? (
-                                teamMembers.map((teamMember) => (
-                                    <div key={teamMember.user_id}> {/* Make sure the div has a unique key for each team member */}
-                                        <h3 style={{ border:'1px solid #a71420', width:'400px', textAlign:'center'}}>Student: {teamMember.first_name} {teamMember.last_name}</h3>
-                                        <table className="table">
-                                            <thead>
-                                                <tr>
-                                                    <th style={{ textAlign: 'center' }} scope="col">Review Author</th>
-                                                    <th style={{ textAlign: 'center' }} scope="col">Cooperation</th>
-                                                    <th style={{ textAlign: 'center' }} scope="col">Conceptual</th>
-                                                    <th style={{ textAlign: 'center' }} scope="col">Practical</th>
-                                                    <th style={{ textAlign: 'center' }} scope="col">Work Ethic</th>
-                                                    <th style={{ textAlign: 'center' }} scope="col">Average</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {Array.isArray(members) && members.length > 0 ? (
-                                                    <>
+        <div>
+            <div style={{ flex: '1', overflow: 'auto' }}>
+                <Header />
+                {/*<Navigation />*/}
+                <div style={{ position: 'relative', height: '650px', marginTop: '40px' }}>
+                    <div className="VTContainer">
+                        <h1>{teamDetails.team_name} : Detailed Peer Review</h1>
+                        {Array.isArray(teamMembers) && teamMembers.length > 0 ? (
+                            teamMembers.map((teamMember) => (
+                                <div key={teamMember.user_id}> {/* Ensure user_id is unique */}
+                                    <h3 style={{ border: '1px solid #a71420', width: '400px', textAlign: 'center' }}>
+                                        Student: {teamMember.first_name} {teamMember.last_name}
+                                    </h3>
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th style={{ textAlign: 'center' }} scope="col">Review Author</th>
+                                                <th style={{ textAlign: 'center' }} scope="col">Cooperation</th>
+                                                <th style={{ textAlign: 'center' }} scope="col">Conceptual</th>
+                                                <th style={{ textAlign: 'center' }} scope="col">Practical</th>
+                                                <th style={{ textAlign: 'center' }} scope="col">Work Ethic</th>
+                                                <th style={{ textAlign: 'center' }} scope="col">Average</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Array.isArray(members) && members.length > 0 ? (
+                                                <>
                                                     {members
                                                         .filter((member) => member.reviewed_first_name === teamMember.first_name) // Only show reviews for the current teamMember
                                                         .length > 0 ? ( // Check if there are any members after filtering
@@ -103,8 +104,8 @@ function TeamReviews() {
                                                                 ))
                                                         ) : (
                                                             <tr>
-                                                                <td colSpan="6" style={{ textAlign: 'center', padding: '50px' }}>
-                                                                    No reviews for this member.
+                                                                <td data-testid="no-review-messages" colSpan="6" style={{ textAlign: 'center', padding: '50px' }}>
+                                                                    No reviews found for this member.
                                                                 </td>
                                                             </tr>
                                                         )
@@ -114,7 +115,7 @@ function TeamReviews() {
                                                         .map((commentMember) => (
                                                             <tr>
                                                                 <td colSpan="6">
-                                                                    <div key={commentMember.user_id}> {/* Unique key for each row */}
+                                                                    <div key={commentMember.user_id}>
                                                                         <div style={{ backgroundColor:'#f9f9f9', padding:'20px', width:'auto'}}>
                                                                             <div style={{ textAlign: 'left', textDecoration:'underline'}}>
                                                                                 <h5>{commentMember.author_first_name} {commentMember.author_last_name}'s Insights</h5>
@@ -136,31 +137,32 @@ function TeamReviews() {
                                                                 </td>
                                                             </tr>
                                                         ))}
-                                                    </>
-                                                ) : (
-                                                    <tr>
-                                                        <td colSpan="7" style={{ textAlign: 'center', padding: '50px' }}>
-                                                            No reviews found for this member.
-                                                        </td>
-                                                    </tr>
-                                                )}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                ))
-                            ): (
-                                <div style={{ textAlign:'center', padding:'50px' }}>
-                                    <h3>No reviews found for this team.</h3>
+                                                </>
+                                            ) : (
+                                                <tr>
+                                                    <td data-testid="no-review-messages" colSpan="6" style={{ textAlign: 'center', padding: '50px' }}>
+                                                        No reviews found for this member.
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
                                 </div>
-                            )}
-                            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                                <button className="ViewButton" onClick={() => navigate(-1)}>Back</button>
+                            ))
+                        ) : (
+                            <div style={{ textAlign: 'center', padding: '50px' }}>
+                                <h3>No reviews found for this team.</h3>
                             </div>
+                        )}
+    
+                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                            <button className="ViewButton" onClick={() => navigate(-1)}>Back</button>
                         </div>
-                    </div>  
-                    <Footer />
+                    </div>
                 </div>
+                <Footer />
             </div>
+        </div>
     );
 }
 

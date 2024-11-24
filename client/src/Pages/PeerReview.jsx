@@ -1,7 +1,7 @@
 import React, {  useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import Navigation from "../Components/Navigation";
+//import Navigation from "../Components/Navigation";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -69,7 +69,8 @@ function PeerReview() {
     <>
     <div>
       <Header />
-      <Navigation />
+      {/*<Navigation />*/}
+      <div style={{ marginTop: '30px'}}>
       <form data-testid="peer-review-form" onSubmit={submitForm}>
         <Form.Group>
             <table className="PRtable">
@@ -87,7 +88,7 @@ function PeerReview() {
                             <h3>Cooperation</h3>
                             <textarea 
                                 onChange={handleChange}
-                                placeholder="Cooperation Comments (Optional):"
+                                placeholder="Describe how well this member has communicated within the group, assisted team members in need, cooperated voluntarily, etc. (Optional):"
                                 name="coop_comment"
                                 value={review.coop_comment}
                                 maxLength="255"
@@ -105,7 +106,7 @@ function PeerReview() {
                             <h3>Conceptual Contribution</h3>
                             <textarea 
                                 onChange={handleChange}
-                                placeholder="Conceptual Contribution Comments (Optional):"
+                                placeholder="Describe how well this member contributed in suggesting ideas, identifying problems and approaches, gathering information, etc. (Optional):"
                                 name="concept_comment"
                                 value={review.concept_comment}
                                 maxLength="255"
@@ -123,7 +124,7 @@ function PeerReview() {
                             <h3>Practical Contribution</h3>
                             <textarea 
                                 onChange={handleChange}
-                                placeholder="Practical Contribution Comments (Optional):"
+                                placeholder="Describe how well this member contributed in writing reports, writing and implementing effective/good code, organising the tasks, etc. (Optional):"
                                 name="practical_comment"
                                 value={review.practical_comment}
                                 maxLength="255"
@@ -141,7 +142,7 @@ function PeerReview() {
                             <h3>Work Ethic</h3>
                             <textarea 
                                 onChange={handleChange}
-                                placeholder="Work Ethic Comments (Optional):"
+                                placeholder="Describe how well this member displayed a positive attitude, attended meetings on time, respected commitments and deadlines, etc. (Optional):"
                                 name="we_comment"
                                 value={review.we_comment}
                                 maxLength="255"
@@ -163,6 +164,7 @@ function PeerReview() {
           </button>
         </div>
       </form>
+      </div>
       <Footer />
     </div>
     </>

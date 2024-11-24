@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Components/Header";
-import Navigation from "../Components/Navigation";
+//import Navigation from "../Components/Navigation";
 import Footer from "../Components/Footer";
 import concordiaBuilding from "../Assets/concordia-building.png";
 import "../Styles/home-page.css";
@@ -10,7 +10,7 @@ import Login from "./Login";
 const HomePage = () => (
   <div className="home">
     <Header />
-    <Navigation />
+    {/*<Navigation />*/}
     <div className="content z-n1">
       <img
         src={concordiaBuilding}
