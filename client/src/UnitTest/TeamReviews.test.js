@@ -8,9 +8,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom';
 import axios from 'axios';  // Import axios to mock it
-import fetch from 'node-fetch';
 
-global.fetch = fetch;
+// global.fetch = jest.fn(() =>
+//   Promise.reject({
+//     data: {
+//       teamDetails: [], // No team name
+//       teamMembers: [],
+//     },
+//   })
+// );
 
 // Mock axios globally at the top of the test file
 jest.mock('axios'); // This tells Jest to mock axios
@@ -21,23 +27,34 @@ describe('TeamReviews Component', () => {
   const group_id3 = '3';
 
   beforeEach(() => {
-    // Clear previous mocks
-    axios.get.mockClear();
-    axios.post.mockClear();
+    global.fetch = jest.fn();
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
+    global.fetch.mockClear();
   });
 
   it('should display "No reviews found for this team" when there are no team members', async () => {
-    // Mock the axios response to simulate no team members
-    axios.get.mockResolvedValueOnce({
-      data: {
-        teamDetails: { team_name: 'Group 2' },
-        teamMembers: [], // No team members
-      },
-    });
+    // Mock the fetch response to simulate no team members
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () =>
+        Promise.resolve([{ team_name: 'Group 2' }]),
+  });
+
+  global.fetch.mockResolvedValueOnce({
+    ok: true,
+    json: () =>
+      Promise.resolve([]),
+  });
+
+  global.fetch.mockResolvedValueOnce({
+    ok: true,
+    json: () =>
+      Promise.resolve([]),
+  }); 
 
     const mockUser1 = {
       username: 'testUser1',
@@ -56,18 +73,18 @@ describe('TeamReviews Component', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/No reviews found for this team/i)).toBeInTheDocument();
+      expect(screen.getByText(/No reviews found for this team./i)).toBeInTheDocument();
     });
   });
 
   it('should display an error message when the team is not found for a different user', async () => {
-    // Mock the axios response for an error when the team is not found
-    axios.get.mockRejectedValueOnce({
-      data: {
-        teamDetails: [], // No team name
-        teamMembers: [],
-      },
-    });
+    // Mock the fetch response for an error when the team is not found
+
+    global.fetch.mockResolvedValueOnce({
+      ok: false,
+      json: () =>
+        Promise.resolve(["Error: Could not access team data"]),
+  });
 
     const mockUser2 = {
       username: 'testUser2',
@@ -91,13 +108,24 @@ describe('TeamReviews Component', () => {
   });
 
   it('should display "No review found for this member" when the team has members but no reviews', async () => {
-    // Mock the axios response to simulate a team with members but no reviews
-    axios.get.mockResolvedValueOnce({
-      data: {
-        teamDetails: { team_name: 'Group 3' },
-        teamMembers: ['S_WOOD', 'G_STON', 'A_RIVE'], // Members, no reviews
-      },
+    // Mock the fetch response to simulate a team with members but no reviews
+    global.fetch.mockResolvedValueOnce({
+        ok: true,
+        json: () =>
+          Promise.resolve([{ team_name: 'Group 3' }]),
     });
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () =>
+        Promise.resolve(['S_WOOD', 'G_STON', 'A_RIVE']),
+    });
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () =>
+        Promise.resolve([]),
+    }); 
 
     const mockUser3 = {
       username: 'S_WOOD',
@@ -116,7 +144,7 @@ describe('TeamReviews Component', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getAllByTestId('no-review-messages')[0]).toHaveTextContent(/No reviews found for this member/i);
+      expect(screen.getAllByTestId('no-review-messages')[0]).toHaveTextContent(/No reviews found for this member./i);
     });
   });
 });
