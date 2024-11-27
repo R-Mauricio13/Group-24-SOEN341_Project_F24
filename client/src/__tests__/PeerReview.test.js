@@ -9,7 +9,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 
+const mockNavigate = jest.fn();  // Mock the navigate function
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,  
+}));
+
 describe('PeerReview Component', () => {
+  
   beforeEach(() => {
     jest.clearAllMocks();
     // Mock the URL search parameters for all tests
@@ -137,6 +149,7 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor(() => expect(window.location.pathname).toBe('/peer-review'));
+     // Check that navigate(-1) was called to go back
+     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(-1));
   });
 });
