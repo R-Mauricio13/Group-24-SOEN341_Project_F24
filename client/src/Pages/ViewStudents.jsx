@@ -1,5 +1,5 @@
 // Outputs a list of all students
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TeamDropdown from '../Components/TeamDropdown';
 import '../Styles/ViewStudents.css'; // Import the CSS File
 

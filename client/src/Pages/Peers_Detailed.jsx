@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../Styles/ViewTeams.css';
 
@@ -52,7 +52,7 @@ function Peers_Detailed(){
                             <td>{teamData.team_name}</td>
                             <td style={{ textAlign: 'left' }}>{teamData.team_size}</td>
                             <td style={{ textAlign: 'center' }}>
-                                <button class="ViewButton" style={{width:'155px'}} onClick={() => handleTeamReviews(group_id)}>
+                                <button className="ViewButton" style={{width:'155px'}} onClick={() => handleTeamReviews(group_id)}>
                                     View Peer Reviews
                                 </button>
                             </td>

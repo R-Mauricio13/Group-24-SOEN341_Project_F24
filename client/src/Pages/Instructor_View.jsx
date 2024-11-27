@@ -8,8 +8,8 @@ import ViewTeams from "./ViewTeams";
 import CreateTeams from "./TeamCreation";
 
 import '../Styles/ToggleButton.css';
-import Peers_Summary from "./Peers_Summary";
-import Peers_Detailed from "./Peers_Detailed";
+import PEERS_SUMMARY from "./Peers_Summary";
+import PEERS_DETAILED from "./Peers_Detailed";
 
 function InstructorView() {
   const [user]=useState(()=>{
@@ -66,8 +66,8 @@ function InstructorView() {
             {activeView === "students" && <ViewStudents />}
             {activeView === "teams" && <ViewTeams />}
             {activeView === "createTeam" && <CreateTeams />}
-            {activeView === "peer_review_summary" && <Peers_Summary/>}
-            {activeView === "peer_review_detailed" && <Peers_Detailed/>}
+            {activeView === "peer_review_summary" && <PEERS_SUMMARY />}
+            {activeView === "peer_review_detailed" && <PEERS_DETAILED />}
           </div>
         </div>  
         <Footer />

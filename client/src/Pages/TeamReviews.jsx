@@ -113,12 +113,12 @@ function TeamReviews() {
                                                     {members
                                                         .filter((commentMember) => commentMember.reviewed_first_name === teamMember.first_name) // Only show reviews for the current teamMember
                                                         .map((commentMember) => (
-                                                            <tr>
+                                                            <tr key={commentMember.user_id}>
                                                                 <td colSpan="6">
-                                                                    <div key={commentMember.user_id}>
+                                                                    <div>
                                                                         <div style={{ backgroundColor:'#f9f9f9', padding:'20px', width:'auto'}}>
                                                                             <div style={{ textAlign: 'left', textDecoration:'underline'}}>
-                                                                                <h5>{commentMember.author_first_name} {commentMember.author_last_name}'s Insights</h5>
+                                                                                <h5>{commentMember.author_first_name} {commentMember.author_last_name}&apos;s Insights</h5>
                                                                             </div>
                                                                             <div style={{ textAlign: 'left' }}>
                                                                                 <strong>Cooperation Comment:</strong> {commentMember.coop_comment || "No comment"}

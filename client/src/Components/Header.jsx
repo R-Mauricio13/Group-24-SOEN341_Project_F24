@@ -38,10 +38,6 @@ const Header = () => {
     });
   };
 
-  function returnHome() {
-    navigate("/");
-  } 
-
   return (
     <header className="header">
       <div className="headerContainer">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function ViewStudentTeam({ username }) { // Accept username as a prop
     const [teamDetails, setTeamDetails] = useState(null);
@@ -10,7 +11,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
 
 
 
-    const [user, setUser] = useState(() => {
+    const [user] = useState(() => {
         const savedItem = localStorage.getItem("Logged in User");
         const parsedItem = JSON.parse(savedItem);
         return parsedItem || ""; // Returns the parsed item or null if nothing exists
@@ -52,7 +53,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
     function handleAssessButton(user_id) {
         console.log(`Viewing peer review`);
         navigate(`/Peer_Review/user?user_id=${user_id}&user_author=${student_username}`);
-    };
+    }
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -78,7 +79,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                                                 <td style={{ textAlign: 'center' }}>{member.first_name}</td>
                                                 <td style={{ textAlign: 'center' }}>{member.last_name}</td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    {member.username.toLowerCase() != username && (
+                                                    {member.username.toLowerCase() !== username && (
                                                       <button className="ViewButton" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Assess Member</button>
                                                     )}
                                                 </td>
@@ -98,5 +99,9 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
             </div>
     );
 }
+
+ViewStudentTeam.propTypes = {
+    username: PropTypes.string.isRequired,
+};
 
 export default ViewStudentTeam;

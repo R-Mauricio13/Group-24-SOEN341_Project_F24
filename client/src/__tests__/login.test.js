@@ -10,7 +10,6 @@ import { MemoryRouter as Router } from "react-router-dom";
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 
-const replace = window.location.replace;
 const href = window.location.href;
 
 // Mock global fetch
@@ -61,6 +60,9 @@ describe('login test', () => {
 
         await waitFor(() => {
             expect(window.location.replace).toHaveBeenCalledTimes(1);
+        });
+
+        await waitFor(() => {
             expect(window.location.replace).toHaveBeenCalledWith(
                 "http://localhost:8080/login?username=Jimmy_Ye&user_password=jy&user_role=student"
             );

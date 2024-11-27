@@ -7,7 +7,7 @@ import ViewStudentTeam from "./ViewStudentTeam";
 import '../Styles/ToggleButton.css';
 
 function StudentView() {
-    const [user, setUser] = useState(() => {
+    const [user] = useState(() => {
         const savedItem = localStorage.getItem("Logged in User");
         const parsedItem = JSON.parse(savedItem);
         return parsedItem || ""; // Returns the parsed item or null if nothing exists

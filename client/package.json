@@ -53,6 +53,7 @@
     "cross-env": "^7.0.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "prop-types": "^15.8.1",
     "supertest": "^7.0.0"
   },
   "jest": {

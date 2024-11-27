@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent} from '@testing-library/react';
 import ViewStudentTeam from '../Pages/ViewStudentTeam';
 import { useNavigate } from 'react-router-dom';
 import '@testing-library/jest-dom';
@@ -64,13 +64,10 @@ describe('ViewStudentTeam Page', () => {
     });
 
     test('displays team name and members', async () => {
-        const { container } = render(<ViewStudentTeam username="testuser" />);
-       
-        // Wait for team name to be rendered
-        await waitFor(() => screen.getByText('Test Team'));
+        render(<ViewStudentTeam username="testuser" />);
     
         // Assert team name is displayed
-        expect(screen.getByText('Test Team')).toBeInTheDocument();
+        expect(await screen.findByText('Test Team')).toBeInTheDocument();
     
         // Assert members are displayed
         expect(screen.getByText('John')).toBeInTheDocument();
@@ -106,9 +103,6 @@ describe('ViewStudentTeam Page', () => {
 
         render(<ViewStudentTeam username="testuser" />);
 
-        // Wait for error to appear
-        await waitFor(() => screen.getByText('Error: Error fetching data'));
-
-        expect(screen.getByText('Error: Error fetching data')).toBeInTheDocument();
+        expect(await screen.findByText('Error: Error fetching data')).toBeInTheDocument();
     });
 });
