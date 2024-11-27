@@ -49,3 +49,28 @@
       2 hours spent on understanding the requirements and writing the queries for the data retrieval of individual students within a group with each having a different number of peer responses
       3 hours 30 minutes spent on coding the back-end logic for the 2 newly created react components Peers_Detailed.jsx and TeamReviews.jsx and using map and filter methods in Arrays to obtain the end result on the web page
       30 minutes spent on slightly refactoring/altering external files needed to incorporate the new files
+
+
+------------
+| Sprint 4 |
+------------
+
+    ------------------------------------
+    | Task.83 Fix Home Page/Header css |
+    ------------------------------------
+
+      Spent 2 hour redesigning the home page by removing Navigation (for all pages as well), readjusting visuals through text fonts, colors and element sizes
+      Spent 30 minutes improving the static responsiveness for different screen sizes on the react app
+      Spent 40 minutes adding logic to hide log out button when user is not logged and show it visible when user is logged in
+
+    ----------------------------------------------------
+    | Task 94 Unit Test (UT) 4.2 Detailed Team Reviews |
+    ----------------------------------------------------
+
+      Spent 2 hours learning JEST for writing and incorporating unit tests
+      Spent 2 hours writing the unit test for detailed team reviews for 3 cases:
+            1. Test for No reviews within the team
+            2. Test for No team found with an invalid gorup_id
+            3. Test for No reviews for individual member with a mocked username in the database
+
+    *** Additionally spent 30 minutes reviewing/fixing other unit tests that failed on the pipeline due to the conflicting incorporation of the cookies on the web app ***
