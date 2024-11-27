@@ -1,3 +1,14 @@
+Sprint 1
+    Spent 1 hour learning REACT
+    Spent 1/2 hour reviewing javascript
+
+    Task.07 Login
+    Spent 2 hour writing login code
+    Spent 1/2 hour fixing issues
+
+    Task.15
+    Spent 1 hour helping Richard
+
 Sprint 2
     Task.33 Create the peer review page, Story point 6
     Spent 1 hour reading/understanding the requirements
@@ -40,4 +51,16 @@ Sprint 3
 
     Configuring yml to run unit tests
     Spent 1 minute
-    
+
+Sprint 4
+    Task96 Linters
+        Spent 1/2 hour learning eslint
+        Spent 1/2 hour configuring eslint onto project
+        Spent 1 hour fixing eslint errors in project
+        Spent 1/2 hour learning stylelint
+        Spent 10 min learning stylelint
+        Spent 30 mins fixing stylelint errors in project
+
+    PR Code Review for issue #87
+        Spent 1/2 hour reading understanding the code
+        Spent 1/2 hour fixing the issue causing the test to fail
