@@ -11,3 +11,19 @@ feautre/unit_test/Victor
 research jest 2h
 first unit test 2h
 second unit test 3h30
+
+Sprint 4
+feautre/UnitTestTDD/DeleteReview
+
+Task 91: Unit Test (UT) 4.1 Review deletion:
+-feature DeleteReview not developped yet so had to make a TDD unit test
+ 1. think of possible way to implement the feautre 1h 
+ 2. write unit test code 3h
+ 3. code revision 1h
+
+ Code:
+ -mocks reviews database
+ -mocks method that is potentially called when triggering for example a button. 
+ -mocks potential api that the method would call that removes reviews 
+ -api removes mocked reviews.
+

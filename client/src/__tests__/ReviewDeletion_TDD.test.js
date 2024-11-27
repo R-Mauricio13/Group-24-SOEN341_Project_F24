@@ -20,24 +20,25 @@ describe('ViewStudentTeam Page', () => {
         { user_id: 1, first_name: 'John', last_name: 'Doe', username: 'john_doe' },
         { user_id: 2, first_name: 'Jane', last_name: 'Smith', username: 'testuser' },
     ];
+    let reviews = [
+        { review_id: 1, user_id: 1, review: 'Great job on the project!' }, 
+        { review_id: 2, user_id: 2, review: 'Needs improvement in communication.' }, 
+    ];
 
     // Mock the removeReview function
     const removeReviewMock = jest.fn();
 
     beforeAll(() => {
-       
         jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterAll(() => {
-        
         console.error.mockRestore();
     });
 
     beforeEach(() => {
         // Mock fetch to return team and member data
         global.fetch = jest.fn((url, options) => {
-            
             if (url.includes('/student_groups/user/')) {
                 return Promise.resolve({
                     ok: true,
@@ -50,10 +51,14 @@ describe('ViewStudentTeam Page', () => {
                 });
             }
 
-            // Mock the remove-review API (hardcoded)
+            // Mock the remove-review API (hardcoded, based on user_id)
             if (url.includes('/remove-review/')) {
+                const userIdToRemove = parseInt(url.split('/').pop()); 
+                const updatedReviews = reviews.filter(review => review.user_id !== userIdToRemove);
+
                 return Promise.resolve({
-                    ok: true,  
+                    ok: true,
+                    json: () => Promise.resolve(updatedReviews),
                 });
             }
 
@@ -72,32 +77,36 @@ describe('ViewStudentTeam Page', () => {
         global.fetch.mockRestore();
     });
 
-    test('simulates removing a review for a student row without UI interaction', async () => {
+    test('simulates removing a review for a student based on user_id', async () => {
         render(<ViewStudentTeam username={username} removeReview={removeReviewMock} />);
 
         // Wait for page to finish loading
         await screen.findByText('John');
 
-        
-        const userIdToRemove = members[0].user_id;
+        const userIdToRemove = 1; 
 
-        // Call removeReviewMock with the user ID
+        // Call removeReviewMock with the user_id
         removeReviewMock(userIdToRemove);
 
         // Directly invoke the API call that would remove the review (without button click)
-        await global.fetch(`/remove-review/${userIdToRemove}`, { method: 'DELETE' });
+        const response = await global.fetch(`/remove-review/${userIdToRemove}`, { method: 'DELETE' });
+        const result = await response.json();
 
-        // Check if the mock removeReview function was called with the correct user ID
+        // Check if the mock removeReview function was called with the correct user_id
         expect(removeReviewMock).toHaveBeenCalledWith(userIdToRemove);
 
         // Verify that the mock fetch was called with the expected URL
         expect(global.fetch).toHaveBeenCalledWith(
             expect.stringContaining(`/remove-review/${userIdToRemove}`),  
-            expect.objectContaining({ method: 'DELETE' })  
+            expect.objectContaining({ method: 'DELETE' }) 
         );
 
-        // Simulate a database removal (mocked behavior)
-        const updatedMembers = members.filter((member) => member.user_id !== userIdToRemove);
-        expect(updatedMembers).toHaveLength(members.length - 1);
+        // Check API response updates reviews correctly
+        expect(result).toHaveLength(reviews.length - 1); 
+        expect(result).not.toContainEqual(expect.objectContaining({ user_id: userIdToRemove })); 
+        //Check if reviews is updated
+        reviews=result;
+        expect(reviews).toHaveLength(1); 
+        expect(reviews).not.toContainEqual(expect.objectContaining({ user_id: userIdToRemove })); 
     });
 });
