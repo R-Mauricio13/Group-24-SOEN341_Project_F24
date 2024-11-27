@@ -6,10 +6,8 @@ import {
   screen,
   waitFor,
   fireEvent,
-  getAllByRole,
 } from "@testing-library/react";
-import Peers_Summary from "../Pages/Peers_Summary";
-import { MemoryRouter } from "react-router-dom";
+import PEERS_SUMMARY from "../Pages/Peers_Summary";
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 describe("Peers_Summary", () => {
@@ -82,11 +80,14 @@ describe("Peers_Summary", () => {
         ]),
     });
 
-    render(<Peers_Summary />);
+    render(<PEERS_SUMMARY />);
 
     await waitFor(() => {
       // Checking if Last name Falls is present
       expect(screen.getByText("Falls")).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
       // Checking if the average is being computed
       expect(screen.getByText("2.88")).toBeInTheDocument();
     });
@@ -171,23 +172,40 @@ describe("Peers_Summary", () => {
         ]),
     });
 
-    render(<Peers_Summary />);
+    render(<PEERS_SUMMARY />);
 
-    
+    fireEvent.click(screen.getByText("Student ID"));
+
     //Clicking the Student ID column
-    
+
     await waitFor(() => {
-      const ascendingRows= screen.getAllByRole("row");
+      const ascendingRows = screen.getAllByRole("row");
       expect(ascendingRows[1].textContent).toContain("1"); // First student ID after sorting
-      expect(ascendingRows[2].textContent).toContain("2"); // Second student ID after sorting
-      expect(ascendingRows[3].textContent).toContain("8"); // Third student ID after sorting
     });
 
     await waitFor(() => {
-      fireEvent.click(screen.getByText("Student ID"));
-      const descendingRows = screen.getAllByRole("row");
+      const ascendingRows = screen.getAllByRole("row");
+      expect(ascendingRows[2].textContent).toContain("2"); // Second student ID after sorting
+    });
+
+    await waitFor(() => {
+      const ascendingRows = screen.getAllByRole("row");
+      expect(ascendingRows[3].textContent).toContain("8"); // Third student ID after sorting
+    });
+
+    
+    fireEvent.click(screen.getByText("Student ID"));
+    const descendingRows = screen.getAllByRole("row");
+
+    await waitFor(() => {
       expect(descendingRows[1].textContent).toContain("8"); // First student ID after sorting
+    });
+
+    await waitFor(() => {
       expect(descendingRows[2].textContent).toContain("2"); // Second student ID after sorting
+    });
+
+    await waitFor(() => {
       expect(descendingRows[3].textContent).toContain("1"); // Third student ID after sorting
     });
   });
