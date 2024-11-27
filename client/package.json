@@ -30,11 +30,19 @@
       "react-app/jest",
       "eslint:recommended",
       "plugin:react/recommended"
+    ],
+    "ignoreFiles": [
+      "build/**/*",
+      "node_modules/**/*"
     ]
   },
   "stylelint": {
     "extends": [
       "stylelint-config-standard-scss"
+    ],
+    "ignoreFiles": [
+      "build/**/*",
+      "node_modules/**/*"
     ]
   },
   "browserslist": {
