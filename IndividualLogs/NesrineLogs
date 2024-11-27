@@ -1,5 +1,53 @@
 ************** Nesrine's Logs **************
 
+******************* Sprint 01 *******************
+
+1. Task.08 Student Page View (#8)
+----------------------------------------------
+Description: Implementing the student page view functionality.
+Time Spent:
+  - Understanding Assignment: 45 minutes
+  - Implementation Work: 2 hours
+  - Testing and Refinement: 1 hour
+Total Time: 3 hours 45 minutes
+
+2. Task.09 Instructor Page View (#9)
+----------------------------------------------
+Description: Creating the instructor page view interface.
+Time Spent:
+  - Understanding Assignment: 30 minutes
+  - Implementation Work: 2 hours 15 minutes
+  - Testing and Refinement: 1 hour
+Total Time: 3 hours 45 minutes
+
+3. Task.16 Introduction Page View (#16)
+----------------------------------------------
+Description: Developing the introduction page view component.
+Time Spent:
+  - Understanding Assignment: 30 minutes
+  - Implementation Work: 1 hour 45 minutes
+  - Testing and Refinement: 45 minutes
+Total Time: 3 hours
+
+4. Task.18 Add React routing for pages (#18)
+----------------------------------------------
+Description: Implementing React routing functionality for page navigation.
+Time Spent:
+  - Understanding Assignment: 1 hour
+  - Implementation Work: 2 hours 30 minutes
+  - Testing and Refinement: 1 hour 30 minutes
+Total Time: 5 hours
+
+5. Task.19 Add page common components (#19)
+----------------------------------------------
+Description: Creating and implementing common components shared across pages.
+Time Spent:
+  - Understanding Assignment: 45 minutes
+  - Implementation Work: 2 hours
+  - Testing and Refinement: 1 hour 15 minutes
+Total Time: 4 hours
+
+
 ************** Sprint 03 **************
 
 --------------------------------------
@@ -44,13 +92,22 @@ comments across all three test unitss
 
 
 
-***************** Summary *****************
-Total:
+******************* Sprint 04 *******************
 
+1. Task.98 System Architecture Implementation (#103)
+----------------------------------------------
+Description: This task involved implementing the system architecture design.
+Time Spent:
+  - Understanding Assignment: 45 minutes
+  - Implementation Work: 2 hours 30 minutes
+  - Testing and Refinement: 1 hour
+Total Time: 4 hours 15 minutes
 
-| Task Name                                  | Time Spent        |
-|--------------------------------------------|-------------------|
-| Unit Test (UT) 1.2 – View Team             | 3 hours 15 min    |
-| Unit Test (AT) 1.3 – Team Creation Test    | 2 hours 45 min    |
-| Unit Test (AT) 1.0 – Account Creation Test | 2 hours           |
-|Test Units Review and Corrections           | 2 hours           |
+2. Task.99 UML Class Diagram for Authentication System (#104)
+----------------------------------------------
+Description: This task focused on creating UML class diagrams for the authentication system component.
+Time Spent:
+  - Understanding Assignment: 30 minutes
+  - Diagram Creation: 1 hour 45 minutes
+  - Review and Refinement: 45 minutes
+Total Time: 3 hours
