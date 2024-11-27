@@ -54,12 +54,12 @@ function InstructorView() {
           <div>
               <h1>Welcome {instructor_username}</h1>
           </div>
-          <div className="ToggleNavigation">
-            <button className="ToggleView" onClick={() => setActiveView("students")}>View Students</button>
-            <button className="ToggleView" onClick={() => setActiveView("teams")}>View Teams</button>
-            <button className="ToggleView" onClick={() => setActiveView("createTeam")}>Create Team</button>
-            <button className="ToggleView" onClick={() => setActiveView("peer_review_summary")}>Summary of Reviews</button>
-            <button className="ToggleView" onClick={() => setActiveView("peer_review_detailed")}>Details of Reviews</button>
+          <div className="toggle-navigation">
+            <button className="toggle-view" onClick={() => setActiveView("students")}>View Students</button>
+            <button className="toggle-view" onClick={() => setActiveView("teams")}>View Teams</button>
+            <button className="toggle-view" onClick={() => setActiveView("createTeam")}>Create Team</button>
+            <button className="toggle-view" onClick={() => setActiveView("peer_review_summary")}>Summary of Reviews</button>
+            <button className="toggle-view" onClick={() => setActiveView("peer_review_detailed")}>Details of Reviews</button>
           </div>
 
           <div>

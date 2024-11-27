@@ -49,9 +49,9 @@ function StudentView() {
                     <div>
                         <h1>Welcome {student_username}</h1>
                     </div>
-                    <div className="ToggleNavigation">
-                        <button className="ToggleView" onClick={() => setActiveView("students")}>View Students</button>
-                        <button className="ToggleView" onClick={() => setActiveView("team")}>View My Team</button>
+                    <div className="toggle-navigation">
+                        <button className="toggle-view" onClick={() => setActiveView("students")}>View Students</button>
+                        <button className="toggle-view" onClick={() => setActiveView("team")}>View My Team</button>
                     </div>
                     <div>
                         {activeView === "students" && <ViewStudents />}
