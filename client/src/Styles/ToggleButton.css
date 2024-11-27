@@ -1,11 +1,14 @@
-/* Toggle Buttons between Student View and Team View*/
 
-.ToggleNavigation {
+/* 
+    Toggle Buttons between Student View and Team View
+*/
+
+.toggle-navigation {
     display: flex;
     justify-content: center;
 }
 
-button.ToggleView {
+button.toggle-view {
     width: 150px;
     padding: 5px;
     margin: 10px;
@@ -18,8 +21,8 @@ button.ToggleView {
     transition: background-color 0.6s ease, border 0.6s ease, color 0.2s ease;
 }
 
-button.ToggleView:enabled:hover {
-    background-color: #ffffff;
+button.toggle-view:enabled:hover {
+    background-color: #fff;
     border: 1px solid #a71420;
     color: #a71420;
     font-weight:bold;
