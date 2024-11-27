@@ -43,3 +43,7 @@ jobs:
       working-directory: ${{github.workspace}}/client
     - run: npm test
       working-directory: ${{github.workspace}}/client
+    - run: npm run eslint
+      working-directory: ${{github.workspace}}/client
+    - run: npm run stylelint
+      working-directory: ${{github.workspace}}/client
