@@ -1,24 +1,23 @@
-.PRtable {
+.pr-table {
     border: none;
     width: 70%;
     margin: auto;
 }
 
-table .Prth {
+.pr-th {
+    border: none;
+    height: 1px;
+    text-align: center;
+    margin: auto;
+}
+
+table .pr-th {
     height: inherit;
     width: inherit;
     white-space: nowrap;
 }
 
-.PRth {
-    border: none;
-    height: 1px;
-    text-align: center;
-    margin: auto;
-
-}
-
-.PRlabel { 
+.pr-label { 
     display: block;
     align-content: center;
     text-align: center;
@@ -28,7 +27,7 @@ table .Prth {
     height: 100%; /* the only height-related attribute that IE6 does not ignore  */
 }
 
-.PRth.entities {
+.pr-th.entities {
     text-align: left;
 }
 
