@@ -3,13 +3,13 @@
   padding: 10px;
 }
 
-.headerContainer {
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width:100%;
   font-family: "Andalé Mono", "Courier New", monospace;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
 }
 
 .logout-container,
@@ -31,11 +31,10 @@
 
 .title-container{
   justify-content: center;
-  
   font-family: "Andalé Mono", "Courier New", monospace;
   font-size:24px;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0 0 0 / 50%);
 }
 
 .logo {

@@ -40,7 +40,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="headerContainer">
+      <div className="header-container">
         <div className="logo-container">
           <div>
             <img
