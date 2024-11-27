@@ -137,6 +137,6 @@ describe('PeerReview Component', () => {
     const form = screen.getByTestId('peer-review-form');
     fireEvent.submit(form); // Trigger the form submission
 
-    await waitFor(() => expect(window.location.pathname).toBe('/Peer_Review_Confirmation'));
+    await waitFor(() => expect(window.location.pathname).toBe('/peer-review'));
   });
 });
