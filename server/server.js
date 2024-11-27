@@ -325,7 +325,7 @@ app.get("/login", (req, res) => {
             user_role: data[0].user_role,
           },
           process.env.JWT_SECRET,
-          { expiresIn: "2m" }
+          { expiresIn: "100m" }
         );
         res.cookie("token", jwtToken, {
           httpOnly: true,

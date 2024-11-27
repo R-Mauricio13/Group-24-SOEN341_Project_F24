@@ -46,13 +46,13 @@ const Header = () => {
     <header className="header">
       <div className="headerContainer">
         <div className="logo-container">
-          <button className="logo-button" onClick={returnHome}>
+          <div>
             <img
               src={concordiaLogo}
               alt="Concordia University Logo"
               className="logo"
             />
-          </button>
+          </div>
         </div>
         <div className="title-container">
           <h1>Peer Assessment System</h1>
