@@ -116,7 +116,7 @@ describe('TeamCreation Component', () => {
         render(<MemoryRouter><TeamCreation /></MemoryRouter>);
 
         await waitFor(() => {
-            expect(global.fetch).toHaveBeenCalledWith('http://localhost:8080/student_groups');
+            expect(global.fetch).toHaveBeenCalledWith('http://localhost:8080/student_groups', expect.objectContaining({credentials: 'include'}));
         });
     });
 });

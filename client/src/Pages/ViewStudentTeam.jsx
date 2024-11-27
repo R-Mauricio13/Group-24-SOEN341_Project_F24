@@ -78,7 +78,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                                                 <td style={{ textAlign: 'center' }}>{member.first_name}</td>
                                                 <td style={{ textAlign: 'center' }}>{member.last_name}</td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    {member.username != username && (
+                                                    {member.username.toLowerCase() != username && (
                                                       <button className="ViewButton" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Assess Member</button>
                                                     )}
                                                 </td>

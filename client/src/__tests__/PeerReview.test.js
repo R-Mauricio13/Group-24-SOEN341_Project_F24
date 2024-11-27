@@ -29,10 +29,10 @@ describe('PeerReview Component', () => {
       </Router>
     );
 
-    expect(screen.getByPlaceholderText('Cooperation Comments (Optional):')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Conceptual Contribution Comments (Optional):')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Practical Contribution Comments (Optional):')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Work Ethic Comments (Optional):')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Describe how well this member has communicated within the group, assisted team members in need, cooperated voluntarily, etc. (Optional):')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Describe how well this member contributed in suggesting ideas, identifying problems and approaches, gathering information, etc. (Optional):')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Describe how well this member contributed in writing reports, writing and implementing effective/good code, organising the tasks, etc. (Optional):')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Describe how well this member displayed a positive attitude, attended meetings on time, respected commitments and deadlines, etc. (Optional):')).toBeInTheDocument();
     expect(screen.getByLabelText("cooperation 3")).toBeInTheDocument();
     expect(screen.getByLabelText("conceptual 3")).toBeInTheDocument();
     expect(screen.getByLabelText("practical 3")).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('PeerReview Component', () => {
     );
   
     // Fill in optional comments
-    fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member has communicated within the group, assisted team members in need, cooperated voluntarily, etc. (Optional):'), { target: { value: 'Some comments' } });
   
     // Try to submit without selecting the required radio button
     const form = screen.getByTestId('peer-review-form');
@@ -77,10 +77,10 @@ describe('PeerReview Component', () => {
       </Router>
     );
 
-    fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
-    fireEvent.change(screen.getByPlaceholderText('Conceptual Contribution Comments (Optional):'), { target: { value: 'Some conceptual comments' } });
-    fireEvent.change(screen.getByPlaceholderText('Practical Contribution Comments (Optional):'), { target: { value: 'Some practical comments' } });
-    fireEvent.change(screen.getByPlaceholderText('Work Ethic Comments (Optional):'), { target: { value: 'Some work ethic comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member has communicated within the group, assisted team members in need, cooperated voluntarily, etc. (Optional):'), { target: { value: 'Some comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member contributed in suggesting ideas, identifying problems and approaches, gathering information, etc. (Optional):'), { target: { value: 'Some conceptual comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member contributed in writing reports, writing and implementing effective/good code, organising the tasks, etc. (Optional):'), { target: { value: 'Some practical comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member displayed a positive attitude, attended meetings on time, respected commitments and deadlines, etc. (Optional):'), { target: { value: 'Some work ethic comments' } });
 
     fireEvent.click(screen.getByLabelText("cooperation 3"));
     fireEvent.click(screen.getByLabelText("conceptual 3"));
@@ -117,10 +117,10 @@ describe('PeerReview Component', () => {
       </Router>
     );
 
-    fireEvent.change(screen.getByPlaceholderText('Cooperation Comments (Optional):'), { target: { value: 'Some comments' } });
-    fireEvent.change(screen.getByPlaceholderText('Conceptual Contribution Comments (Optional):'), { target: { value: 'Some conceptual comments' } });
-    fireEvent.change(screen.getByPlaceholderText('Practical Contribution Comments (Optional):'), { target: { value: 'Some practical comments' } });
-    fireEvent.change(screen.getByPlaceholderText('Work Ethic Comments (Optional):'), { target: { value: 'Some work ethic comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member has communicated within the group, assisted team members in need, cooperated voluntarily, etc. (Optional):'), { target: { value: 'Some comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member contributed in suggesting ideas, identifying problems and approaches, gathering information, etc. (Optional):'), { target: { value: 'Some conceptual comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member contributed in writing reports, writing and implementing effective/good code, organising the tasks, etc. (Optional):'), { target: { value: 'Some practical comments' } });
+    fireEvent.change(screen.getByPlaceholderText('Describe how well this member displayed a positive attitude, attended meetings on time, respected commitments and deadlines, etc. (Optional):'), { target: { value: 'Some work ethic comments' } });
 
     fireEvent.click(screen.getByLabelText("cooperation 3"));
     fireEvent.click(screen.getByLabelText("conceptual 3"));
