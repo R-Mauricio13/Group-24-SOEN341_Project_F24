@@ -33,7 +33,9 @@
     ]
   },
   "stylelint": {
-    "extends": "stylelint-config-standard-scss"
+    "extends": [
+      "stylelint-config-standard-scss"
+    ]
   },
   "browserslist": {
     "production": [

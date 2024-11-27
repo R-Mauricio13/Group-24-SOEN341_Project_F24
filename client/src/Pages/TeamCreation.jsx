@@ -49,14 +49,14 @@ const TeamCreation = () => {
     }
 
     return (
-        <div className="TCContainer" style={{ maxWidth: '300px', marginTop: '40px' }}>
+        <div className="tc-container" style={{ maxWidth: '300px', marginTop: '40px' }}>
             <h2 className="highlight">Create a Team</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label className="TCLabel">
+                    <label className="tc-label">
                         Team Name
                         <input
-                            className="TCPrompt"
+                            className="tc-prompt"
                             type="text"
                             name="team_name"
                             placeholder="Enter Team Name"
@@ -66,10 +66,10 @@ const TeamCreation = () => {
                     </label>
                 </div>
                 <div>
-                    <label className="TCLabel">
+                    <label className="tc-label">
                         Team Size
                         <select
-                            className="TCPrompt"
+                            className="tc-prompt"
                             name="team_size"
                             value={team_created.team_size}
                             onChange={handleChange}
@@ -80,9 +80,9 @@ const TeamCreation = () => {
                         </select>
                     </label>
                 </div>
-                <button type="submit" className="TCButton">Create Team</button>
+                <button type="submit" className="tc-button">Create Team</button>
             </form>
-            {message && <p className="TCMessage">{message}</p>}
+            {message && <p className="tc-message">{message}</p>}
         </div>
     );
 };
