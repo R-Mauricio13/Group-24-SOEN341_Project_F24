@@ -1,17 +1,19 @@
-/* ViewTeam.css */
+/* 
+    ViewTeam.css 
+*/
 
-.VTContainer {
+.vt-container {
     max-width: 1000px;
     position: relative;
     margin: auto;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0 0 0 / 10%);
     background-color: #f9f9f9;
 }
 
-button.ViewButton{
+button.view-button{
     width: 100px;
     padding: 5px;
     background-color: #912338;
@@ -22,8 +24,8 @@ button.ViewButton{
     transition: background-color 0.6s ease, border 0.6s ease, color 0.2s ease;
 }
 
-button.ViewButton:enabled:hover {
-    background-color: #ffffff;
+button.view-button:enabled:hover {
+    background-color: #fff;
     border: 1px solid #a71420;
     color: #a71420;
     font-weight:bold;

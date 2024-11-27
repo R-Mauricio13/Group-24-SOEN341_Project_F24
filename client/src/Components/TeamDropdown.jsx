@@ -1,9 +1,8 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import axios from 'axios';
-
-
+import PropTypes from 'prop-types';
 
 const TeamDropdown = ({ teams = [], studentId, onTeamAssigned, setTeams }) => {
 
@@ -59,5 +58,12 @@ const TeamDropdown = ({ teams = [], studentId, onTeamAssigned, setTeams }) => {
       </DropdownButton>
     );
   };
+
+TeamDropdown.propTypes = {
+  teams: PropTypes.array,
+  studentId: PropTypes.number,
+  onTeamAssigned: PropTypes.func,
+  setTeams: PropTypes.func,
+};
   
   export default TeamDropdown;

@@ -7,19 +7,6 @@ import TeamReviews from '../Pages/TeamReviews';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import '@testing-library/jest-dom';
-import axios from 'axios';  // Import axios to mock it
-
-// global.fetch = jest.fn(() =>
-//   Promise.reject({
-//     data: {
-//       teamDetails: [], // No team name
-//       teamMembers: [],
-//     },
-//   })
-// );
-
-// Mock axios globally at the top of the test file
-jest.mock('axios'); // This tells Jest to mock axios
 
 describe('TeamReviews Component', () => {
   const group_id1 = '2';

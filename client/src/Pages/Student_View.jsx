@@ -7,7 +7,7 @@ import ViewStudentTeam from "./ViewStudentTeam";
 import '../Styles/ToggleButton.css';
 
 function StudentView() {
-    const [user, setUser] = useState(() => {
+    const [user] = useState(() => {
         const savedItem = localStorage.getItem("Logged in User");
         const parsedItem = JSON.parse(savedItem);
         return parsedItem || ""; // Returns the parsed item or null if nothing exists
@@ -49,9 +49,9 @@ function StudentView() {
                     <div>
                         <h1>Welcome {student_username}</h1>
                     </div>
-                    <div className="ToggleNavigation">
-                        <button className="ToggleView" onClick={() => setActiveView("students")}>View Students</button>
-                        <button className="ToggleView" onClick={() => setActiveView("team")}>View My Team</button>
+                    <div className="toggle-navigation">
+                        <button className="toggle-view" onClick={() => setActiveView("students")}>View Students</button>
+                        <button className="toggle-view" onClick={() => setActiveView("team")}>View My Team</button>
                     </div>
                     <div>
                         {activeView === "students" && <ViewStudents />}

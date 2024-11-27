@@ -1,5 +1,5 @@
 // Outputs a list of all students
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TeamDropdown from '../Components/TeamDropdown';
 import '../Styles/ViewStudents.css'; // Import the CSS File
 
@@ -94,7 +94,7 @@ function ViewStudents() {
   const showDropdown = window.location.pathname === '/Instructor_Login';
 
   return (
-    <div className="SVContainer">
+    <div className="sv-container">
       <h1>Student List</h1>
       <table className="table">
         <thead>

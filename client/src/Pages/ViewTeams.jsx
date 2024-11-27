@@ -34,7 +34,7 @@ function ViewTeams() {
     };
 
     return (
-        <div className="VTContainer">
+        <div className="vt-container">
             <h1>List of Teams</h1>
             <table className="table">
                 <thead>
@@ -52,7 +52,7 @@ function ViewTeams() {
                             <td>{teamData.team_name}</td>
                             <td style={{ textAlign: 'left' }}>{teamData.team_size}</td>
                             <td style={{ textAlign: 'center' }}>
-                                <button className="ViewButton" onClick={() => handleViewTeam(group_id)}>
+                                <button className="view-button" onClick={() => handleViewTeam(group_id)}>
                                     View Team
                                 </button>
                             </td>

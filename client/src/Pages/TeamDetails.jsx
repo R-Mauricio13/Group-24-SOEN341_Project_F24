@@ -58,7 +58,7 @@ function TeamDetails() {
                     <Header />
                     {/*<Navigation />*/}
                     <div style={{ position: 'relative' , height: '650px' }}>
-                        <div className="VTContainer">
+                        <div className="vt-container">
                             <h1>{teamDetails.team_name}</h1>
                             <table className="table">
                                 <thead>
@@ -89,13 +89,13 @@ function TeamDetails() {
                             {/*}     
                             {Array.isArray(members) && members.length > 0 && (
                                 <div style={{ textAlign: 'center'}}>
-                                    <button className="ViewButton" style={{width: '200px'}}>Peer Review Details</button>
+                                    <button className="view-button" style={{width: '200px'}}>Peer Review Details</button>
                                 </div>
                             )}
                             */}
 
                             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                                <button className="ViewButton" onClick={() => navigate(-1)}>Back</button>
+                                <button className="view-button" onClick={() => navigate(-1)}>Back</button>
                             </div>
                         </div>
                     </div>  

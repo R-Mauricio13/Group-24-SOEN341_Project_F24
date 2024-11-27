@@ -37,10 +37,10 @@ function CreateAccount() {
     <div className="row justify-content-center">
       <div className="col-md-10">
         <div className="card p-3">
-          <h2 className="CAHighlight">Create Account</h2>
+          <h2 className="ca-highlight">Create Account</h2>
           <form onSubmit={submitForm}>
             <Form.Group className="mb-3">
-              <Form.Label htmlFor="username" className="CALabel">Username</Form.Label>
+              <Form.Label htmlFor="username" className="ca-label">Username</Form.Label>
               <Form.Control
                 id="username"
                 type="text"
@@ -51,7 +51,7 @@ function CreateAccount() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label htmlFor="password" className="CALabel">Password</Form.Label>
+              <Form.Label htmlFor="password" className="ca-label">Password</Form.Label>
               <Form.Control
                 id="password"
                 type="password"
@@ -62,7 +62,7 @@ function CreateAccount() {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="firstName" className="CALabel">First Name</Form.Label>
+              <Form.Label htmlFor="firstName" className="ca-label">First Name</Form.Label>
               <Form.Control
                 id="firstName"
                 type="text"
@@ -73,7 +73,7 @@ function CreateAccount() {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="lastName" className="CALabel">Last Name</Form.Label>
+              <Form.Label htmlFor="lastName" className="ca-label">Last Name</Form.Label>
               <Form.Control
                 id="lastName"
                 type="text"
@@ -85,7 +85,7 @@ function CreateAccount() {
             </Form.Group>
             <Form.Group>
               <br />
-              <Form.Label htmlFor="userRole" className="CALabel">Select your role</Form.Label>
+              <Form.Label htmlFor="userRole" className="ca-label">Select your role</Form.Label>
               <Form.Select 
                 id="userRole"
                 name="user_role" 
@@ -98,7 +98,7 @@ function CreateAccount() {
               </Form.Select>
             </Form.Group>
             <br />
-            <button className="CAButton" type="submit">
+            <button className="ca-button" type="submit">
               Create Account
             </button>
           </form>

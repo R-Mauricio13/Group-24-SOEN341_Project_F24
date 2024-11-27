@@ -1,9 +1,7 @@
-import React,{ useEffect, useState,} from "react";
+import React, { useEffect, useState } from "react";
+
 //Will display the summaries of the peer reviews from all students
 function Peers_Summary() {
-  const [peer_review, setPeerReview] = useState([]);
-
-  const [student_review_count,setCount]= useState([]);
   const [student_Average_Score,setAverage]= useState([]);
   const [order, setOrder] = useState("ASCENDING");
   
@@ -104,7 +102,6 @@ const sorting = (col) => {
         const response = await fetch("http://localhost:8080/peer_reviews", {credentials: 'include'});
         const data = await response.json();
         const sortedReviews=data.sort((a,b)=>parseInt(a.user_id)-parseInt(b.user_id))
-        setPeerReview( sortedReviews) //sort by user_id increasing
         console.log(sortedReviews)
         getScores(sortedReviews);
       } catch (error) {
@@ -123,7 +120,8 @@ const sorting = (col) => {
       try {
         const response = await fetch("http://localhost:8080/peer_reviews/review-counts", {credentials: 'include'});
         const data = await response.json();
-        setCount(data);
+        if (data)
+          console.log("Review Count Retrieved");
       } catch (error) {
         console.error("Error fetching student members:", error);
       }
@@ -145,7 +143,7 @@ const sorting = (col) => {
       return totalAverage.toFixed(2);
    }
   return (
-    <div className="SVContainer">
+    <div className="sv-container">
       
         <h1>Summary of Student Reviews</h1>
       <table className="table">

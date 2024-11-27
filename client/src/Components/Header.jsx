@@ -38,13 +38,9 @@ const Header = () => {
     });
   };
 
-  function returnHome() {
-    navigate("/");
-  } 
-
   return (
     <header className="header">
-      <div className="headerContainer">
+      <div className="header-container">
         <div className="logo-container">
           <div>
             <img

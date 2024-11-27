@@ -8,14 +8,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import '../Styles/PeerReview.css'; 
 
 function PeerReview() {
-  const [user,setUser]=useState(()=>{
-      const savedItem= localStorage.getItem("Logged in User")
-      const parsedItem= JSON.parse(savedItem)
-      return parsedItem ||"" //Returns the parsed item or null if nothing exists
-    });
  const [searchParams]= useSearchParams();
     
-  const student_username=user.username;
   const navigate = useNavigate();
    //Handles reading the input field of the form
   const userID = searchParams.get("user_id")
@@ -74,18 +68,18 @@ function PeerReview() {
       <div style={{ marginTop: '30px'}}>
       <form data-testid="peer-review-form" onSubmit={submitForm}>
         <Form.Group>
-            <table className="PRtable">
+            <table className="pr-table">
                 <tbody>
                     <tr>
-                        <th className="PRth"></th>
-                        <th className="PRth">1</th>
-                        <th className="PRth">2</th>
-                        <th className="PRth">3</th>
-                        <th className="PRth">4</th>
-                        <th className="PRth">5</th>
+                        <th className="pr-th"></th>
+                        <th className="pr-th">1</th>
+                        <th className="pr-th">2</th>
+                        <th className="pr-th">3</th>
+                        <th className="pr-th">4</th>
+                        <th className="pr-th">5</th>
                     </tr>
                     <tr>
-                        <th className="PRth entities">
+                        <th className="pr-th entities">
                             <h3>Cooperation</h3>
                             <textarea 
                                 onChange={handleChange}
@@ -96,14 +90,14 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th className="PRth"><label className="PRlabel"><input id="c1" type="radio" value="1" name="cooperation" aria-label="cooperation 1" onChange={handleChange} required/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="cooperation" aria-label="cooperation 2" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="cooperation" aria-label="cooperation 3" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="cooperation" aria-label="cooperation 4" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="cooperation" aria-label="cooperation 5" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input id="c1" type="radio" value="1" name="cooperation" aria-label="cooperation 1" onChange={handleChange} required/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="2" name="cooperation" aria-label="cooperation 2" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="3" name="cooperation" aria-label="cooperation 3" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="4" name="cooperation" aria-label="cooperation 4" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="5" name="cooperation" aria-label="cooperation 5" onChange={handleChange}/></label></th>
                     </tr>
                     <tr>
-                        <th className="Prth entities">
+                        <th className="pr-th entities">
                             <h3>Conceptual Contribution</h3>
                             <textarea 
                                 onChange={handleChange}
@@ -114,14 +108,14 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="1" name="conceptual" onChange={handleChange} required/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="conceptual" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="conceptual"  aria-label="conceptual 3" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="conceptual" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="conceptual" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="1" name="conceptual" onChange={handleChange} required/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="2" name="conceptual" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="3" name="conceptual"  aria-label="conceptual 3" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="4" name="conceptual" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="5" name="conceptual" onChange={handleChange}/></label></th>
                     </tr>
                     <tr>
-                        <th className="PRth entities">
+                        <th className="pr-th entities">
                             <h3>Practical Contribution</h3>
                             <textarea 
                                 onChange={handleChange}
@@ -132,14 +126,14 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="1" name="practical" onChange={handleChange} required/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="practical" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="practical"  aria-label="practical 3" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="practical" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="practical" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="1" name="practical" onChange={handleChange} required/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="2" name="practical" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="3" name="practical"  aria-label="practical 3" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="4" name="practical" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="5" name="practical" onChange={handleChange}/></label></th>
                     </tr>
                     <tr>
-                        <th className="PRth entities">
+                        <th className="pr-th entities">
                             <h3>Work Ethic</h3>
                             <textarea 
                                 onChange={handleChange}
@@ -150,17 +144,17 @@ function PeerReview() {
                                 rows="3"
                             />
                         </th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="1" name="work_ethic" onChange={handleChange} required/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="2" name="work_ethic" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="3" name="work_ethic" aria-label="work ethic 3" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="4" name="work_ethic" onChange={handleChange}/></label></th>
-                        <th className="PRth"><label className="PRlabel"><input type="radio" value="5" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="1" name="work_ethic" onChange={handleChange} required/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="2" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="3" name="work_ethic" aria-label="work ethic 3" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="4" name="work_ethic" onChange={handleChange}/></label></th>
+                        <th className="pr-th"><label className="pr-label"><input type="radio" value="5" name="work_ethic" onChange={handleChange}/></label></th>
                     </tr>
                 </tbody>
             </table>
         </Form.Group>
         <div style={{display:'flex', justifyContent:'center'}}>
-          <button className="CAButton" style={{width:'10%'}} type="submit">
+          <button className="ca-button" style={{width:'10%'}} type="submit">
             Submit Review
           </button>
         </div>

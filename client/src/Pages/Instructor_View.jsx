@@ -8,11 +8,11 @@ import ViewTeams from "./ViewTeams";
 import CreateTeams from "./TeamCreation";
 
 import '../Styles/ToggleButton.css';
-import Peers_Summary from "./Peers_Summary";
-import Peers_Detailed from "./Peers_Detailed";
+import PEERS_SUMMARY from "./Peers_Summary";
+import PEERS_DETAILED from "./Peers_Detailed";
 
 function InstructorView() {
-  const [user,setUser]=useState(()=>{
+  const [user]=useState(()=>{
       const savedItem= localStorage.getItem("Logged in User")
       const parsedItem= JSON.parse(savedItem)
       return parsedItem ||"" //Returns the parsed item or null if nothing exists
@@ -54,20 +54,20 @@ function InstructorView() {
           <div>
               <h1>Welcome {instructor_username}</h1>
           </div>
-          <div class="ToggleNavigation">
-            <button class="ToggleView" onClick={() => setActiveView("students")}>View Students</button>
-            <button class="ToggleView" onClick={() => setActiveView("teams")}>View Teams</button>
-            <button class="ToggleView" onClick={() => setActiveView("createTeam")}>Create Team</button>
-            <button class="ToggleView" onClick={() => setActiveView("peer_review_summary")}>Summary of Reviews</button>
-            <button class="ToggleView" onClick={() => setActiveView("peer_review_detailed")}>Details of Reviews</button>
+          <div className="toggle-navigation">
+            <button className="toggle-view" onClick={() => setActiveView("students")}>View Students</button>
+            <button className="toggle-view" onClick={() => setActiveView("teams")}>View Teams</button>
+            <button className="toggle-view" onClick={() => setActiveView("createTeam")}>Create Team</button>
+            <button className="toggle-view" onClick={() => setActiveView("peer_review_summary")}>Summary of Reviews</button>
+            <button className="toggle-view" onClick={() => setActiveView("peer_review_detailed")}>Details of Reviews</button>
           </div>
 
           <div>
             {activeView === "students" && <ViewStudents />}
             {activeView === "teams" && <ViewTeams />}
             {activeView === "createTeam" && <CreateTeams />}
-            {activeView === "peer_review_summary" && <Peers_Summary/>}
-            {activeView === "peer_review_detailed" && <Peers_Detailed/>}
+            {activeView === "peer_review_summary" && <PEERS_SUMMARY />}
+            {activeView === "peer_review_detailed" && <PEERS_DETAILED />}
           </div>
         </div>  
         <Footer />
