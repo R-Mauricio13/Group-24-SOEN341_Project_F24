@@ -156,7 +156,7 @@ function TeamReviews() {
                         )}
     
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <button className="ViewButton" onClick={() => navigate(-1)}>Back</button>
+                            <button className="view-button" onClick={() => navigate(-1)}>Back</button>
                         </div>
                     </div>
                 </div>

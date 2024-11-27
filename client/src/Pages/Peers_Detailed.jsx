@@ -34,7 +34,7 @@ function Peers_Detailed(){
     };
 
     return (
-        <div className="VTContainer">
+        <div className="vt-container">
             <h1>List of Teams</h1>
             <table className="table">
                 <thead>
@@ -52,7 +52,7 @@ function Peers_Detailed(){
                             <td>{teamData.team_name}</td>
                             <td style={{ textAlign: 'left' }}>{teamData.team_size}</td>
                             <td style={{ textAlign: 'center' }}>
-                                <button className="ViewButton" style={{width:'155px'}} onClick={() => handleTeamReviews(group_id)}>
+                                <button className="view-button" style={{width:'155px'}} onClick={() => handleTeamReviews(group_id)}>
                                     View Peer Reviews
                                 </button>
                             </td>

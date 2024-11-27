@@ -143,7 +143,7 @@ const sorting = (col) => {
       return totalAverage.toFixed(2);
    }
   return (
-    <div className="SVContainer">
+    <div className="sv-container">
       
         <h1>Summary of Student Reviews</h1>
       <table className="table">

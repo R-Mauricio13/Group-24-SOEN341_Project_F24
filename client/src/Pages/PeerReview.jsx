@@ -154,7 +154,7 @@ function PeerReview() {
             </table>
         </Form.Group>
         <div style={{display:'flex', justifyContent:'center'}}>
-          <button className="CAButton" style={{width:'10%'}} type="submit">
+          <button className="ca-button" style={{width:'10%'}} type="submit">
             Submit Review
           </button>
         </div>

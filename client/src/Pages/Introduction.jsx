@@ -22,7 +22,7 @@ const Introduction = () => (
             <p>Reflect on the entire group work exercise and provide fair assessments.</p>
           </div>
         </div>
-        <button className="cta-button">Start Assessment</button>
+        <button className="ca-button">Start Assessment</button>
       </div>
     </div>
     <Footer />

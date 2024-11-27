@@ -62,7 +62,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
             <div>
                 <div style={{flex: '1' , overflow: 'auto'}}>
                     <div style={{ position: 'relative' , height: '650px' }}>
-                        <div className="VTContainer">
+                        <div className="vt-container">
                             <h1> {teamDetails && teamDetails.length > 0 ? teamDetails[0].team_name : "None"}</h1>
                             <table className="table">
                                 <thead>
@@ -80,7 +80,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                                                 <td style={{ textAlign: 'center' }}>{member.last_name}</td>
                                                 <td style={{ textAlign: 'center' }}>
                                                     {member.username.toLowerCase() !== username && (
-                                                      <button className="ViewButton" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Assess Member</button>
+                                                      <button className="view-button" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Assess Member</button>
                                                     )}
                                                 </td>
                                             </tr>

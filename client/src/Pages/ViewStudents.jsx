@@ -94,7 +94,7 @@ function ViewStudents() {
   const showDropdown = window.location.pathname === '/Instructor_Login';
 
   return (
-    <div className="SVContainer">
+    <div className="sv-container">
       <h1>Student List</h1>
       <table className="table">
         <thead>
