@@ -26,3 +26,16 @@ Task 64:
 - 3 hours adding logic to tables such as figuring out who the author of the review is and calculating review count and averages
 
 - 2 hours summing all the entries for one student and calculating their average by the number of review counts. Then outputting it onto the table
+
+Sprint 4:
+User Story 78 & Task 97:
+ - Task was done in Sprint 3 however spent:
+   - 2 hours writing the code/testing functionality
+
+Task 32:
+  -Spent 2 minutes adding two lines of code
+
+Task 90 Unit Test(UT)4.0 Sorted Review Criteria's:
+  -1 hour learning Jest and react testing library
+  -1.5 hours implementing the test and bug fixing the unit test
+
