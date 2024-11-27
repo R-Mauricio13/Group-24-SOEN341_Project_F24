@@ -21,7 +21,8 @@
     "build": "CI=false react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js src/**/*.jsx"
+    "eslint": "eslint src/**/*.js src/**/*.jsx",
+    "stylelint": "stylelint **/*.{css,scss}"
   },
   "eslintConfig": {
     "extends": [
@@ -30,6 +31,9 @@
       "eslint:recommended",
       "plugin:react/recommended"
     ]
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard-scss"
   },
   "browserslist": {
     "production": [
@@ -54,6 +58,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "prop-types": "^15.8.1",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard-scss": "^13.1.0",
     "supertest": "^7.0.0"
   },
   "jest": {
