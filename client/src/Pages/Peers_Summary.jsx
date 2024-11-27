@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-
+import React,{ useEffect, useState,} from "react";
 //Will display the summaries of the peer reviews from all students
 function Peers_Summary() {
   const [peer_review, setPeerReview] = useState([]);
