@@ -20,6 +20,9 @@ Task 91: Unit Test (UT) 4.1 Review deletion:
  1. think of possible way to implement the feautre 1h 
  2. write unit test code 3h
  3. code revision 1h
+-updated PeerReview Unit test
+ 1.conflict with changes to new navigation location.Needed to change expect statement to handle new page that is navigated to 30 min
+ 
 
  Code:
  -mocks reviews database
