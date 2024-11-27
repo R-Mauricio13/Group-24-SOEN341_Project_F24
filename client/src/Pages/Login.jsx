@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-// import axios from "axios"
-import { useNavigate } from "react-router-dom";
 import '../Styles/Login.css'; 
 
 function Login() {
@@ -15,8 +13,6 @@ function Login() {
 
   const [login_error, setLogin_Error] = useState(null)
   const [login_success, setLogin_Success] = useState(null)
-
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setUser_info((prev) => ({ ...prev, [event.target.name]: event.target.value }))
@@ -61,13 +57,6 @@ function Login() {
   const submitForm = async event => {
     event.preventDefault();
 
-    // let response = await axios.get("http://localhost:8080/login", {
-    //   params: {
-    //     username: user_info.username,
-    //     user_password: user_info.user_password,
-    //     user_role: user_info.user_role,
-    //   }
-    // });
     if (!user_info.username || !user_info.user_password || !user_info.user_role) {
       throw new Error("Login parameters missings!");
     }

@@ -8,14 +8,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import '../Styles/PeerReview.css'; 
 
 function PeerReview() {
-  const [user,setUser]=useState(()=>{
-      const savedItem= localStorage.getItem("Logged in User")
-      const parsedItem= JSON.parse(savedItem)
-      return parsedItem ||"" //Returns the parsed item or null if nothing exists
-    });
  const [searchParams]= useSearchParams();
     
-  const student_username=user.username;
   const navigate = useNavigate();
    //Handles reading the input field of the form
   const userID = searchParams.get("user_id")
