@@ -39,3 +39,26 @@ Tasks:
     - Updated documentation for Sprint 3 tasks.
     - Comitting andmanaging many conflicts
     
+
+Sprint 4
+Dates:
+    Friday 22nd Nov, 17:00-19:00
+    Sunday 24th Nov, 15:00-18:00
+    Monday 25th Nov, 19:00-21:00
+    Wednesday 27th Nov, 12:00-15:00
+    Wednesday 27th Nov, 23:00-0:00
+
+Tasks:
+    - changed front end and backend for review submission to authenticate the student,
+        such that a student cannot impersonate another student in the review (crucial)
+    - implemented the username in the auth cookie, for better authentication
+    - fixed a bug there the authentication cookie was lacking the user_id and
+        thus be unable to authenticate properly
+    - added backend to delete the reviews that the user created (authenticated request)
+        invoking delete on the SQL database
+    - created the buttons such that the user can click 'delete review' and confirmation promts shows up
+    - fixed glitch where user can self evaluate
+    - changed frontend such that students can see which students they rated, and and can edit or delete review
+    - changed the project chart to reflect updates
+    - fixed commit problem, where there was trouble committing to the repository my changes for sprint 4
+    

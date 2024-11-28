@@ -3,7 +3,6 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 //import Navigation from "../Components/Navigation";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import '../Styles/PeerReview.css'; 
 
@@ -41,19 +40,28 @@ function PeerReview() {
 
   // Check if the form is valid (ensures that required fields are filled out)
   if (form.checkValidity()) {
-    try {
-      console.log(review);
-      console.log(`Attempting to submit review for user id= ${userID}`);
+    console.log(review);
+    console.log(`Attempting to submit review for user id= ${userID}`);
       
-      // Proceed with form submission if valid
-      await axios.post("http://localhost:8080/submit_review", review);
-      console.log("post complete");
-      
-      alert("Form submission");
+    // Proceed with form submission if valid
+    fetch("http://localhost:8080/submit_review", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(review),
+    }).then((response) => {
+      if (response.ok) {
+        console.log("Form submission successful");
+        alert("Form submission successful");
+      } else {
+        console.log("Form submission failed");
+        alert("Form submission failed");
+      }
       navigate(-1);
-    } catch (err) {
-      console.log("Form submission error:", err);
-    }
+    });
+
   } else {
     console.log("Form is invalid. Please fill in all required fields.");
   }
