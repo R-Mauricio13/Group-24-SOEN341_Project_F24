@@ -24,7 +24,6 @@ const cookieJwtAuth = (req, res, next) => {
     const tokenData = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user_id = tokenData.user_id;
-    req.username = tokenData.username
     req.user_role = tokenData.user_role;
     // console.log("user_id:", req.user_id);
     next();
@@ -320,20 +319,14 @@ app.get("/login", (req, res) => {
 
       if (data.length > 0) {
         console.log("User found:", data[0]);
-
-
-
         const jwtToken = jwt.sign(
           {
-            user_id: data[0].user_id,
-            username: data[0].username,
+            user_id: data[0].id,
             user_role: data[0].user_role,
           },
           process.env.JWT_SECRET,
           { expiresIn: "100m" }
         );
-        console.log("Token:", jwtToken);
-
         res.cookie("token", jwtToken, {
           httpOnly: true,
           // sameSite: 'None',  // need to set Secure too...
@@ -440,15 +433,7 @@ app.post("/create", (req, res) => {
   });
 });
 
-app.post("/submit_review", cookieJwtAuth, (req, res) => {
-  // check if the user is a student, and that the user_id in the request body matches the user_id in the token
-  // console.log("req.user_role:", req.user_role);
-  // console.log("req.username:", req.username);
-  // console.log("req.body.user_author:", req.body.user_author);
-  if (req.user_role !== "student" || req.username !== req.body.user_author) {
-    return res.status(401).json("Unauthorized");
-  }
-
+app.post("/submit_review", (req, res) => {
   console.log("Attempting to submit peer review.");
   const values = [
     parseInt(req.body.cooperation),
@@ -487,36 +472,6 @@ app.post("/submit_review", cookieJwtAuth, (req, res) => {
     return res.status(200).json(data);
   });
 });
-
-
-app.post("/delete_review", cookieJwtAuth, (req, res) => {
-  // check if the user is a student, and that the user_id in the request body matches the user_id in the token
-  // console.log("req.user_role:", req.user_role);
-  // console.log("req.username:", req.username);
-  // console.log("req.body.user_author:", req.body.user_author);
-  if (req.user_role !== "student" || req.username !== req.body.user_author) {
-    return res.status(401).json("Unauthorized");
-  }
-
-  console.log("Attempting to delete peer review.");
-  const values = [parseInt(req.body.user_id), req.body.user_author];
-  console.log(values);
-  const peer_review = process.env.PEER_REVIEW;
-
-  const query = `
-    DELETE FROM ${peer_review} 
-    WHERE user_id = ? AND user_author = ?`;
-
-  db.query(query, values, (err, data) => {
-    if (err) {
-      console.error("MySQL error: ", err);
-      return res.status(500).json("Error: Peer review deletion failed");
-    }
-    console.log("Data deleted successfully:", data);
-    return res.status(200).json(data);
-  });
-});
-
 
 // POST to add member to a team or to change a member's team
 app.post("/addMemberToTeam", (req, res) => {

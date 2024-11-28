@@ -30,7 +30,7 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
 
                 const teamData = await teamResponse.json();
                 setTeamDetails(teamData); // Assuming the response is an array
-                // setLoading(false);
+                setLoading(false);
 
                 // Fetch members of the team
                 const membersResponse = await fetch(`http://localhost:8080/student-members/user/${username}`, {credentials: 'include'});
@@ -43,81 +43,18 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
             } catch (error) {
                 console.error("Error fetching team data:", error);
                 setError(error.message);
-                // setLoading(false);
+                setLoading(false);
             }
         };
 
         fetchTeamData();
     }, [username]);
 
-
-    const [reviewData, setReviewData] = useState(() => {
-        fetch(`http://localhost:8080/peer_reviews`, {credentials: 'include'})
-            .then((response) => {  
-                if (response.ok) {
-                    return response.json();
-                }
-                throw response;
-            }).then((data) => {
-                console.log("review data: ", data);
-                setReviewData(data);
-                setLoading(false);
-                
-                return data;
-            }).catch((error) => {
-                console.error("Error fetching review data:", error);
-                setError(error.message);
-                setLoading(false);
-            });
-    });
-
-    function existsReview(user_id, user_author) {
-        console.log("Checking if review exists for user_id: ", user_id, " and user_author: ", user_author);
-        console.log("Review data: ", reviewData);
-        if (reviewData) {
-            for (let i = 0; i < reviewData.length; i++) {
-                console.log("Review data: ", reviewData[i]);
-                if (reviewData[i].user_id === user_id && reviewData[i].user_author === user_author) {
-                    console.log("Review exists!");
-                    return true;
-                }
-            }
-        }
-        console.log("Review does not exist.");
-        return false;
-    }
-
-
     function handleAssessButton(user_id) {
         console.log(`Viewing peer review`);
         navigate(`/Peer_Review/user?user_id=${user_id}&user_author=${student_username}`);
     }
 
-    function handleDeleteButton(user_id) {
-        // create popup to confirm deletion
-        if (window.confirm("Are you sure you want to delete this review?")) {
-            fetch("http://localhost:8080/delete_review", {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ user_id: user_id, user_author: student_username }),
-            })
-
-            .then((response) => {
-                if (response.ok) {
-                    console.log("Evaluation deleted successfully");
-                    alert("Evaluation deleted successfully");
-                    window.location.reload();
-                } else {
-                    console.log("Failed to delete evaluation");
-                    alert("Failed to delete evaluation");
-                }
-            });
-        }
-    }
-    
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     
@@ -142,16 +79,9 @@ function ViewStudentTeam({ username }) { // Accept username as a prop
                                                 <td style={{ textAlign: 'center' }}>{member.first_name}</td>
                                                 <td style={{ textAlign: 'center' }}>{member.last_name}</td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                {member.username !== user.username && !existsReview(member.user_id, user.username) && (
-                                                        <button className="view-button" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Assess Member</button>
-                                                )}
-                                                {member.username !== user.username && existsReview(member.user_id, user.username) && (
-                                                    <button className="view-button" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Edit Review</button>
-                                                )}
-                                                {member.username !== user.username && existsReview(member.user_id, user.username) && (
-                                                    <button className="view-button" style={{width: '140px'}} onClick={() => handleDeleteButton(member.user_id)}>Delete Review</button>
-                                                )}
-                                                    
+                                                    {member.username.toLowerCase() !== username && (
+                                                      <button className="view-button" style={{width: '140px'}} onClick={() => handleAssessButton(member.user_id)}>Assess Member</button>
+                                                    )}
                                                 </td>
                                             </tr>
                                         ))
